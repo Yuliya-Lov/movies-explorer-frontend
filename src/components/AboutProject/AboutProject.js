@@ -1,10 +1,11 @@
 import React from 'react';
 import Paragraph from '../Paragraph/Paragraph.js';
+import Title from '../Title/Title';
 
 function AboutProject(props) {
   return (
     <article className='about-project'>
-      <h2 className='about-project__title'>О проекте</h2>
+      <Title level={2} size='m' text='О проекте'/>
       <hr className='about-project__underscore' />
       <ul className='about-project__info'>
         <li className='about-project__stages'>

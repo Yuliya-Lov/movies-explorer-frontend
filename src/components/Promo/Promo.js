@@ -1,9 +1,10 @@
 import React from 'react';
+import Title from '../Title/Title';
 
 function Promo(props) {
   return (
     <div className='promo'>
-      <h1 className='promo__title'>Учебный проект студента факультета Веб-разработки.</h1>
+      <Title level={1} size='xl' text='Учебный проект студента факультета Веб-разработки.' />
     </div>
   );
 }
