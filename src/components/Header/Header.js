@@ -5,9 +5,7 @@ import logo from '../../images/logo.svg';
 
 function Header({ isLoggedIn }) {
   const navigate = useNavigate();
-  const handleButtonClick = () => {
-    navigate('/profile', { replace: true })
-  }
+
   return (
     <header className='header'>
       <img className='header__logo' alt='Логотип' src={logo} />
