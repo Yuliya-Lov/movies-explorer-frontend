@@ -5,9 +5,10 @@ import Header from '../Header/Header.js';
 import Main from '../Main/Main.js';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
   return (
     <div className="root">
-      <Header></Header>
+      <Header isLoggedIn={isLoggedIn}></Header>
       <Main></Main>
     </div>
   );
