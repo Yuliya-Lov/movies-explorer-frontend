@@ -1,0 +1,8 @@
+.promo {
+  box-sizing: border-box;
+  padding: 160px 20% 151px 20%;
+  border-radius: 10px;
+  background: #272727;
+  max-width: 1200px;
+  width: calc( 100% - 80px);
+}

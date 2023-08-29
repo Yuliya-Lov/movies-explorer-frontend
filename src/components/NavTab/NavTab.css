@@ -1,0 +1,39 @@
+.project-nav {
+  box-sizing: border-box;
+  max-width: 1200px;
+  width: calc(100% - 80px);
+  border-radius: 0 0 10px 10px;
+  background: #272727;
+
+}
+
+.project-nav__list {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  align-items: center;
+}
+
+.project-nav__item {
+  display: block;
+  width: 96px;
+  min-height: 36px;
+  margin: 0;
+  padding: 0;
+  border-radius: 10px;
+  background: #303030;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.project-nav__link {
+  margin: 0;
+  padding: 0;
+  color: #FFF;
+  text-decoration: none;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1.33;
+}
