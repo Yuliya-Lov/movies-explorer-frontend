@@ -1,4 +1,5 @@
 import React from 'react';
+import Paragraph from '../Paragraph/Paragraph.js';
 
 function AboutProject(props) {
   return (
@@ -8,11 +9,11 @@ function AboutProject(props) {
       <ul className='about-project__info'>
         <li className='about-project__stages'>
           <h3 className='two-columns__stages-title'>Дипломный проект включал 5 этапов</h3>
-          <p className='two-columns__stages-text'>Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки.</p>
+          <Paragraph text='Составление плана, работу над бэкендом, вёрстку, добавление функциональности и финальные доработки.'/>
         </li>
         <li className='about-project__stages'>
           <h3 className='about-project__stages-title'>На выполнение диплома ушло 5 недель</h3>
-          <p className='about-project__stages-text'>У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.</p>
+          <Paragraph text='У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.'/>
         </li>
       </ul>
       <ul className='about-project__schema'>
