@@ -29,16 +29,50 @@
   letter-spacing: -0.8px;
 }
 
-.about-project__schema {}
+.about-project__schema {
+  padding: 0;
+  margin: 110px 0 0 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  align-items: center;
+  width: 100%;
+}
 
-.about-project__schema-part {}
+.about-project__schema-part {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-.about-project__schema-part_left {}
+.about-project__schema-cell {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 36px;
+  background: #303030;
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  line-height: normal;
+  font-weight: 400;
+}
 
-.about-project__schema-time {}
+.about-project__schema-cell_colorfull {
+  background: #3DDC84;
+  color: #000;
+}
 
-.about-project__schema-time_colorfull {}
-
-.about-project__schema-about {}
-
-.about-project__schema-part_right {}
+.about-project__schema-cell_about {
+  background: #202020;
+  color: #8B8B8B;
+font-weight: 500;
+line-height: 1.21;
+}

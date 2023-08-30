@@ -20,13 +20,13 @@ function AboutProject(props) {
         </li>
       </ul>
       <ul className='about-project__schema'>
-        <li className='about-project__schema-part about-project__schema-part_left'>
-          <h3 className='about-project__schema-time about-project__schema-time_colorfull'>1 неделя</h3>
-          <p lang='en' className='about-project__schema-about'>Back-end</p>
+        <li className='about-project__schema-part'>
+          <h3 className='about-project__schema-cell about-project__schema-cell_colorfull'>1 неделя</h3>
+          <p lang='en' className='about-project__schema-cell about-project__schema-cell_about'>Back-end</p>
         </li>
-        <li className='about-project__schema-part about-project__schema-part_right'>
-          <h3 className='about-project__schema-time'>4 недели</h3>
-          <p lang='en' className='about-project__schema-about'>Front-end</p>
+        <li className='about-project__schema-part'>
+          <h3 className='about-project__schema-cell'>4 недели</h3>
+          <p lang='en' className='about-project__schema-cell about-project__schema-cell_about'>Front-end</p>
         </li>
       </ul>
     </article>
