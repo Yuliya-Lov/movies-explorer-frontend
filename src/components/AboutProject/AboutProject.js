@@ -3,7 +3,7 @@ import './AboutProject.css';
 import Title from '../Title/Title';
 import Underline from '../Underline/Underline';
 
-function AboutProject(props) {
+function AboutProject() {
   return (
     <article className='about-project'>
       <Title level={2} size='m' text='О проекте'/>

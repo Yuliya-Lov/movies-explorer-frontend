@@ -9,7 +9,7 @@ function NavTab(props) {
           <a href='#' className='project-nav__link'>О проекте</a>
         </li>
         <li className='project-nav__item'>
-          <a href='#' className='project-nav__link'>Технологии</a>
+          <a href='#techs' className='project-nav__link'>Технологии</a>
         </li>
         <li className='project-nav__item'>
           <a href='#' className='project-nav__link'>Студент</a>

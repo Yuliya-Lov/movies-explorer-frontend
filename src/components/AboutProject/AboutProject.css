@@ -1,5 +1,5 @@
 .about-project {
-  margin: 110px 0 100px 0;
+  margin: 110px 0 95px 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -86,5 +86,5 @@
   color: #8B8B8B;
   font-weight: 500;
   line-height: 1.21;
-  min-height: 50px;
+  min-height: 48px;
 }
