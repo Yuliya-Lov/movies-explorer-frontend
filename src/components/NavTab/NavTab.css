@@ -1,5 +1,6 @@
 .project-nav {
   box-sizing: border-box;
+  padding-bottom: 30px;
   max-width: 1200px;
   width: calc(100% - 80px);
   border-radius: 0 0 10px 10px;
@@ -8,6 +9,8 @@
 }
 
 .project-nav__list {
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
   gap: 10px;

@@ -1,5 +1,5 @@
 .about-project {
-  margin: 110px 0;
+  margin: 110px 0 100px 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -14,11 +14,14 @@
   list-style: none;
   display: flex;
   width: 100%;
-  gap: 40px;
+  gap: 50px;
 
 }
 
-.about-project__stages {}
+.about-project__stages {
+  margin: 0;
+  padding: 0;
+}
 
 .about-project__stages-title {
   margin: 0;
@@ -27,6 +30,14 @@
   font-weight: 400;
   line-height: normal;
   letter-spacing: -0.8px;
+}
+
+.about-project__stages-text {
+  margin: 26px 0 0 0;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42;
 }
 
 .about-project__schema {
@@ -73,6 +84,7 @@
 .about-project__schema-cell_about {
   background: #202020;
   color: #8B8B8B;
-font-weight: 500;
-line-height: 1.21;
+  font-weight: 500;
+  line-height: 1.21;
+  min-height: 50px;
 }
