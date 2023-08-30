@@ -2,20 +2,16 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
 import logo from '../../images/logo.svg';
+import Navigation from '../Navigation/Navigation.js';
 
-function Header({ isLoggedIn }) {
+function Header({ isLoggedIn, isMobile }) {
   const navigate = useNavigate();
 
   return (
     <header className='header'>
-      <img className='header__logo' alt='Логотип' src={logo} />
-      {isLoggedIn &&
-        <nav className='header__nav'>
-          <Link className='header__nav-item' to="/movies">Фильмы</Link>
-          <Link className='header__nav-item header__nav-item_active' to="/saved-movies">Сохранённые фильмы</Link>
-        </nav>}
+      <Link className='header__logo' aria-label='Перейти на главную' to="/"/>
       {isLoggedIn
-        ? <button className='header__profile-button' onClick={() => navigate('/profile', { replace: true })}>Аккаунт</button>
+        ? <Navigation isMobile={isMobile} />
         : <div className='header__access'>
             <Link className='header__signup-link' to="/signup">Регистрация</Link>
             <button className='header__signin-button' onClick={() => navigate('/signin', { replace: true })}>Войти</button>

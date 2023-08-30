@@ -8,15 +8,15 @@ function Portfolio(props) {
       <h2 className='portfolio__title'>Портфолио</h2>
       <ul className='portfolio__list'>
         <li className='portfolio__item'>
-          <a href='#' className='portfolio__link'>Статичный сайт</a>
+          <a href='#' className='portfolio__link' target='blank'>Статичный сайт</a>
           <Underline  type='mist'/>
         </li>
         <li className='portfolio__item'>
-          <a href='#' className='portfolio__link'>Адаптивный сайт</a>
+          <a href='https://yuliya-lov.github.io/russian-travel/' className='portfolio__link' target='blank'>Адаптивный сайт</a>
           <Underline  type='mist'/>
         </li>
         <li className='portfolio__item'>
-          <a href='#' className='portfolio__link'>Одностраничное приложение</a>
+          <a href='#' className='portfolio__link' target='blank'>Одностраничное приложение</a>
         </li>
       </ul>
     </article>
