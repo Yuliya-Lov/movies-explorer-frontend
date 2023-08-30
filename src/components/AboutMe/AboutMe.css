@@ -5,7 +5,7 @@
   width: calc(100% - 140px);
   box-sizing: border-box;
   max-width: 1140px;
-  margin: 110px 0 100px 0;
+  padding: 110px 0 100px 0;
 }
 
 .about-me__container {
@@ -52,4 +52,8 @@
   color: #FFF;
   text-decoration: none;
   cursor: pointer;
+}
+
+.about-me__git-link:hover {
+  opacity: .7;
 }

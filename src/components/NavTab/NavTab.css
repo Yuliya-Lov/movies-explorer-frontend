@@ -45,3 +45,34 @@
   cursor: pointer;
   text-align: center;
 }
+
+.project-nav__link:hover {
+  opacity: .7;
+}
+
+
+@media screen and (max-width: 790px) {
+  .project-nav {
+    width: calc(100% - 40px);
+  }
+
+}
+
+@media screen and (max-width: 600px) {
+
+  .project-nav__item {
+    width: 82px;
+    min-height: 26px;
+  }
+
+  .project-nav__link {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .project-nav {
+    width: calc(100% - 28px);
+  }
+}

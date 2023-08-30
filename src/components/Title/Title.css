@@ -20,11 +20,25 @@ letter-spacing: -1.2px;
 }
 
 .title_size_m {
-font-size: 22px;
-letter-spacing: -0.88px;
-}
-
-.title_size_s {
   font-size: 13px;
   font-weight: 500;
+}
+
+@media screen and (max-width: 940px) {
+  .title_size_xl {
+    font-size: 40px;
+    line-height: 1.30;
+    letter-spacing: -2px;
+  }
+
+  .title_size_l {
+  font-size: 30px;
+  line-height: 1.67;
+  letter-spacing: -1.2px;
+  }
+
+  .title_size_m {
+    font-size: 13px;
+    font-weight: 500;
+  }
 }

@@ -6,7 +6,7 @@ import photo from '../../images/photo_yuliya.jpg';
 
 function AboutMe(props) {
   return (
-    <article className='about-me'>
+    <article className='about-me' id='about-me'>
       <Title level={2} size='m' text='Студент' />
       <Underline type='light' />
       <div className='about-me__container'>

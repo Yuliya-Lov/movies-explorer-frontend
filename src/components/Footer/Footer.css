@@ -46,3 +46,7 @@
   font-weight: 400;
   cursor: pointer;
 }
+
+.footer__link:hover {
+  opacity: .7;
+}

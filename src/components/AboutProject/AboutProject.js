@@ -5,7 +5,7 @@ import Underline from '../Underline/Underline';
 
 function AboutProject() {
   return (
-    <article className='about-project'>
+    <article className='about-project' id='about-project'>
       <Title level={2} size='m' text='О проекте'/>
       <Underline type ='light' />
       <ul className='about-project__info'>

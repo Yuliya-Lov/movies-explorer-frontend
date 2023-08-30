@@ -50,6 +50,10 @@
   cursor: pointer;
 }
 
+.header__profile-button:hover {
+  opacity: .8;
+}
+
 .header__access {
   display: flex;
   align-items: center;
@@ -67,6 +71,10 @@
   cursor: pointer;
 }
 
+.header__signup-link:hover {
+  opacity: .7;
+}
+
 .header__signin-button {
   padding: 0;
   margin: 0;
@@ -80,4 +88,16 @@
   font-weight: 500;
   line-height: 1.33;
   cursor: pointer;
+}
+
+.header__signin-button:hover {
+  opacity: .8;
+}
+
+
+@media screen and (max-width: 790px) {
+  .header {
+    width: calc(100% - 60px);
+  }
+
 }
