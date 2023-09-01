@@ -21,6 +21,24 @@
   border-radius: 49%;
   cursor: pointer;
 }
+
+.header__menu-button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  width: 44px;
+  height: 44px;
+  background-image: url(../../images/burger.svg);
+  background-repeat: no-repeat;
+  background-size: 44px 44px;
+  cursor: pointer;
+}
+
+.header__menu-button:hover {
+  opacity: .8;
+}
+
 .header__logo:hover {
   opacity: .7;
 }

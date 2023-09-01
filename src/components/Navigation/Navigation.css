@@ -5,11 +5,24 @@
   width: calc(50% + 106px);
 }
 
+.navigation_mobile {
+  padding: 160px 0 90px 0;
+  width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
 .navigation__movies {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 16px;
+}
+
+.navigation__movies_mobile {
+flex-direction: column;
+gap: 28px;
 }
 
 .navigation__link {
@@ -23,12 +36,22 @@
   cursor: pointer;
 }
 
+.navigation__link:hover {
+  opacity: .7;
+}
+
+.navigation__link_mobile {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
+}
+
 .navigation__link_active {
   font-weight: 500;
 }
 
-.navigation__link:hover {
-  opacity: .7;
+.navigation__link_mobile-active {
+  border-bottom: 2px solid #FFF;
 }
 
 .navigation__profile-link {
