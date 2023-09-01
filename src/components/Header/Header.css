@@ -89,3 +89,16 @@
   }
 
 }
+
+@media screen and (max-width: 380px) {
+  .header {
+    width: calc(100% - 28px);
+  }
+
+  .header__menu-button {
+    width: 40px;
+    height: 40px;
+    background-size: 40px 40px;
+}
+
+}

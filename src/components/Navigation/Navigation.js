@@ -9,7 +9,7 @@ function Navigation({ isMobile }) {
       <div className={`navigation__movies ${isMobile && 'navigation__movies_mobile'}`}>
         {isMobile && <Link className={`navigation__link ${isMobile && 'navigation__link_mobile'}`} to="/">Главная</Link>}
         <Link className={`navigation__link ${isMobile && 'navigation__link_mobile'}`} to="/movies">Фильмы</Link>
-        <Link className={`navigation__link navigation__link_mobile-active ${isMobile && 'navigation__link_mobile'}`} to="/saved-movies">Сохранённые фильмы</Link>
+        <Link className={`navigation__link navigation__link_active ${isMobile && 'navigation__link_mobile navigation__link_mobile-active'}`} to="/saved-movies">Сохранённые фильмы</Link>
       </div>
       <Link className='navigation__profile-link' to="/profile">Аккаунт</Link>
     </nav>

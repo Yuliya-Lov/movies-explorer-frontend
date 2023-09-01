@@ -79,6 +79,7 @@
 .about-project__schema-cell_colorfull {
   background: #3DDC84;
   color: #000;
+  min-width: 140px;
 }
 
 .about-project__schema-cell_about {
@@ -87,4 +88,59 @@
   font-weight: 500;
   line-height: 1.21;
   min-height: 48px;
+}
+
+@media screen and (max-width: 1050px) {}
+
+@media screen and (max-width: 790px) {
+  .about-project {
+    padding: 90px 0 73px 0;
+    width: calc(100% - 100px);
+  }
+
+  .about-project__stages-text {
+    margin: 22px 0 0 0;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .about-project__info {
+    gap: 36px;
+
+  }
+
+  .about-project__schema {
+    margin: 93px 0 0 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .about-project {
+    padding: 70px 0 63px 0;
+    width: calc(100% - 100px);
+  }
+
+  .about-project__info {
+    margin: 60px 0 0 0;
+    gap: 56px;
+    flex-direction: column;
+}
+
+.about-project__stages-title {
+  font-size: 18px;
+  letter-spacing: -0.72px;
+}
+
+.about-project__stages-text {
+  margin: 16px 0 0 0;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+}
+
+@media screen and (max-width: 380px) {
+  .about-project {
+    width: calc(100% - 36px);
+  }
 }

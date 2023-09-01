@@ -1,4 +1,5 @@
 import React from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import './App.css';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header.js';
@@ -23,6 +24,11 @@ function App() {
     setIsPopupWithNavOpen(false);
   }
 
+  function handleOverlayClick(evt) {
+    if (evt.target.classList.contains('popup'))
+      closeAllPopups();
+  }
+
   const handleResize = () => {
     if (window.innerWidth < 790) {
       setIsMobile(true);
@@ -37,11 +43,21 @@ function App() {
     handleResize();
   }, []);
 
+
   return (
     <div className="root">
       <Header isLoggedIn={isLoggedIn} isMobile={isMobile} onNavClick={handleNavClick}></Header>
-      <Main></Main>
-      <Footer />
+      <Routes>
+        <Route path='/' element={<Main></Main>}
+        />
+        {/* <Route
+            path='/signup'
+            element={<Register isLoggedIn={isLoggedIn} />} />
+          <Route
+            path='/signin'
+            element={<Login isLoggedIn={isLoggedIn} />} /> */}
+      </Routes>
+      {isLoggedIn && <Footer />}
       <PopupWithNav isMobile={isMobile} isOpen={isOpen} onClose={closeAllPopups} />
     </div>
   );
