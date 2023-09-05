@@ -33,7 +33,7 @@
 @media screen and (max-width: 790px) {
   .promo {
     width: calc(100% - 40px);
-    padding: 350px 0 314px 0;
+    padding: 350px 0 310px 0;
   }
 
   .promo__title {
@@ -45,7 +45,7 @@
 @media screen and (max-width: 600px) {
   .promo {
     width: calc(100% - 40px);
-    padding: 212px 0 210px 0;
+    padding: 212px 0 214px 0;
   }
 
   .promo__title {

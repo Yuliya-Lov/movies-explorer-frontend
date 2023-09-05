@@ -15,3 +15,9 @@
 .underline_type_mist {
   border-top: 1px solid #424242;
 }
+
+@media screen and (max-width: 380px) {
+  .underline_type_light {
+    margin-top: 28px;
+  }
+}

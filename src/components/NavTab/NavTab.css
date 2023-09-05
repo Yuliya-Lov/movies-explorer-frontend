@@ -74,5 +74,10 @@
 @media screen and (max-width: 380px) {
   .project-nav {
     width: calc(100% - 28px);
+    padding-bottom: 17px;
+  }
+
+  .project-nav__list {
+    gap: 6px;
   }
 }
