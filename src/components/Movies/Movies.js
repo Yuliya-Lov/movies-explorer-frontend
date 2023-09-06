@@ -5,7 +5,7 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function Movies(props) {
   return (
-    <section>
+    <section className='movies'>
       <SearchForm />
       <MoviesCardList />
     </section>

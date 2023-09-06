@@ -4,9 +4,16 @@ import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm(props) {
   return (
-    <div>
-
-    </div>
+    <form className='seach-form'>
+      <div className='seach-form__line'>
+        <input className='seach-form__input'
+        placeholder='Фильм'/>
+        <button
+          type="submit"
+          className="seach-form__submit-button" aria-label='Найти фильмы'></button>
+      </div>
+      <FilterCheckbox />
+    </form>
   );
 }
 

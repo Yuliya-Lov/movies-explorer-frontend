@@ -1,0 +1,20 @@
+.movies {
+  display: flex;
+  flex-direction: column;
+  width: calc(100% - 140px);
+  max-width: 1140px;
+  min-width: 292px;
+}
+
+@media screen and (max-width: 790px) {
+  .movies {
+    width: calc(100% - 60px);
+  }
+
+}
+
+@media screen and (max-width: 380px) {
+  .movies {
+    width: calc(100% - 28px);
+  }
+}
