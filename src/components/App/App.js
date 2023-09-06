@@ -4,6 +4,11 @@ import './App.css';
 import { Link } from 'react-router-dom';
 import Header from '../Header/Header.js';
 import Main from '../Main/Main.js';
+import Movies from '../Movies/Movies.js';
+import SavedMovies from '../SavedMovies/SavedMovies.js';
+import Register from '../Register/Register.js';
+import Login from '../Login/Login.js';
+import Profile from '../Profile/Profile.js';
 import Footer from '../Footer/Footer.js';
 import PopupWithNav from '../PopupWithNav/PopupWithNav.js';
 
@@ -48,14 +53,12 @@ function App() {
     <div className="root">
       <Header isLoggedIn={isLoggedIn} isMobile={isMobile} onNavClick={handleNavClick}></Header>
       <Routes>
-        <Route path='/' element={<Main></Main>}
-        />
-        {/* <Route
-            path='/signup'
-            element={<Register isLoggedIn={isLoggedIn} />} />
-          <Route
-            path='/signin'
-            element={<Login isLoggedIn={isLoggedIn} />} /> */}
+        <Route path='/' element={<Main/>}/>
+        <Route path='/movies' element={<Movies/>}/>
+        <Route path='/saved-movies' element={<SavedMovies/>}/>
+        <Route path='/profile' element={<Profile/>}/>
+        <Route path='/signin' element={<Login/>}/>
+        <Route path='/signup' element={<Register/>}/>
       </Routes>
       {isLoggedIn && <Footer />}
       <PopupWithNav isMobile={isMobile} isOpen={isOpen} onClose={closeAllPopups} />
