@@ -3,16 +3,24 @@ import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm(props) {
+  const [isShort, setIsShort] = React.useState(true);
+
+  const handleTumbClick = () => {
+    isShort
+      ? setIsShort(false)
+      : setIsShort(true);
+  }
+
   return (
     <form className='seach-form'>
       <div className='seach-form__line'>
         <input className='seach-form__input'
-        placeholder='Фильм'/>
+          placeholder='Фильм' />
         <button
           type="submit"
           className="seach-form__submit-button" aria-label='Найти фильмы'></button>
       </div>
-      <FilterCheckbox />
+      <FilterCheckbox isShort={isShort} handleTumbClick={handleTumbClick} />
     </form>
   );
 }

@@ -16,9 +16,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(true);
   const [isMobile, setIsMobile] = React.useState(false);
   const [isPopupWithNavOpen, setIsPopupWithNavOpen] = React.useState(false);
-  console.log(isPopupWithNavOpen);
   const isOpen = isPopupWithNavOpen;
-  console.log(isOpen);
 
   function handleNavClick() {
     console.log('handleNavClick')

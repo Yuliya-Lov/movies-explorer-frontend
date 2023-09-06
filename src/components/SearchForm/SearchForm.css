@@ -1,5 +1,9 @@
 .seach-form {
   margin: 80px 0 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
 }
 
 .seach-form__line {
@@ -11,6 +15,7 @@
 
 .seach-form__input {
   margin: 0;
+  min-height: 50px;
   padding: 0 20px;
   border-radius: 8px;
   background: #2F2F2F;
@@ -35,6 +40,7 @@
   border: 0;
   width: 44px;
   height: 44px;
+  align-self: center;
   background: transparent;
   background-image: url(../../images/find-button.png);
   background-size: 44px 44px;
