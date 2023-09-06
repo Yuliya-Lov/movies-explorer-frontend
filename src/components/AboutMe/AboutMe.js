@@ -7,11 +7,11 @@ import photo from '../../images/photo_yuliya.jpg';
 function AboutMe(props) {
   return (
     <article className='about-me' id='about-me'>
-      <Title level={2} size='m' text='Студент' />
+      <h1 className='about-me__title'>Студент</h1>
       <Underline type='light' />
       <div className='about-me__container'>
         <div className='about-me__info'>
-          <Title level={3} size='xl' text='Юлия' />
+          <h3 className='about-me__info-title'>Юлия</h3>
           <p className='about-me__brief'>Фронтенд-разработчик, 37 лет</p>
           <p className='about-me__description'>Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена
             и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.</p>
