@@ -56,7 +56,7 @@
   background-image: url(../../images/link_arrow.png);
   background-repeat: no-repeat;
   background-size: 18px;
-  background-position: center right 5px;
+  background-position: top 19px right 6px;
 }
 
 .portfolio__link:hover {
@@ -64,14 +64,26 @@
 }
 
 @media screen and (max-width: 790px) {
+  .portfolio {
+    width: calc(100% - 100px);
+    margin: 0 0 68px 0;
+  }
+
   .portfolio__underline {
     border-top: 1px solid #DADADA;
+  }
+
+  .portfolio__link {
+    font-size: 28px;
+    line-height: 1.78;
+    letter-spacing: -1.12px;
   }
 }
 
 @media screen and (max-width: 380px) {
   .portfolio {
     width: calc(100% - 28px);
+    margin: 0 0 48px 0;
   }
 
   .portfolio__title {
@@ -85,5 +97,6 @@
     line-height: 1.55;
     letter-spacing: -0.72px;
     background-size: 12px;
+    background-position: top 7px right 6px;
   }
 }

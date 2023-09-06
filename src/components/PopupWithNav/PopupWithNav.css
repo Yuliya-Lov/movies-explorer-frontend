@@ -56,11 +56,11 @@
   background-repeat: no-repeat;
   background-color: transparent;
   border: none;
-  width: 22px;
+  width: 19px;
   height: 22px;
   position: absolute;
-  top: 29px;
-  right: 29px;
+  top: 27px;
+  right: 28px;
   transition: opacity .5s;
   cursor: pointer;
 }

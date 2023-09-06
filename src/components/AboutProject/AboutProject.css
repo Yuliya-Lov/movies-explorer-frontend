@@ -92,7 +92,7 @@
 
 @media screen and (max-width: 790px) {
   .about-project {
-    padding: 90px 0 71px 0;
+    padding: 92px 0 73px 0;
     width: calc(100% - 100px);
   }
 
@@ -108,7 +108,7 @@
   }
 
   .about-project__schema {
-    margin: 93px 0 0 0;
+    margin: 92px 0 0 0;
   }
 }
 
