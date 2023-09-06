@@ -1,13 +1,11 @@
 import React from 'react';
 import './AboutProject.css';
-import Title from '../Title/Title';
-import Underline from '../Underline/Underline';
+import ArticleTitle from '../ArticleTitle/ArticleTitle';
 
 function AboutProject() {
   return (
     <article className='about-project' id='about-project'>
-      <h2 className='about-project__title'>О проекте</h2>
-      <Underline type ='light' />
+      <ArticleTitle text='О проекте'/>
       <ul className='about-project__info'>
         <li className='about-project__stages'>
           <h3 className='about-project__stages-title'>Дипломный проект включал 5 этапов</h3>

@@ -76,3 +76,7 @@
 .navigation__profile-link:hover {
   opacity: .7;
 }
+
+@media screen and (max-width: 380px){
+
+}

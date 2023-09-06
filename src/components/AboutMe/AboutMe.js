@@ -1,14 +1,12 @@
 import React from 'react';
 import './AboutMe.css';
-import Title from '../Title/Title';
-import Underline from '../Underline/Underline';
+import ArticleTitle from '../ArticleTitle/ArticleTitle';
 import photo from '../../images/photo_yuliya.jpg';
 
 function AboutMe(props) {
   return (
     <article className='about-me' id='about-me'>
-      <h1 className='about-me__title'>Студент</h1>
-      <Underline type='light' />
+      <ArticleTitle text='Студент' />
       <div className='about-me__container'>
         <div className='about-me__info'>
           <h3 className='about-me__info-title'>Юлия</h3>
@@ -17,7 +15,7 @@ function AboutMe(props) {
             и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.</p>
           <a className='about-me__git-link' target='blank' href='https://github.com/Yuliya-Lov'>Github</a>
         </div>
-        <img className='about-me__photo' src={photo} alt='Фотография студента'/>
+        <img className='about-me__photo' src={photo} alt='Фотография студента' />
       </div>
     </article>
   );

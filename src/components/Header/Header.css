@@ -1,8 +1,8 @@
 .header {
   max-width: 1140px;
-  min-width: 300px;
+  min-width: 292px;
   width: calc(100% - 140px);
-  padding: 16px 0;
+  padding: 18px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -99,6 +99,20 @@
     width: 40px;
     height: 40px;
     background-size: 40px 40px;
-}
+  }
 
+  .header__signin-button {
+    width: 54px;
+    height: 26px;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+
+  .header__signup-link {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+  .header__access {
+    gap: 14px;
+  }
 }

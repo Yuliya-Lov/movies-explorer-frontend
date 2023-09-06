@@ -8,7 +8,7 @@ import Footer from '../Footer/Footer.js';
 import PopupWithNav from '../PopupWithNav/PopupWithNav.js';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isMobile, setIsMobile] = React.useState(false);
   const [isPopupWithNavOpen, setIsPopupWithNavOpen] = React.useState(false);
   console.log(isPopupWithNavOpen);

@@ -1,0 +1,32 @@
+.article-title {
+  width: 100%;
+}
+
+.article-title__name {
+  margin: 0;
+  padding: 0;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.88px;
+}
+
+.article-title__underline {
+  margin: 26px 0 0 0;
+  padding: 0;
+  max-width: 1140px;
+  width: 100%;
+  height: 0;
+	border: none;
+  border-top: 1px solid #DADADA;
+}
+
+@media screen and (max-width: 380px) {
+  .article-title__name {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .article-title__underline {
+    margin-top: 28px;
+  }
+}
