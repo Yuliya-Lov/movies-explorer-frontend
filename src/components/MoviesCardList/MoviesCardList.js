@@ -4,9 +4,22 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 function MoviesCardList(props) {
   return (
-    <div>
+    <section className='movies-list'>
       <MoviesCard />
-    </div>
+      <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
+      <MoviesCard />
+    </section>
   );
 }
 

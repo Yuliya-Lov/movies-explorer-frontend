@@ -1,0 +1,20 @@
+.movie {
+  background-color: aqua;
+  width: 100%;
+  aspect-ratio: 1.56/1;
+  border-radius: 5px;
+}
+
+
+@media screen and (max-width: 1050px) {
+  .movie {
+    aspect-ratio: 1.47/1;
+  }
+}
+
+@media screen and (max-width: 1050px) {
+  .movie {
+    aspect-ratio: 1.5/1;
+  }
+}
+

@@ -3,9 +3,9 @@ import './MoviesCard.css';
 
 function MoviesCard(props) {
   return (
-    <div>
+    <article className='movie'>
 
-    </div>
+    </article>
   );
 }
 
