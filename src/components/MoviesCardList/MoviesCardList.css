@@ -23,3 +23,8 @@
     grid-row-gap: 39px;
   }
 }
+@media screen and (max-width: 380px) {
+  .movies-list {
+    grid-row-gap: 37px;
+  }
+}

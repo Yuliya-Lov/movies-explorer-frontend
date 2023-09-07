@@ -12,9 +12,14 @@
   }
 }
 
-@media screen and (max-width: 1050px) {
+@media screen and (max-width: 790px) {
+  .movie {
+    aspect-ratio: 1.46/1;
+  }
+}
+
+@media screen and (max-width: 380px) {
   .movie {
     aspect-ratio: 1.5/1;
   }
 }
-
