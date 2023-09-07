@@ -9,14 +9,14 @@ import Portfolio from '../Portfolio/Portfolio.js';
 
 function Main(props) {
   return (
-    <section className='main'>
+    <main className='main'>
       <Promo/>
       <NavTab/>
       <AboutProject/>
       <Techs/>
       <AboutMe/>
       <Portfolio/>
-    </section>
+    </main>
   );
 }
 

@@ -1,8 +1,8 @@
-.article-title {
+.section-title {
   width: 100%;
 }
 
-.article-title__name {
+.section-title__name {
   margin: 0;
   padding: 0;
   font-size: 22px;
@@ -10,7 +10,7 @@
   letter-spacing: -0.88px;
 }
 
-.article-title__underline {
+.section-title__underline {
   margin: 23px 0 0 0;
   padding: 0;
   max-width: 1140px;
@@ -21,12 +21,12 @@
 }
 
 @media screen and (max-width: 380px) {
-  .article-title__name {
+  .section-title__name {
     font-size: 18px;
     letter-spacing: -0.72px;
   }
 
-  .article-title__underline {
+  .section-title__underline {
     margin-top: 28px;
   }
 }

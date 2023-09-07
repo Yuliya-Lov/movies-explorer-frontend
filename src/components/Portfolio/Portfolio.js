@@ -3,7 +3,7 @@ import './Portfolio.css';
 
 function Portfolio(props) {
   return (
-    <article className='portfolio'>
+    <section className='portfolio'>
       <h2 className='portfolio__title'>Портфолио</h2>
       <ul className='portfolio__list'>
         <li className='portfolio__item'>
@@ -18,7 +18,7 @@ function Portfolio(props) {
           <a href='#' className='portfolio__link' target='blank'>Одностраничное приложение</a>
         </li>
       </ul>
-    </article>
+    </section>
   );
 }
 

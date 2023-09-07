@@ -1,12 +1,12 @@
 import React from 'react';
 import './Techs.css';
-import ArticleTitle from '../ArticleTitle/ArticleTitle';
+import SectionTitle from '../SectionTitle/SectionTitle';
 
 function Techs(props) {
   return (
-    <article className='techs' id='techs'>
+    <section className='techs' id='techs'>
       <div className='techs__container'>
-        <ArticleTitle text="Технологии"/>
+        <SectionTitle text="Технологии"/>
         <div className='techs__info'>
           <h3 className='techs__info-title'>7 технологий</h3>
           <p className='techs__about'>На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
@@ -21,7 +21,7 @@ function Techs(props) {
           </ul>
         </div>
       </div>
-    </article>
+    </section>
   );
 }
 

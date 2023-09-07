@@ -1,12 +1,12 @@
 import React from 'react';
 import './AboutMe.css';
-import ArticleTitle from '../ArticleTitle/ArticleTitle';
+import SectionTitle from '../SectionTitle/SectionTitle';
 import photo from '../../images/photo_yuliya.jpg';
 
 function AboutMe(props) {
   return (
-    <article className='about-me' id='about-me'>
-      <ArticleTitle text='Студент' />
+    <section className='about-me' id='about-me'>
+      <SectionTitle text='Студент' />
       <div className='about-me__container'>
         <div className='about-me__info'>
           <h3 className='about-me__info-title'>Юлия</h3>
@@ -18,7 +18,7 @@ function AboutMe(props) {
         </div>
         <img className='about-me__photo' src={photo} alt='Фотография студента' />
       </div>
-    </article>
+    </section>
   );
 }
 

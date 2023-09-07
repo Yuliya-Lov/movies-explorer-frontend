@@ -1,7 +1,7 @@
 import React from 'react';
 import './NavTab.css';
 
-function NavTab(props) {
+function NavTab() {
   return (
     <nav className='project-nav'>
       <ul className='project-nav__list'>

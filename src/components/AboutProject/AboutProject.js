@@ -1,11 +1,11 @@
 import React from 'react';
 import './AboutProject.css';
-import ArticleTitle from '../ArticleTitle/ArticleTitle';
+import SectionTitle from '../SectionTitle/SectionTitle';
 
 function AboutProject() {
   return (
-    <article className='about-project' id='about-project'>
-      <ArticleTitle text='О проекте'/>
+    <section className='about-project' id='about-project'>
+      <SectionTitle text='О проекте'/>
       <ul className='about-project__info'>
         <li className='about-project__stages'>
           <h3 className='about-project__stages-title'>Дипломный проект включал 5 этапов</h3>
@@ -26,7 +26,7 @@ function AboutProject() {
           <p lang='en' className='about-project__schema-cell about-project__schema-cell_about'>Front-end</p>
         </li>
       </ul>
-    </article>
+    </section>
   );
 }
 

@@ -5,10 +5,10 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
 function Movies(props) {
   return (
-    <section className='movies'>
+    <main className='movies'>
       <SearchForm />
       <MoviesCardList />
-    </section>
+    </main>
   );
 }
 

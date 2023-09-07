@@ -21,6 +21,7 @@ function SearchForm(props) {
           className="seach-form__submit-button" aria-label='Найти фильмы'></button>
       </div>
       <FilterCheckbox isShort={isShort} handleTumbClick={handleTumbClick} />
+      <hr className='seach-form__underline'></hr>
     </form>
   );
 }
