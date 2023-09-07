@@ -1,24 +1,12 @@
 import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import {db} from '../../utils/db';
 
 function MoviesCardList(props) {
   return (
-    <section className='movies-list'>
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
-      <MoviesCard />
+    <section className='movies-list' aria-label='Фильмы'>
+      {db.map(item => { return <MoviesCard movie={item}/>})}
     </section>
   );
 }

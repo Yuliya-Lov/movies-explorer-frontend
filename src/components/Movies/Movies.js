@@ -8,6 +8,7 @@ function Movies(props) {
     <main className='movies'>
       <SearchForm />
       <MoviesCardList />
+      <button className='movies__more-button'>Ещё</button>
     </main>
   );
 }
