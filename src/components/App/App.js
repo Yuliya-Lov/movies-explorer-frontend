@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes, useNavigate } from 'react-router-dom';
+import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
 import './App.css';
 import Header from '../Header/Header.js';
 import Main from '../Main/Main.js';
@@ -12,23 +12,23 @@ import Footer from '../Footer/Footer.js';
 import PopupWithNav from '../PopupWithNav/PopupWithNav.js';
 
 function App() {
+  const location = useLocation();
   const [isLoggedIn, setIsLoggedIn] = React.useState(true);
   const [isMobile, setIsMobile] = React.useState(false);
   const [isPopupWithNavOpen, setIsPopupWithNavOpen] = React.useState(false);
   const isOpen = isPopupWithNavOpen;
+  const [currentUser, setCurrentUser] = React.useState(
+    {
+      name: 'Виталий',
+      email: 'pochta@yandex.ru',
+    })
 
   function handleNavClick() {
-    console.log('handleNavClick')
     setIsPopupWithNavOpen(true);
   }
 
   function closeAllPopups() {
     setIsPopupWithNavOpen(false);
-  }
-
-  function handleOverlayClick(evt) {
-    if (evt.target.classList.contains('popup'))
-      closeAllPopups();
   }
 
   const handleResize = () => {
@@ -39,6 +39,7 @@ function App() {
       setIsPopupWithNavOpen(false);
     }
   };
+
 
   React.useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -53,11 +54,11 @@ function App() {
         <Route path='/' element={<Main/>}/>
         <Route path='/movies' element={<Movies/>}/>
         <Route path='/saved-movies' element={<SavedMovies/>}/>
-        <Route path='/profile' element={<Profile/>}/>
+        <Route path='/profile' element={<Profile currentUser={currentUser}/>}/>
         <Route path='/signin' element={<Login/>}/>
         <Route path='/signup' element={<Register/>}/>
       </Routes>
-      {isLoggedIn && <Footer />}
+      {isLoggedIn && location.pathname !== '/profile' && <Footer />}
       <PopupWithNav isMobile={isMobile} isOpen={isOpen} onClose={closeAllPopups} />
     </div>
   );

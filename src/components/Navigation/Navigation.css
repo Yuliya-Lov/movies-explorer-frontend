@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: calc(50% + 106px);
+  width: calc(50% + 105px);
 }
 
 .navigation_mobile {
@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 16px;
+  gap: 17px;
 }
 
 .navigation__movies_mobile {

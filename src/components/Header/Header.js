@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Header.css';
-import logo from '../../images/logo.svg';
 import Navigation from '../Navigation/Navigation.js';
 
 function Header({ isLoggedIn, isMobile, onNavClick }) {
