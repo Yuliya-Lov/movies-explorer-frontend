@@ -1,0 +1,36 @@
+.register {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 396px;
+  min-height: calc(100vh - 108px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.register__greeting {
+  margin: 40px 0 0 0;
+  padding: 0;
+  font-size: 24px;
+  font-weight: 500;
+  align-self: flex-start;
+}
+
+.register__redirection {
+  margin: 16px 0 0 0;
+  padding: 0;
+  color: #8B8B8B;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.register__link {
+  padding-left: 3px;
+  text-decoration: none;
+  color: #4285F4;
+  cursor: pointer;
+}
+
+.register__link:hover {
+  opacity: .7;
+}

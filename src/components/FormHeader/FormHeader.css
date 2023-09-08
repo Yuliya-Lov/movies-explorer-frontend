@@ -1,0 +1,16 @@
+.form-header {
+  margin-top: 70px;
+  width: 100%;
+  max-width: 396px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.form-header__logo {
+  margin: 0;
+  padding: 0;
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
