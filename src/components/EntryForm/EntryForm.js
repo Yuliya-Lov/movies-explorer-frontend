@@ -9,7 +9,7 @@ function EntryForm({ buttonText }) {
       <div className='entry-form__container'>
         <div className='entry-form__input-area'>
           <label htmlFor='name' className='entry-form__input-label'>Имя</label>
-          <input id='name' className='entry-form__input'></input>
+          <input type="text" id='name' className='entry-form__input'></input>
           <span className="entry-form__input-error name-input-error"></span>
         </div>
         <div className='entry-form__input-area'>
@@ -20,13 +20,12 @@ function EntryForm({ buttonText }) {
         {location.pathname === '/signup' &&
           <div className='entry-form__input-area'>
             <label htmlFor='password' className='entry-form__input-label'>Пароль</label>
-            <input id='password' className='entry-form__input'></input>
-            <span className="entry-form__input-error password-input-error"></span>
+            <input type="password" id='password' className='entry-form__input entry-form__input_error'></input>
+            <span className="entry-form__input-error password-input-error">Что-то пошло не так...</span>
           </div>
         }
-        <button className='entry-form__submit-button'>{buttonText}</button>
       </div>
-
+      <button className='entry-form__submit-button'>{buttonText}</button>
     </form>
   );
 }

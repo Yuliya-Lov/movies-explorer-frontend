@@ -14,3 +14,16 @@
   height: 38px;
   object-fit: contain;
 }
+
+@media screen and (max-width: 790px) {
+  .form-header {
+    margin-top: 232px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .form-header {
+    margin-top: 56px;
+    align-items: center;
+  }
+}
