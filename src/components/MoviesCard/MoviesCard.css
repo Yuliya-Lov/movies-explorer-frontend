@@ -6,7 +6,7 @@
 }
 
 .movie:hover .movie__button {
-  display: block;
+  display: flex;
 }
 
 .movie__img {
@@ -51,9 +51,11 @@
 }
 
 .movie__button {
-  display: none;
   margin: 0;
   padding: 0;
+  display: none;
+  justify-content: center;
+  align-items: center;
   border: none;
   position: absolute;
   top: 14px;
@@ -83,6 +85,13 @@
   border-radius: 50%;
   color: #FFF;
   font-size: 12px;
+}
+
+.movie__button_saved {
+  background-color: #313131;
+  font-size: 14px;
+  padding-bottom: 2px;
+  padding-left: 1px;
 }
 
 

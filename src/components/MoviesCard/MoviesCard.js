@@ -1,7 +1,9 @@
 import React from 'react';
 import './MoviesCard.css';
+import { useLocation } from 'react-router-dom';
 
 function MoviesCard({ movie }) {
+  const location = useLocation();
   const [isSaved, setIsSaved] = React.useState(true);
 
   function getTime(duration) {
@@ -18,7 +20,7 @@ function MoviesCard({ movie }) {
         <p className='movie__duration'>{getTime(movie.duration)}</p>
       </div>
       {isSaved
-        ? <button className='movie__button movie__button_type_remove' aria-label='Удалить из сохраненного'>✓</button>
+        ? <button className={`movie__button movie__button_type_remove ${location.pathname === '/saved-movies' && 'movie__button_saved'}`} aria-label='Удалить из сохраненного'>{location.pathname === '/saved-movies' ? '×' : '✓' }</button>
         : <button className='movie__button movie__button_type_save'>Сохранить</button>
       }
     </article>
