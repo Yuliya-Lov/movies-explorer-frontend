@@ -13,6 +13,7 @@ import Profile from '../Profile/Profile.js';
 import Footer from '../Footer/Footer.js';
 import PopupWithNav from '../PopupWithNav/PopupWithNav.js';
 import InfoTooltip from '../InfoTooltip/InfoTooltip.js';
+import PageNotFound from '../PageNotFound/PageNotFound';
 
 function App() {
   const location = useLocation();
@@ -23,7 +24,7 @@ function App() {
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const isOpen = isPopupWithNavOpen || isInfoTooltipOpen;
   const [isSucces, setIsSucces] = React.useState(false);
-  const [message, setMessage] = React.useState({message: 'The HTML element is used to create interactive controls for web-based forms in order'})
+  const [message, setMessage] = React.useState({ message: 'The HTML element is used to create interactive controls for web-based forms in order' })
   const [currentUser, setCurrentUser] = React.useState(
     {
       name: 'Виталий',
@@ -52,18 +53,21 @@ function App() {
     }
   };
 
+  const pathWithoutFooTer = (location.pathname === '/profile') ||
+    (location.pathname === '/*');
+
+  const pathWithoutHeader = (location.pathname !== '/signup') || (location.pathname !== '/signin') || (location.pathname !== '/*')
+
 
   React.useEffect(() => {
     window.addEventListener("resize", handleResize);
     handleResize();
   }, []);
 
-  console.log((location.pathname === '/signup'));
   return (
     <div className="root">
-      {(location.pathname !== '/signup' && location.pathname !== '/signin')
-        ? <Header isLoggedIn={isLoggedIn} isMobile={isMobile} onNavClick={handleNavClick}></Header>
-        : <FormHeader />
+      {!pathWithoutHeader &&
+        <Header isLoggedIn={isLoggedIn} isMobile={isMobile} onNavClick={handleNavClick}></Header>
       }
       <Routes>
         <Route path='/' element={<Main />} />
@@ -72,15 +76,16 @@ function App() {
         <Route path='/profile' element={<Profile currentUser={currentUser} />} />
         <Route path='/signin' element={<Login />} />
         <Route path='/signup' element={<Register />} />
+        <Route path='/*' element={<PageNotFound />} />
       </Routes>
-      {isLoggedIn && location.pathname !== '/profile' && <Footer />}
+      {isLoggedIn && !pathWithoutFooTer && <Footer />}
       <PopupWithNav isMobile={isMobile} isOpen={isPopupWithNavOpen} onClose={closeAllPopups} />
       <InfoTooltip
-          isOpen={isInfoTooltipOpen}
-          isOk={isSucces}
-          message={message}
-          onClose={closeAllPopups}
-        />
+        isOpen={isInfoTooltipOpen}
+        isOk={isSucces}
+        message={message}
+        onClose={closeAllPopups}
+      />
     </div>
   );
 }
