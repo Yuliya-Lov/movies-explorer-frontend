@@ -1,13 +1,12 @@
 import React from 'react';
-import './Login.css';
 import EntrySection from '../EntrySection/EntrySection';
 
-function Login(props) {
+function Login({buttonAction}) {
   return (
     <EntrySection
       greeting='Рады видеть!'
       buttonText='Войти'
-      buttonAction={() => console.log('buttonAction')}
+      buttonAction={buttonAction}
       redirectionText='Ещё не зарегистрированы?'
       linkName='Регистрация' linkPath='/signup' />
   );
