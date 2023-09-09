@@ -1,15 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './Login.css';
-import EntryForm from '../EntryForm/EntryForm';
+import EntrySection from '../EntrySection/EntrySection';
 
 function Login(props) {
   return (
-    <section className='login'>
-      <h1 className='login__greeting'>Рады видеть!</h1>
-      <EntryForm buttonText='Войти' />
-      <p className='login__redirection'>Ещё не зарегистрированы? <Link className='login__link' to='/signup'>Регистрация</Link></p>
-    </section>
+    <EntrySection
+      greeting='Рады видеть!'
+      buttonText='Войти'
+      buttonAction={() => console.log('buttonAction')}
+      redirectionText='Ещё не зарегистрированы?'
+      linkName='Регистрация' linkPath='/signup' />
   );
 }
 
