@@ -16,6 +16,11 @@
   opacity: .8;
 }
 
+.submit-button_disabled {
+  background: #F8F8F8;
+  color: #C2C2C2;
+}
+
 @media screen and (max-width: 600px) {
   .submit-button {
     width: 100%;
