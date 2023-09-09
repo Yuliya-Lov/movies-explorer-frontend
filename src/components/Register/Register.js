@@ -1,12 +1,12 @@
 import React from 'react';
 import EntrySection from '../EntrySection/EntrySection';
 
-function Register({ buttonAction }) {
+function Register({ handleSubmit }) {
   return (
     <EntrySection
       greeting='Добро пожаловать!'
       buttonText='Зарегистрироваться'
-      buttonAction={buttonAction}
+      buttonAction={handleSubmit}
       redirectionText='Уже зарегистрированы?'
       linkName='Войти' linkPath='/signin' />
   );

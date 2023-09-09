@@ -1,12 +1,12 @@
 import React from 'react';
 import EntrySection from '../EntrySection/EntrySection';
 
-function Login({buttonAction}) {
+function Login({ handleSubmit }) {
   return (
     <EntrySection
       greeting='Рады видеть!'
       buttonText='Войти'
-      buttonAction={buttonAction}
+      buttonAction={handleSubmit}
       redirectionText='Ещё не зарегистрированы?'
       linkName='Регистрация' linkPath='/signup' />
   );

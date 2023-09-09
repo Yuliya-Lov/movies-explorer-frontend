@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './EntrySection.css';
+import logo from '../../images/logo.svg';
 import ControlledInput from '../ControlledInput/ControlledInput';
 import SubmitButton from '../SubmitButton/SubmitButton';
 
@@ -24,21 +25,24 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
   function handleSubmit(e) {
     e.preventDefault();
     console.log(userInfo);
-   /*  buttonAction(); */
+    buttonAction(userInfo);
   }
   return (
     <section className='entry-section'>
+      <img src={logo} className='entry-section__logo' alt='Логотип' ></img>
       <h1 className='entry-section__greeting'>{greeting}</h1>
-      <form className='entry-section__form' >
+      <form className='entry-section__form'>
         <div className='entry-section__container'>
-          <ControlledInput
-            id='name'
-            type='text'
-            labelName='Имя'
-            placeHolder=''
-            value={userInfo.name}
-            isDisabled={false}
-            onChange={handleInputChange} />
+          {location.pathname === '/signup' &&
+            <ControlledInput
+              id='name'
+              type='text'
+              labelName='Имя'
+              placeHolder=''
+              value={userInfo.name}
+              isDisabled={false}
+              onChange={handleInputChange} />
+          }
           <ControlledInput
             id='email'
             type='email'
@@ -47,16 +51,14 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
             value={userInfo.email}
             isDisabled={false}
             onChange={handleInputChange} />
-          {location.pathname === '/signup' &&
-            <ControlledInput
-              id='password'
-              type='password'
-              labelName='Пароль'
-              placeHolder=''
-              value={userInfo.password}
-              isDisabled={false}
-              onChange={handleInputChange} />
-          }
+          <ControlledInput
+            id='password'
+            type='password'
+            labelName='Пароль'
+            placeHolder=''
+            value={userInfo.password}
+            isDisabled={false}
+            onChange={handleInputChange} />
         </div>
         <SubmitButton type='submit' buttonText={buttonText} buttonAction={handleSubmit} isDisabled={false} />
       </form>

@@ -6,7 +6,6 @@ import Header from '../Header/Header.js';
 import Main from '../Main/Main.js';
 import Movies from '../Movies/Movies.js';
 import SavedMovies from '../SavedMovies/SavedMovies.js';
-import FormHeader from '../FormHeader/FormHeader.js';
 import Register from '../Register/Register.js';
 import Login from '../Login/Login.js';
 import Profile from '../Profile/Profile.js';
@@ -18,7 +17,7 @@ import PageNotFound from '../PageNotFound/PageNotFound';
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
   const [isMobile, setIsMobile] = React.useState(false);
   const [isPopupWithNavOpen, setIsPopupWithNavOpen] = React.useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
@@ -29,6 +28,7 @@ function App() {
     {
       name: 'Виталий',
       email: 'pochta@yandex.ru',
+      password: ''
     })
 
   function handleNavClick() {
@@ -54,15 +54,43 @@ function App() {
   };
 
   const pathWithoutFooTer = (location.pathname === '/profile') ||
-    (location.pathname === '/*');
+    (location.pathname === '/*') || (location.pathname === '/signup') || (location.pathname === '/signin');
 
-  const pathWithoutHeader = (location.pathname !== '/signup') || (location.pathname !== '/signin') || (location.pathname !== '/*')
+  const pathWithoutHeader = (location.pathname === '/signup') || (location.pathname === '/signin') || (location.pathname === '/*')
 
 
   React.useEffect(() => {
     window.addEventListener("resize", handleResize);
     handleResize();
   }, []);
+
+  function onRegister() {
+    navigate('/signin', { replace: true });
+  }
+
+  function onLogin(data) {
+    console.log(data);
+    setCurrentUser({
+      ...currentUser,
+      email: data.email,
+      password: data.password,
+    });
+    setIsLoggedIn(true);
+    navigate('/', { replace: true });
+  }
+
+  function updateUserInfo(data) {
+    setCurrentUser({
+      ...currentUser,
+      email: data.email,
+      name: data.name,
+    });
+  }
+
+
+  React.useEffect(() => {
+    closeAllPopups();
+  }, [location]);
 
   return (
     <div className="root">
@@ -73,9 +101,9 @@ function App() {
         <Route path='/' element={<Main />} />
         <Route path='/movies' element={<Movies />} />
         <Route path='/saved-movies' element={<SavedMovies />} />
-        <Route path='/profile' element={<Profile currentUser={currentUser} />} />
-        <Route path='/signin' element={<Login />} />
-        <Route path='/signup' element={<Register />} />
+        <Route path='/profile' element={<Profile currentUser={currentUser} handleExit={handleChangeIsLogged} onUpdate={updateUserInfo}/>} />
+        <Route path='/signin' element={<Login handleSubmit={onLogin} />} />
+        <Route path='/signup' element={<Register handleSubmit={onRegister} />} />
         <Route path='/*' element={<PageNotFound />} />
       </Routes>
       {isLoggedIn && !pathWithoutFooTer && <Footer />}

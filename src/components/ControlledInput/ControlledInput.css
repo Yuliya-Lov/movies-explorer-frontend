@@ -6,6 +6,12 @@
   gap: 10px;
 }
 
+.controlled-input_slim {
+  min-height: 40px;
+  gap: 0;
+  margin: 3px 0;
+}
+
 .controlled-input__label {
   margin: 0;
   padding: 0;
@@ -26,6 +32,18 @@
   color: #FFF;
   font-size: 13px;
   font-weight: 500;
+}
+
+/* .controlled-input__input:-webkit-autofill {
+  transition: all 5000s ease-in-out 0s;
+} */
+
+.controlled-input__input:disabled {
+  color: #FFF;
+  border: none;
+  font-weight: 400;
+  text-align: end;
+  background-color: transparent;
 }
 
 .controlled-input__input_error-value {
