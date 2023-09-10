@@ -31,12 +31,12 @@ function App() {
       password: ''
     })
 
-  function handleNavClick() {
-    setIsPopupWithNavOpen(true);
-  }
-
   function handleChangeIsLogged(value) {
     setIsLoggedIn(value);
+  }
+
+  function handleNavClick() {
+    setIsPopupWithNavOpen(true);
   }
 
   function closeAllPopups() {
@@ -53,16 +53,16 @@ function App() {
     }
   };
 
-  const pathWithoutFooTer = (location.pathname === '/profile') ||
-    (location.pathname === '/*') || (location.pathname === '/signup') || (location.pathname === '/signin');
+  const pathWithoutFooTer =
+    (location.pathname === '/profile')
+    || (location.pathname === '/*')
+    || (location.pathname === '/signup')
+    || (location.pathname === '/signin');
 
-  const pathWithoutHeader = (location.pathname === '/signup') || (location.pathname === '/signin') || (location.pathname === '/*')
-
-
-  React.useEffect(() => {
-    window.addEventListener("resize", handleResize);
-    handleResize();
-  }, []);
+  const pathWithoutHeader =
+    (location.pathname === '/signup')
+    || (location.pathname === '/signin')
+    || (location.pathname === '/*')
 
   function onRegister() {
     navigate('/signin', { replace: true });
@@ -86,6 +86,32 @@ function App() {
     });
   }
 
+  React.useEffect(() => {
+    function closeByEscape(evt) {
+      if (evt.key === 'Escape') {
+        closeAllPopups();
+      }
+    }
+
+    function handleOverlayClick(evt) {
+      if (evt.target.classList.contains('popup') || evt.target.classList.contains('tooltip'))
+        closeAllPopups();
+    }
+
+    if (isOpen) {
+      document.addEventListener('keydown', closeByEscape);
+      document.addEventListener('click', handleOverlayClick);
+      return () => {
+        document.removeEventListener('keydown', closeByEscape);
+        document.removeEventListener('click', handleOverlayClick);
+      }
+    }
+  }, [isOpen])
+
+  React.useEffect(() => {
+    window.addEventListener("resize", handleResize);
+    handleResize();
+  }, []);
 
   React.useEffect(() => {
     setIsPopupWithNavOpen(false);

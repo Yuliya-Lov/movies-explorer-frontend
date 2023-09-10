@@ -15,7 +15,7 @@ function Portfolio(props) {
           <hr className='portfolio__underline'/>
         </li>
         <li className='portfolio__item'>
-          <a href='#' className='portfolio__link' target='blank'>Одностраничное приложение</a>
+          <a href='https://place.nomoreparties.co/' className='portfolio__link' target='blank'>Одностраничное приложение</a>
         </li>
       </ul>
     </section>

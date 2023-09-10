@@ -3,7 +3,6 @@ import './PopupWithNav.css';
 import Navigation from '../Navigation/Navigation';
 
 function PopupWithNav({isMobile, isOpen, onClose}) {
-  console.log('isOpen', isOpen)
   return (
     <div className={`popup ${isOpen && 'popup_opened'}`}>
       <div className="popup__container">

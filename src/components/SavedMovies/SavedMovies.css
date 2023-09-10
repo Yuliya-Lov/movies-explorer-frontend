@@ -13,7 +13,6 @@
     margin-bottom: 0;
     min-height: calc(100vh - 249px);
   }
-
 }
 
 @media screen and (max-width: 380px) {
@@ -21,5 +20,4 @@
     width: calc(100% - 20px);
     min-height: calc(100vh - 328px);
   }
-
 }

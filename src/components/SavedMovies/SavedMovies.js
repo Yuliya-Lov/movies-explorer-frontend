@@ -3,7 +3,7 @@ import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-function SavedMovies(props) {
+function SavedMovies() {
   const [moviesArr, setMoviesArr] = React.useState([])
 
   const arrayFavoriteMovies = () => {

@@ -43,7 +43,7 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
   return (
     <section className='entry-section'>
       <img src={logo} className='entry-section__logo' alt='Логотип' ></img>
-      <h1 className='entry-section__greeting'>{greeting}</h1>
+      <h2 className='entry-section__greeting'>{greeting}</h2>
       <form className='entry-section__form' name='entry-form' ref={enteryForm}>
         <div className='entry-section__container'>
           {location.pathname === '/signup' &&

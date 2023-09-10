@@ -108,7 +108,6 @@
   .techs__info-title {
     font-size: 6.8vw;
   }
-
 }
 
 @media screen and (max-width: 380px) {
@@ -128,7 +127,6 @@
   .techs__info-title {
     font-size: 30px;
     letter-spacing: -1.2px;
-    line-height: normal;
   }
 
   .techs__info {

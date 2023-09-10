@@ -13,9 +13,7 @@
   margin: 0;
   padding: 0;
   font-size: 24px;
-  font-style: normal;
   font-weight: 500;
-  line-height: normal;
 }
 
 .profile__form {
@@ -92,7 +90,6 @@
   border: none;
   font-size: 13px;
   font-weight: 400;
-  line-height: normal;
   background-color: transparent;
   cursor: pointer;
 }
@@ -109,11 +106,10 @@
   color: #EE3465;
 }
 
-
 @media screen and (max-width: 790px) {
   .profile {
-    min-height: calc(100vh - 70px);
-    padding-top: 240px;
+    min-height: calc(100vh - 76px);
+    padding-top: 234px;
   }
 
   .profile__form {
@@ -129,7 +125,6 @@
   .profile {
     width: calc(100% - 60px);
   }
-
 }
 
 @media screen and (max-width: 380px) {
@@ -148,5 +143,5 @@
 
   .profile__actions {
     margin-top: 329px;
-}
+  }
 }

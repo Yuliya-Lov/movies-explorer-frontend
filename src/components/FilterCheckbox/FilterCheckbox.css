@@ -32,7 +32,6 @@
   transition: .3s;
 }
 
-
 .checkbox__switch:before {
   content: '';
   display: inline-block;

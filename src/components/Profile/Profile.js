@@ -36,12 +36,12 @@ function Profile({ currentUser, handleExit, onUpdate }) {
 
   const profileForm = React.useRef();
 
- React.useEffect(() => {
-  console.log(profileForm.current);
+  React.useEffect(() => {
     if (isEditMode) {
       const validatedForm = new FormValidator(validationSettings, profileForm.current);
       validatedForm.enableValidation();
       validatedForm.setInitialFormState();
+
     }
   }, [profileForm, isEditMode])
 
@@ -80,7 +80,7 @@ function Profile({ currentUser, handleExit, onUpdate }) {
         {isEditMode &&
           <div className='profile__actions'>
             <span className='profile__form-error'></span>
-            <SubmitButton buttonText="Сохранить" buttonAction={handleSubmit} isDisabled={false} />
+            <SubmitButton buttonText="Сохранить" buttonAction={handleSubmit} />
           </div>}
       </form>
       {!isEditMode &&

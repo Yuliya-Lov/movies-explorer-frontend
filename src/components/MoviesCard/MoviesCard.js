@@ -5,7 +5,6 @@ import { useLocation } from 'react-router-dom';
 function MoviesCard({ movie, saved }) {
   const location = useLocation();
   const [isSaved, setIsSaved] = React.useState(saved || false);
-  console.log(isSaved);
 
   function checkLocalFavoriteMovies() {
     let oldArray = localStorage.getItem("favoriteMovies");
@@ -39,7 +38,6 @@ function MoviesCard({ movie, saved }) {
     window.dispatchEvent(new Event("storage"));
   }
 
-
   function getTime(duration) {
     const minutes = Math.floor((duration / (1000 * 60)) % 60);
     const hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
@@ -56,7 +54,6 @@ function MoviesCard({ movie, saved }) {
     setIsSaved(false);
   }
 
-  console.log(getTime(movie.duration))
   return (
     <article className='movie'>
       <img className='movie__img' src={movie.image} alt={movie.nameRu} />

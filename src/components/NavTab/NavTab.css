@@ -5,7 +5,6 @@
   width: calc(100% - 80px);
   border-radius: 0 0 10px 10px;
   background: #272727;
-
 }
 
 .project-nav__list {
@@ -28,7 +27,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 .project-nav__link {
@@ -50,16 +48,13 @@
   opacity: .7;
 }
 
-
 @media screen and (max-width: 790px) {
   .project-nav {
     width: calc(100% - 40px);
   }
-
 }
 
 @media screen and (max-width: 600px) {
-
   .project-nav__item {
     width: 82px;
     min-height: 26px;

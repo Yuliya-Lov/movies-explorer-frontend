@@ -11,7 +11,10 @@ export default class FormValidator {
 
   _showInputError(input) {
     input.classList.add(this._inputErrorClass);
-    if (!input.classList.contains('controlled-input__input_slim')) {
+    if (input.classList.contains('controlled-input__input_slim')) {
+      const errorElement = this._form.querySelector(`.profile__form-error`);
+      errorElement.textContent = 'При обновлении профиля произошла ошибка.';
+    } else {
       const errorElement = this._form.querySelector(`.${input.id}-error`);
       errorElement.textContent = input.validationMessage;
     }
@@ -19,8 +22,10 @@ export default class FormValidator {
 
   _hideInputError(input) {
     input.classList.remove(this._inputErrorClass);
-    console.log(input.classList)
-    if (!input.classList.contains('controlled-input__input_slim')) {
+    if (input.classList.contains('controlled-input__input_slim')) {
+      const errorElement = this._form.querySelector(`.profile__form-error`);
+      errorElement.textContent = '';
+    } else {
       const errorElement = this._form.querySelector(`.${input.id}-error`);
       errorElement.textContent = '';
     }
@@ -34,12 +39,11 @@ export default class FormValidator {
     }
   }
 
-  _hasInputsValid() {
+  hasInputsValid() {
     return this._inputList.every((input) => input.validity.valid)
   }
 
   _disableSubmitButton() {
-    console.log(this._submitButton.classList);
     this._submitButton.classList.add(this._inactiveButtonClass);
     this._submitButton.setAttribute('disabled', 'disabled');
   }
@@ -50,7 +54,7 @@ export default class FormValidator {
   }
 
   _setButtonState() {
-    if (this._hasInputsValid()) {
+    if (this.hasInputsValid()) {
       this._enableSubmitButton();
     } else {
       this._disableSubmitButton();
@@ -63,6 +67,7 @@ export default class FormValidator {
       this._hideInputError(input);
     })
   }
+
 
   _setEventListeners() {
     this._setButtonState();

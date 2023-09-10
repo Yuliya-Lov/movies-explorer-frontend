@@ -44,7 +44,6 @@
 .navigation__link_mobile {
   font-size: 18px;
   font-weight: 500;
-  line-height: normal;
 }
 
 .navigation__link_active {
@@ -77,6 +76,3 @@
   opacity: .7;
 }
 
-@media screen and (max-width: 380px){
-
-}

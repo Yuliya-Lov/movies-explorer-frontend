@@ -3,7 +3,7 @@ import './AboutMe.css';
 import SectionTitle from '../SectionTitle/SectionTitle';
 import photo from '../../images/photo-yuliya.jpg';
 
-function AboutMe(props) {
+function AboutMe() {
   return (
     <section className='about-me' id='about-me'>
       <SectionTitle text='Студент' />

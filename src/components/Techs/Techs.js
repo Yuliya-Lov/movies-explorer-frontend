@@ -6,7 +6,7 @@ function Techs(props) {
   return (
     <section className='techs' id='techs'>
       <div className='techs__container'>
-        <SectionTitle text="Технологии"/>
+        <SectionTitle text="Технологии" />
         <div className='techs__info'>
           <h3 className='techs__info-title'>7 технологий</h3>
           <p className='techs__about'>На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>

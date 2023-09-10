@@ -58,7 +58,6 @@
   padding: 0;
   font-size: 20px;
   font-weight: 400;
-  line-height: normal;
   letter-spacing: -0.8px;
   color: #000000;
   margin: 0 0 13px 0;
@@ -85,7 +84,6 @@
 .tooltip__button-close:hover {
   opacity: 0.8;
 }
-
 
 @media screen and (max-width:600px) {
   .tooltip__container {

@@ -2,7 +2,7 @@ import React from 'react';
 import './Footer.css';
 const currentYear = new Date().getFullYear();
 
-function Footer(props) {
+function Footer() {
   return (
     <footer className="footer">
       <p className="footer__name">Учебный проект Яндекс.Практикум х BeatFilm.</p>
