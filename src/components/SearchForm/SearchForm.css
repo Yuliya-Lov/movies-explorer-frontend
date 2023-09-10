@@ -25,6 +25,9 @@
   font-weight: 400;
   line-height: 18px;
 }
+.seach-form__input:focus {
+  outline: 2px solid #4285F4;
+}
 
 .seach-form__input::placeholder {
   margin: 0;

@@ -34,6 +34,10 @@
   font-weight: 500;
 }
 
+.controlled-input__input:focus {
+  outline: 1px solid #4285F4;
+}
+
 /* .controlled-input__input:-webkit-autofill {
   transition: all 5000s ease-in-out 0s;
 } */
