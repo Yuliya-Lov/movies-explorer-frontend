@@ -1,7 +1,7 @@
 import React from 'react';
 import './AboutMe.css';
 import SectionTitle from '../SectionTitle/SectionTitle';
-import photo from '../../images/photo_yuliya.jpg';
+import photo from '../../images/photo-yuliya.jpg';
 
 function AboutMe(props) {
   return (

@@ -1,7 +1,7 @@
 import React from "react";
 import './InfoTooltip.css';
-import success_icon from "../../images/success_icon.png";
-import failed_icon from "../../images/failed_icon.png";
+import success_icon from "../../images/success-icon.svg";
+import failed_icon from "../../images/failed-icon.svg";
 
 const InfoTooltip = ({ isOpen, isOk, message, onClose }) => {
 

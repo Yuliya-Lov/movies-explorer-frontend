@@ -20,7 +20,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(true);
   const [isMobile, setIsMobile] = React.useState(false);
   const [isPopupWithNavOpen, setIsPopupWithNavOpen] = React.useState(false);
-  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(true);
   const isOpen = isPopupWithNavOpen || isInfoTooltipOpen;
   const [isSucces, setIsSucces] = React.useState(false);
   const [message, setMessage] = React.useState({ message: 'The HTML element is used to create interactive controls for web-based forms in order' })
@@ -89,7 +89,7 @@ function App() {
 
 
   React.useEffect(() => {
-    closeAllPopups();
+    setIsPopupWithNavOpen(false);
   }, [location]);
 
   return (
@@ -97,15 +97,17 @@ function App() {
       {!pathWithoutHeader &&
         <Header isLoggedIn={isLoggedIn} isMobile={isMobile} onNavClick={handleNavClick}></Header>
       }
-      <Routes>
-        <Route path='/' element={<Main />} />
-        <Route path='/movies' element={<Movies />} />
-        <Route path='/saved-movies' element={<SavedMovies />} />
-        <Route path='/profile' element={<Profile currentUser={currentUser} handleExit={handleChangeIsLogged} onUpdate={updateUserInfo}/>} />
-        <Route path='/signin' element={<Login handleSubmit={onLogin} />} />
-        <Route path='/signup' element={<Register handleSubmit={onRegister} />} />
-        <Route path='/*' element={<PageNotFound />} />
-      </Routes>
+      <CurrentUserContext.Provider value={currentUser}>
+        <Routes>
+          <Route path='/' element={<Main />} />
+          <Route path='/movies' element={<Movies />} />
+          <Route path='/saved-movies' element={<SavedMovies />} />
+          <Route path='/profile' element={<Profile currentUser={currentUser} handleExit={handleChangeIsLogged} onUpdate={updateUserInfo} />} />
+          <Route path='/signin' element={<Login handleSubmit={onLogin} />} />
+          <Route path='/signup' element={<Register handleSubmit={onRegister} />} />
+          <Route path='/*' element={<PageNotFound />} />
+        </Routes>
+      </CurrentUserContext.Provider>
       {isLoggedIn && !pathWithoutFooTer && <Footer />}
       <PopupWithNav isMobile={isMobile} isOpen={isPopupWithNavOpen} onClose={closeAllPopups} />
       <InfoTooltip

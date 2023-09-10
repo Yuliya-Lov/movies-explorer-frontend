@@ -7,7 +7,7 @@ function Portfolio(props) {
       <h2 className='portfolio__title'>Портфолио</h2>
       <ul className='portfolio__list'>
         <li className='portfolio__item'>
-          <a href='#' className='portfolio__link' target='blank'>Статичный сайт</a>
+          <a href='https://yuliya-lov.github.io/how-to-learn/' className='portfolio__link' target='blank'>Статичный сайт</a>
           <hr className='portfolio__underline'/>
         </li>
         <li className='portfolio__item'>
