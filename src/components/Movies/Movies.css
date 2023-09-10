@@ -5,6 +5,7 @@
   width: calc(100% - 140px);
   max-width: 1140px;
   min-width: 292px;
+  min-height: calc(100vh - 275px);
 }
 
 .movies__more-button {
@@ -31,6 +32,7 @@
   .movies {
     width: calc(100% - 60px);
     margin-bottom: 0;
+    min-height: calc(100vh - 249px);
   }
 
 }
@@ -45,6 +47,7 @@
 @media screen and (max-width: 380px) {
   .movies {
     width: calc(100% - 20px);
+    min-height: calc(100vh - 328px);
   }
 
 }
