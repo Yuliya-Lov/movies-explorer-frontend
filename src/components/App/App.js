@@ -20,7 +20,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = React.useState(true);
   const [isMobile, setIsMobile] = React.useState(false);
   const [isPopupWithNavOpen, setIsPopupWithNavOpen] = React.useState(false);
-  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(true);
+  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const isOpen = isPopupWithNavOpen || isInfoTooltipOpen;
   const [isSucces, setIsSucces] = React.useState(false);
   const [message, setMessage] = React.useState({ message: 'The HTML element is used to create interactive controls for web-based forms in order' })

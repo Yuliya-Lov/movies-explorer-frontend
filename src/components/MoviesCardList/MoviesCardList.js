@@ -1,12 +1,11 @@
 import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-import {db} from '../../utils/db';
 
-function MoviesCardList(props) {
+function MoviesCardList({movies, saved}) {
   return (
     <section className='movies-list' aria-label='Фильмы'>
-      {db.map(item => { return <MoviesCard key={item._id} movie={item}/>})}
+      {movies.map(item => { return <MoviesCard key={item._id} movie={item} saved={saved}/>})}
     </section>
   );
 }
