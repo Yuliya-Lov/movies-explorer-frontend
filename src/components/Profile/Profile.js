@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import './Profile.css';
 import SubmitButton from '../SubmitButton/SubmitButton';
 import ControlledInput from '../ControlledInput/ControlledInput';
+import FormValidator from '../../utils/FormValidator';
+import { validationSettings } from '../../utils/validationSettings';
 
 function Profile({ currentUser, handleExit, onUpdate }) {
   const navigate = useNavigate();
@@ -31,10 +33,22 @@ function Profile({ currentUser, handleExit, onUpdate }) {
     handleExit(false);
     navigate('/signin', { replace: true })
   }
+
+  const profileForm = React.useRef();
+
+ React.useEffect(() => {
+  console.log(profileForm.current);
+    if (isEditMode) {
+      const validatedForm = new FormValidator(validationSettings, profileForm.current);
+      validatedForm.enableValidation();
+      validatedForm.setInitialFormState();
+    }
+  }, [profileForm, isEditMode])
+
   return (
     <section className='profile'>
       <h2 className='profile__greeting'>Привет, {currentUser.name}!</h2>
-      <form className='profile__form'>
+      <form className='profile__form' name='profile-form' ref={profileForm}>
         <div className='profile__input-container'>
           <label className='profile__form-field profile__form-field_type_key'>Имя</label>
           <ControlledInput
@@ -44,6 +58,9 @@ function Profile({ currentUser, handleExit, onUpdate }) {
             placeHolder=''
             value={userInfo.name}
             isDisabled={!isEditMode}
+            isRequired={true}
+            minLengthValue='2'
+            maxLengthValue='30'
             onChange={handleInputChange}
             slim={true} />
         </div>
@@ -56,11 +73,9 @@ function Profile({ currentUser, handleExit, onUpdate }) {
             placeHolder=''
             value={userInfo.email}
             isDisabled={!isEditMode}
+            isRequired={true}
             onChange={handleInputChange}
             slim={true} />
-          {/* <input
-            className='profile__form-field profile__form-field_type_value' disabled={!isEditMode}
-            value={userInfo.email} /> */}
         </div>
         {isEditMode &&
           <div className='profile__actions'>

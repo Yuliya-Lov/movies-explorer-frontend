@@ -18,10 +18,10 @@ function ControlledInput({ id, type, labelName, placeHolder, value, onChange, is
         minLength={minLengthValue|| ''}
         maxLength={maxLengthValue || '' }
         required={isRequired || false}
-        className='controlled-input__input'
-        autocomplete="off"/>
+        className='controlled-input__input controlled-input__input_slim'
+        autoComplete="off"/>
       {!slim && <span
-        className="controlled-input__error" />}
+        className= {`controlled-input__error ${id}-error`}/>}
     </div>
   );
 }

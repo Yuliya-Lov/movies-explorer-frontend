@@ -4,6 +4,8 @@ import './EntrySection.css';
 import logo from '../../images/logo.svg';
 import ControlledInput from '../ControlledInput/ControlledInput';
 import SubmitButton from '../SubmitButton/SubmitButton';
+import FormValidator from '../../utils/FormValidator';
+import { validationSettings } from '../../utils/validationSettings';
 
 function EntrySection({ greeting, buttonText, buttonAction, redirectionText, linkName, linkPath }) {
   const location = useLocation();
@@ -27,11 +29,22 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
     console.log(userInfo);
     buttonAction(userInfo);
   }
+
+  const enteryForm = React.useRef();
+
+  React.useEffect(() => {
+    console.log(enteryForm);
+    const validatedForm = new FormValidator(validationSettings, enteryForm.current);
+    validatedForm.enableValidation();
+    validatedForm.setInitialFormState();
+  }, [enteryForm])
+
+
   return (
     <section className='entry-section'>
       <img src={logo} className='entry-section__logo' alt='Логотип' ></img>
       <h1 className='entry-section__greeting'>{greeting}</h1>
-      <form className='entry-section__form'>
+      <form className='entry-section__form' name='entry-form' ref={enteryForm}>
         <div className='entry-section__container'>
           {location.pathname === '/signup' &&
             <ControlledInput

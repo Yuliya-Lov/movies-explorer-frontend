@@ -13,7 +13,6 @@ import Footer from '../Footer/Footer.js';
 import PopupWithNav from '../PopupWithNav/PopupWithNav.js';
 import InfoTooltip from '../InfoTooltip/InfoTooltip.js';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import FormValidator from '../../utils/FormValidator';
 
 function App() {
   const location = useLocation();
@@ -70,7 +69,6 @@ function App() {
   }
 
   function onLogin(data) {
-    console.log(data);
     setCurrentUser({
       ...currentUser,
       email: data.email,
