@@ -41,6 +41,9 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
               placeHolder=''
               value={userInfo.name}
               isDisabled={false}
+              isRequired={true}
+              minLengthValue='2'
+              maxLengthValue='30'
               onChange={handleInputChange} />
           }
           <ControlledInput
@@ -50,6 +53,7 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
             placeHolder=''
             value={userInfo.email}
             isDisabled={false}
+            isRequired={true}
             onChange={handleInputChange} />
           <ControlledInput
             id='password'
@@ -58,6 +62,7 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
             placeHolder=''
             value={userInfo.password}
             isDisabled={false}
+            isRequired={true}
             onChange={handleInputChange} />
         </div>
         <SubmitButton type='submit' buttonText={buttonText} buttonAction={handleSubmit} isDisabled={false} />

@@ -1,7 +1,7 @@
 import React from 'react';
 import './ControlledInput.css';
 
-function ControlledInput({ id, type, labelName, placeHolder, value, onChange, isDisabled, slim}) {
+function ControlledInput({ id, type, labelName, placeHolder, value, onChange, isDisabled, isRequired, minLengthValue, maxLengthValue, slim}) {
   return (
     <div className={`controlled-input ${slim && 'controlled-input_slim'}`}>
       <label
@@ -15,6 +15,9 @@ function ControlledInput({ id, type, labelName, placeHolder, value, onChange, is
         value={value}
         disabled={isDisabled}
         onChange={onChange}
+        minLength={minLengthValue|| ''}
+        maxLength={maxLengthValue || '' }
+        required={isRequired || false}
         className='controlled-input__input'
         autocomplete="off"/>
       {!slim && <span
