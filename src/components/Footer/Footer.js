@@ -6,13 +6,16 @@ function Footer() {
   return (
     <footer className="footer">
       <p className="footer__name">Учебный проект Яндекс.Практикум х BeatFilm.</p>
-      <hr className="footer__underline" />
       <div className="footer__info">
         <p className="footer__copyright">&#169;{currentYear}</p>
-        <div className="footer__links">
-          <a href='https://practicum.yandex.ru/' className="footer__link" target='blank'>Яндекс.Практикум</a>
-          <a href='https://github.com/' className="footer__link" lang='en' target='blank'>Github</a>
-        </div>
+        <ul className="footer__links">
+          <li className='footer__link-item'>
+            <a href='https://practicum.yandex.ru/' className="footer__link" target='blank'>Яндекс.Практикум</a>
+          </li>
+          <li className='footer__link-item'>
+            <a href='https://github.com/' className="footer__link" lang='en' target='blank'>Github</a>
+          </li>
+        </ul>
       </div>
     </footer>
   )

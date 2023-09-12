@@ -53,16 +53,11 @@ function App() {
     }
   };
 
-  const pathWithoutFooTer =
-    (location.pathname === '/profile')
-    || (location.pathname === '/*')
-    || (location.pathname === '/signup')
-    || (location.pathname === '/signin');
 
-  const pathWithoutHeader =
-    (location.pathname === '/signup')
-    || (location.pathname === '/signin')
-    || (location.pathname === '/*')
+  const pathWithFooter =
+    (location.pathname === '/movies') || (location.pathname === '/saved-movies') || (location.pathname === '/');
+
+  const pathWithHeader = (location.pathname === '/movies') || (location.pathname === '/saved-movies') || (location.pathname === '/') || (location.pathname === '/profile');
 
   function onRegister() {
     navigate('/signin', { replace: true });
@@ -115,16 +110,18 @@ function App() {
 
   React.useEffect(() => {
     setIsPopupWithNavOpen(false);
+    console.log(location.pathname === '/*');
   }, [location]);
 
   return (
     <div className="root">
-      {!pathWithoutHeader &&
+      {pathWithHeader &&
         <Header isLoggedIn={isLoggedIn} isMobile={isMobile} onNavClick={handleNavClick}></Header>
       }
       <CurrentUserContext.Provider value={currentUser}>
         <Routes>
-          <Route path='/' element={<Main />} />
+          <Route path='/' element={<Main />} >
+          </Route>
           <Route path='/movies' element={<Movies />} />
           <Route path='/saved-movies' element={<SavedMovies />} />
           <Route path='/profile' element={<Profile currentUser={currentUser} handleExit={handleChangeIsLogged} onUpdate={updateUserInfo} />} />
@@ -133,7 +130,7 @@ function App() {
           <Route path='/*' element={<PageNotFound />} />
         </Routes>
       </CurrentUserContext.Provider>
-      {isLoggedIn && !pathWithoutFooTer && <Footer />}
+      {pathWithFooter && <Footer />}
       <PopupWithNav isMobile={isMobile} isOpen={isPopupWithNavOpen} onClose={closeAllPopups} />
       <InfoTooltip
         isOpen={isInfoTooltipOpen}

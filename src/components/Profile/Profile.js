@@ -31,7 +31,7 @@ function Profile({ currentUser, handleExit, onUpdate }) {
 
   const handleExitClick = () => {
     handleExit(false);
-    navigate('/signin', { replace: true })
+    navigate('/', { replace: true })
   }
 
   const profileForm = React.useRef();
@@ -46,58 +46,60 @@ function Profile({ currentUser, handleExit, onUpdate }) {
   }, [profileForm, isEditMode])
 
   return (
-    <section className='profile'>
-      <h2 className='profile__greeting'>Привет, {currentUser.name}!</h2>
-      <form className='profile__form' name='profile-form' ref={profileForm}>
-        <div className='profile__input-container'>
-          <label className='profile__form-field profile__form-field_type_key'>Имя</label>
-          <ControlledInput
-            id='name'
-            type='text'
-            labelName=''
-            placeHolder=''
-            value={userInfo.name}
-            isDisabled={!isEditMode}
-            isRequired={true}
-            minLengthValue='2'
-            maxLengthValue='30'
-            onChange={handleInputChange}
-            slim={true} />
-        </div>
-        <div className='profile__input-container'>
-          <label className='profile__form-field profile__form-field_type_key'>E-mail</label>
-          <ControlledInput
-            id='email'
-            type='email'
-            labelName=''
-            placeHolder=''
-            value={userInfo.email}
-            isDisabled={!isEditMode}
-            isRequired={true}
-            onChange={handleInputChange}
-            slim={true} />
-        </div>
-        {isEditMode &&
+    <main className='profile'>
+      <section className='profile__section'>
+        <h1 className='profile__greeting'>Привет, {currentUser.name}!</h1>
+        <form className='profile__form' name='profile-form' ref={profileForm}>
+          <div className='profile__input-container'>
+            <label className='profile__form-field profile__form-field_type_key'>Имя</label>
+            <ControlledInput
+              id='name'
+              type='text'
+              labelName=''
+              placeHolder=''
+              value={userInfo.name}
+              isDisabled={!isEditMode}
+              isRequired={true}
+              minLengthValue='2'
+              maxLengthValue='30'
+              onChange={handleInputChange}
+              slim={true} />
+          </div>
+          <div className='profile__input-container'>
+            <label className='profile__form-field profile__form-field_type_key'>E-mail</label>
+            <ControlledInput
+              id='email'
+              type='email'
+              labelName=''
+              placeHolder=''
+              value={userInfo.email}
+              isDisabled={!isEditMode}
+              isRequired={true}
+              onChange={handleInputChange}
+              slim={true} />
+          </div>
+          {isEditMode &&
+            <div className='profile__actions'>
+              <span className='profile__form-error'></span>
+              <SubmitButton buttonText="Сохранить" buttonAction={handleSubmit} />
+            </div>}
+        </form>
+        {!isEditMode &&
           <div className='profile__actions'>
-            <span className='profile__form-error'></span>
-            <SubmitButton buttonText="Сохранить" buttonAction={handleSubmit} />
-          </div>}
-      </form>
-      {!isEditMode &&
-        <div className='profile__actions'>
-          <button
-            type='button'
-            className='profile__button profile__button_type_edit'
-            onClick={() => setIsEditMode(true)}
-          >Редактировать</button>
-          <button
-            type='button'
-            className='profile__button profile__button_type_exit'
-            onClick={handleExitClick}
-          >Выйти из аккаунта</button>
-        </div>
-      }
-    </section>
+            <button
+              type='button'
+              className='profile__button profile__button_type_edit'
+              onClick={() => setIsEditMode(true)}
+            >Редактировать</button>
+            <button
+              type='button'
+              className='profile__button profile__button_type_exit'
+              onClick={handleExitClick}
+            >Выйти из аккаунта</button>
+          </div>
+        }
+      </section>
+    </main>
   );
 }
 

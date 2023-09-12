@@ -149,6 +149,7 @@
 @media screen and (max-width: 380px) {
   .about-me {
     width: calc(100% - 28px);
+    padding-top: 53px;
   }
 
   .about-me__title {

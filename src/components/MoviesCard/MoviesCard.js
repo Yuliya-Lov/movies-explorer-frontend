@@ -55,17 +55,17 @@ function MoviesCard({ movie, saved }) {
   }
 
   return (
-    <article className='movie'>
-      <img className='movie__img' src={movie.image} alt={movie.nameRu} />
-      <div className='movie__info'>
-        <h3 className='movie__name'>{movie.nameRU}</h3>
-        <p className='movie__duration'>{getTime(movie.duration)}</p>
-      </div>
-      {isSaved
-        ? <button className={`movie__button movie__button_type_remove ${location.pathname === '/saved-movies' && 'movie__button_saved'}`} aria-label='Удалить из сохраненного' onClick={deleteMovie}>{location.pathname === '/saved-movies' ? '×' : '✓'}</button>
-        : <button type='button' className='movie__button movie__button_type_save' onClick={saveMovie}>Сохранить</button>
-      }
-    </article>
+      <article className='movie'>
+        <img className='movie__img' src={movie.image} alt={movie.nameRu} />
+        <div className='movie__info'>
+          <h2 className='movie__name'>{movie.nameRU}</h2>
+          <p className='movie__duration'>{getTime(movie.duration)}</p>
+        </div>
+        {isSaved
+          ? <button className={`movie__button movie__button_type_remove ${location.pathname === '/saved-movies' && 'movie__button_saved'}`} aria-label='Удалить из сохраненного' onClick={deleteMovie}>{location.pathname === '/saved-movies' ? '×' : '✓'}</button>
+          : <button type='button' className='movie__button movie__button_type_save' onClick={saveMovie}>Сохранить</button>
+        }
+      </article>
   );
 }
 

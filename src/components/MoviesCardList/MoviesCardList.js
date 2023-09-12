@@ -2,10 +2,19 @@ import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({movies, saved}) {
+function MoviesCardList({ movies, saved }) {
   return (
     <section className='movies-list' aria-label='Фильмы'>
-      {movies.map(item => { return <MoviesCard key={item._id} movie={item} saved={saved}/>})}
+      <ul className='movies-list__shell'>
+        {movies.map(item => {
+        return (
+          <li className='movies-list__item'>
+            <MoviesCard key={item._id} movie={item} saved={saved} />
+          </li>
+        )
+         })}
+      </ul>
+
     </section>
   );
 }

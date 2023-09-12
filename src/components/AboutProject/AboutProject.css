@@ -137,6 +137,7 @@
 @media screen and (max-width: 380px) {
   .about-project {
     width: calc(100% - 36px);
+    padding: 43px 0 31px 0;
   }
 
   .about-project__schema {

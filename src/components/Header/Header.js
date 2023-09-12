@@ -20,10 +20,10 @@ function Header({ isLoggedIn, isMobile, onNavClick }) {
       )
       }
       {!isLoggedIn &&
-      <div className='header__access'>
+      <nav className='header__access'>
         <Link className='header__signup-link' to="/signup">Регистрация</Link>
         <button className='header__signin-button' onClick={() => navigate('/signin', { replace: true })}>Войти</button>
-      </div>
+      </nav>
       }
 
     </header>

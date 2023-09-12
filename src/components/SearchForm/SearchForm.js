@@ -12,17 +12,18 @@ function SearchForm(props) {
   }
 
   return (
-    <form className='seach-form'>
-      <div className='seach-form__line'>
-        <input className='seach-form__input'
-          placeholder='Фильм' />
-        <button
-          type="submit"
-          className="seach-form__submit-button" aria-label='Найти фильмы'></button>
-      </div>
-      <FilterCheckbox isShort={isShort} handleTumbClick={handleTumbClick} />
-      <hr className='seach-form__underline'></hr>
-    </form>
+    <section className='seach'>
+      <form className='seach__form'>
+        <div className='seach__line'>
+          <input className='seach__input'
+            placeholder='Фильм' />
+          <button
+            type="submit"
+            className="seach__submit-button" aria-label='Найти фильмы'></button>
+        </div>
+        <FilterCheckbox isShort={isShort} handleTumbClick={handleTumbClick} />
+      </form>
+    </section>
   );
 }
 

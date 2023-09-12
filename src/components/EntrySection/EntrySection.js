@@ -41,47 +41,49 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
 
 
   return (
-    <section className='entry-section'>
-      <img src={logo} className='entry-section__logo' alt='Логотип' ></img>
-      <h2 className='entry-section__greeting'>{greeting}</h2>
-      <form className='entry-section__form' name='entry-form' ref={enteryForm}>
-        <div className='entry-section__container'>
-          {location.pathname === '/signup' &&
+    <main className='entry-section'>
+      <Link className='entry-section__logo' aria-label='Перейти на главную' to="/" />
+      <section className='entry-section__section'>
+        <h1 className='entry-section__greeting'>{greeting}</h1>
+        <form className='entry-section__form' name='entry-form' ref={enteryForm}>
+          <div className='entry-section__container'>
+            {location.pathname === '/signup' &&
+              <ControlledInput
+                id='name'
+                type='text'
+                labelName='Имя'
+                placeHolder=''
+                value={userInfo.name}
+                isDisabled={false}
+                isRequired={true}
+                minLengthValue='2'
+                maxLengthValue='30'
+                onChange={handleInputChange} />
+            }
             <ControlledInput
-              id='name'
-              type='text'
-              labelName='Имя'
+              id='email'
+              type='email'
+              labelName='E-mail'
               placeHolder=''
-              value={userInfo.name}
+              value={userInfo.email}
               isDisabled={false}
               isRequired={true}
-              minLengthValue='2'
-              maxLengthValue='30'
               onChange={handleInputChange} />
-          }
-          <ControlledInput
-            id='email'
-            type='email'
-            labelName='E-mail'
-            placeHolder=''
-            value={userInfo.email}
-            isDisabled={false}
-            isRequired={true}
-            onChange={handleInputChange} />
-          <ControlledInput
-            id='password'
-            type='password'
-            labelName='Пароль'
-            placeHolder=''
-            value={userInfo.password}
-            isDisabled={false}
-            isRequired={true}
-            onChange={handleInputChange} />
-        </div>
-        <SubmitButton type='submit' buttonText={buttonText} buttonAction={handleSubmit} isDisabled={false} />
-      </form>
-      <p className='entry-section__redirection'>{redirectionText}<Link className='entry-section__link' to={linkPath}>{linkName}</Link></p>
-    </section>
+            <ControlledInput
+              id='password'
+              type='password'
+              labelName='Пароль'
+              placeHolder=''
+              value={userInfo.password}
+              isDisabled={false}
+              isRequired={true}
+              onChange={handleInputChange} />
+          </div>
+          <SubmitButton type='submit' buttonText={buttonText} buttonAction={handleSubmit} isDisabled={false} />
+        </form>
+        <p className='entry-section__redirection'>{redirectionText}<Link className='entry-section__link' to={linkPath}>{linkName}</Link></p>
+      </section>
+    </main>
   );
 }
 

@@ -4,7 +4,7 @@ import Navigation from '../Navigation/Navigation';
 
 function PopupWithNav({isMobile, isOpen, onClose}) {
   return (
-    <div className={`popup ${isOpen && 'popup_opened'}`}>
+    <div className={`popup ${isOpen ? 'popup_opened' : ''}`}>
       <div className="popup__container">
         <Navigation isMobile={isMobile}/>
         <button

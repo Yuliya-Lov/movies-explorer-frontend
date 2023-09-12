@@ -8,14 +8,12 @@ function Portfolio(props) {
       <ul className='portfolio__list'>
         <li className='portfolio__item'>
           <a href='https://yuliya-lov.github.io/how-to-learn/' className='portfolio__link' target='blank'>Статичный сайт</a>
-          <hr className='portfolio__underline'/>
         </li>
         <li className='portfolio__item'>
           <a href='https://yuliya-lov.github.io/russian-travel/' className='portfolio__link' target='blank'>Адаптивный сайт</a>
-          <hr className='portfolio__underline'/>
         </li>
         <li className='portfolio__item'>
-          <a href='https://place.nomoreparties.co/' className='portfolio__link' target='blank'>Одностраничное приложение</a>
+          <a href='https://place.nomoreparties.co/' className='portfolio__link portfolio__link_last' target='blank'>Одностраничное приложение</a>
         </li>
       </ul>
     </section>
