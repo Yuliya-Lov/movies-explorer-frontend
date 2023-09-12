@@ -22,7 +22,7 @@ function Header({ isLoggedIn, isMobile, onNavClick }) {
       {!isLoggedIn &&
       <nav className='header__access'>
         <Link className='header__signup-link' to="/signup">Регистрация</Link>
-        <button className='header__signin-button' onClick={() => navigate('/signin', { replace: true })}>Войти</button>
+        <button type='button' className='header__signin-button' onClick={() => navigate('/signin', { replace: true })}>Войти</button>
       </nav>
       }
 

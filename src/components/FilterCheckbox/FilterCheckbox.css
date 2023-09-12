@@ -11,6 +11,10 @@
   user-select: none;
 }
 
+.checkbox__area:hover {
+  opacity: 0.7;
+}
+
 .checkbox__input {
   position: absolute;
   z-index: -1;

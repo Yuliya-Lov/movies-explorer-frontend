@@ -9,7 +9,7 @@ function Movies() {
     <main className='movies'>
       <SearchForm />
       <MoviesCardList movies={db}/>
-      <button className='movies__more-button'>Ещё</button>
+      <button type='button' className='movies__more-button'>Ещё</button>
     </main>
   );
 }

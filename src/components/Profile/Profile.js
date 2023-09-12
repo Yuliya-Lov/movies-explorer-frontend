@@ -56,7 +56,7 @@ function Profile({ currentUser, handleExit, onUpdate }) {
               id='name'
               type='text'
               labelName=''
-              placeHolder=''
+              placeHolder='Введите имя'
               value={userInfo.name}
               isDisabled={!isEditMode}
               isRequired={true}
@@ -71,7 +71,7 @@ function Profile({ currentUser, handleExit, onUpdate }) {
               id='email'
               type='email'
               labelName=''
-              placeHolder=''
+              placeHolder='Введите email'
               value={userInfo.email}
               isDisabled={!isEditMode}
               isRequired={true}

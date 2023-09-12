@@ -16,11 +16,15 @@
 }
 
 .about-me__info {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.about-me__general {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  min-height: 327px;
   height: fit-content;
 }
 
@@ -58,7 +62,6 @@
 }
 
 .about-me__git-link {
-  position: absolute;
   bottom: 0;
   margin: 40px 0 2px 0;
   padding: 0;

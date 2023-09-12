@@ -7,7 +7,6 @@ function ControlledInput({ id, type, labelName, placeHolder, value, onChange, is
       <label
         htmlFor={id}
         className='controlled-input__label'
-        placeholder={placeHolder}
       >{labelName}</label>
       <input
         type={type}
@@ -15,6 +14,7 @@ function ControlledInput({ id, type, labelName, placeHolder, value, onChange, is
         value={value}
         disabled={isDisabled}
         onChange={onChange}
+        placeholder={placeHolder}
         minLength={minLengthValue|| ''}
         maxLength={maxLengthValue || '' }
         required={isRequired || false}

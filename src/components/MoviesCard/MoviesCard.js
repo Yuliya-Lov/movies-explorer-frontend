@@ -62,7 +62,7 @@ function MoviesCard({ movie, saved }) {
           <p className='movie__duration'>{getTime(movie.duration)}</p>
         </div>
         {isSaved
-          ? <button className={`movie__button movie__button_type_remove ${location.pathname === '/saved-movies' && 'movie__button_saved'}`} aria-label='Удалить из сохраненного' onClick={deleteMovie}>{location.pathname === '/saved-movies' ? '×' : '✓'}</button>
+          ? <button  type='button' className={`movie__button movie__button_type_remove ${location.pathname === '/saved-movies' && 'movie__button_saved'}`} aria-label='Удалить из сохраненного' onClick={deleteMovie}>{location.pathname === '/saved-movies' ? '×' : '✓'}</button>
           : <button type='button' className='movie__button movie__button_type_save' onClick={saveMovie}>Сохранить</button>
         }
       </article>

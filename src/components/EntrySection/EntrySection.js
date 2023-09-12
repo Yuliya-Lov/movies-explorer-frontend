@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import './EntrySection.css';
-import logo from '../../images/logo.svg';
 import ControlledInput from '../ControlledInput/ControlledInput';
 import SubmitButton from '../SubmitButton/SubmitButton';
 import FormValidator from '../../utils/FormValidator';
@@ -52,7 +51,7 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
                 id='name'
                 type='text'
                 labelName='Имя'
-                placeHolder=''
+                placeHolder='Введите имя'
                 value={userInfo.name}
                 isDisabled={false}
                 isRequired={true}
@@ -64,7 +63,7 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
               id='email'
               type='email'
               labelName='E-mail'
-              placeHolder=''
+              placeHolder='Введите email'
               value={userInfo.email}
               isDisabled={false}
               isRequired={true}
@@ -73,9 +72,10 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
               id='password'
               type='password'
               labelName='Пароль'
-              placeHolder=''
+              placeHolder='Введите пароль'
               value={userInfo.password}
               isDisabled={false}
+              minLengthValue='8'
               isRequired={true}
               onChange={handleInputChange} />
           </div>

@@ -5,19 +5,19 @@
   width: calc(100% - 140px);
   max-width: 1140px;
   min-width: 292px;
-  min-height: calc(100vh - 275px);
+  min-height: calc(100vh - 274px);
 }
 @media screen and (max-width: 790px) {
   .movies {
     width: calc(100% - 60px);
     margin-bottom: 0;
-    min-height: calc(100vh - 249px);
+    min-height: calc(100vh - 248px);
   }
 }
 
 @media screen and (max-width: 380px) {
   .movies {
     width: calc(100% - 20px);
-    min-height: calc(100vh - 328px);
+    min-height: calc(100vh - 331px);
   }
 }

@@ -34,6 +34,10 @@
   font-weight: 500;
 }
 
+.controlled-input__input::placeholder {
+  letter-spacing: 1.5;
+}
+
 .controlled-input__input:focus {
   outline: 1px solid #4285F4;
 }
