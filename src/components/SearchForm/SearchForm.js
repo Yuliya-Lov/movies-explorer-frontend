@@ -3,7 +3,7 @@ import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm() {
-  const [seachValue, setSeachValue] = React.useState({ value: '' });
+  const [seachValue, setSeachValue] = React.useState({ value: undefined });
   const [isShort, setIsShort] = React.useState(true);
   const [error, setError] = React.useState('');
   const [isDisabled, setIsDisabled] = React.useState(false);
@@ -32,7 +32,7 @@ function SearchForm() {
     e.preventDefault();
     const meaning = e.target['search-value'];
     if (meaning.validity.valid) {
-      console.log(seachValue)
+      console.log(seachValue.value)
     } else {
       setError(meaning.validationMessage);
     }
