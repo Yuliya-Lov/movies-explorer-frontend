@@ -6,7 +6,7 @@ import ControlledInput from '../ControlledInput/ControlledInput';
 import FormValidator from '../../utils/FormValidator';
 import { validationSettings } from '../../utils/validationSettings';
 
-function Profile({ currentUser, onExit, onUpdate, reqError}) {
+function Profile({ currentUser, onExit, onUpdate, reqError, cleanMessage }) {
   const navigate = useNavigate();
   const [isEditMode, setIsEditMode] = useState(false);
   const [userInfo, setUserInfo] = React.useState(
@@ -16,6 +16,7 @@ function Profile({ currentUser, onExit, onUpdate, reqError}) {
     });
 
   function handleInputChange(e) {
+    cleanMessage();
     setUserInfo({
       ...userInfo,
       [e.target.id]: e.target.value

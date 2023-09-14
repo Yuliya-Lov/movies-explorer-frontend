@@ -6,7 +6,7 @@ import SubmitButton from '../SubmitButton/SubmitButton';
 import FormValidator from '../../utils/FormValidator';
 import { validationSettings } from '../../utils/validationSettings';
 
-function EntrySection({ greeting, buttonText, buttonAction, redirectionText, linkName, linkPath, reqError }) {
+function EntrySection({ greeting, buttonText, buttonAction, redirectionText, linkName, linkPath, reqError, cleanMessage }) {
   const location = useLocation();
 
   const [userInfo, setUserInfo] = React.useState(
@@ -17,6 +17,7 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
     });
 
   function handleInputChange(e) {
+    cleanMessage();
     setUserInfo({
       ...userInfo,
       [e.target.id]: e.target.value
@@ -25,14 +26,12 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(userInfo);
     buttonAction(userInfo);
   }
 
   const enteryForm = React.useRef();
 
   React.useEffect(() => {
-    console.log(enteryForm);
     const validatedForm = new FormValidator(validationSettings, enteryForm.current);
     validatedForm.enableValidation();
     validatedForm.setInitialFormState();

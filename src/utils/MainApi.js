@@ -52,7 +52,7 @@ export const logout = () => {
     .catch(res => Promise.reject(res))
 }
 
-export const checkToken = () => {
+export const getUser = () => {
   return request(
     `${BASE_URL}/users/me`,
     {
@@ -63,5 +63,4 @@ export const checkToken = () => {
       credentials: 'include',
     }
   )
-    .catch(res => Promise.reject(res))
 }
