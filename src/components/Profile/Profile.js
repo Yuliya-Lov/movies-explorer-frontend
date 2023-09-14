@@ -25,13 +25,17 @@ function Profile({ currentUser, onExit, onUpdate, reqError, cleanMessage }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(userInfo);
-    setIsEditMode(false);
-    onUpdate(userInfo);
+    onUpdate(userInfo)
+      .then(() => {
+        setIsEditMode(false)
+      })
+      .catch((e) => {
+        console.log(e)
+      })
   }
 
   const handleExitClick = () => {
-    navigate('/signout', {replace: true})
+    navigate('/signout', { replace: true })
     onExit();
   }
 
@@ -63,6 +67,7 @@ function Profile({ currentUser, onExit, onUpdate, reqError, cleanMessage }) {
               isRequired={true}
               minLengthValue='2'
               maxLengthValue='30'
+              pattern='^[A-Za-zА-Яа-я\sё\-]*$'
               onChange={handleInputChange}
               slim={true} />
           </div>

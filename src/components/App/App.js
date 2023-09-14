@@ -18,7 +18,8 @@ import {
   register,
   login,
   logout,
-  getUser
+  getUser,
+  updateUser
 } from '../../utils/MainApi';
 
 function App() {
@@ -82,7 +83,7 @@ function App() {
         });
       })
       .catch((e) => {
-        console.log(e)
+        return Promise.reject(e);
       })
   }
 
@@ -120,7 +121,7 @@ function App() {
           .catch(() => console.log('На сервере произошла ошибка.'))
       })
       .catch((e) => {
-        if (e.status === 400 ||e.status === 401 || e.statusCode === 400 || e.statusCode === 401) {
+        if (e.status === 400 || e.status === 401 || e.statusCode === 400 || e.statusCode === 401) {
           setMessage({
             message: 'Вы ввели неправильный логин или пароль.'
           })
@@ -133,23 +134,33 @@ function App() {
   }
 
   function updateUserInfo(data) {
-    setCurrentUser({
-      ...currentUser,
-      email: data.email,
-      name: data.name,
-    });
+    return updateUser(data)
+      .then((res) => {
+        setCurrentUser({
+          ...currentUser,
+          email: res.data.email,
+          name: res.data.name,
+        });
+      })
+      .catch((e) => {
+        if (e.status === 409) {
+          setMessage({
+            message: 'Пользователь с таким email уже существует.'
+          })
+        } else {
+          setMessage({
+            message: 'При обновлении профиля произошла ошибка.'
+          })
+        }
+        return Promise.reject(e);
+      })
   }
 
   function onExit() {
     return logout()
       .then(() => {
-        setIsSucces(true);
-        setMessage({
-          message: 'Вы успешно вышли из аккаунта!'
-        })
-        handleChangeIsLogged(false);
+        setIsLoggedIn(false);
         navigate('/', { replace: true });
-        setIsInfoTooltipOpen(true);
 
       })
       .catch((e) => {
@@ -187,13 +198,29 @@ function App() {
     window.addEventListener("resize", handleResize);
     handleResize();
     checkUser()
-      .then(() => console.log('+'))
-      .catch((e) => console.log(e))
+      .then(() => {
+        setIsLoggedIn(true);
+      })
+      .catch((e) => {
+        setIsLoggedIn(false);
+      })
   }, []);
 
   React.useEffect(() => {
+    if(!isLoggedIn) {
+      checkUser()
+      .then(() => {
+        setIsLoggedIn(true);
+      })
+      .catch((e) => {
+        setIsLoggedIn(false);
+      })
+    }
+
+  }, [isLoggedIn])
+
+  React.useEffect(() => {
     setIsPopupWithNavOpen(false);
-    console.log(location.pathname === '/*');
   }, [location]);
 
   return (
@@ -207,7 +234,7 @@ function App() {
           </Route>
           <Route path='/movies' element={<ProtectedRoute element={Movies} isLoggedIn={isLoggedIn} />} />
           <Route path='/saved-movies' element={<ProtectedRoute element={SavedMovies} isLoggedIn={isLoggedIn} />} />
-          <Route path='/profile' element={<ProtectedRoute element={Profile} currentUser={currentUser} onExit={onExit} onUpdate={updateUserInfo} reqError={message.message} isLoggedIn={isLoggedIn} cleanMessage={cleanMessage} />} />
+          <Route path='/profile' element={<ProtectedRoute isLoggedIn={isLoggedIn} element={Profile} currentUser={currentUser} onExit={onExit} onUpdate={updateUserInfo} reqError={message.message} cleanMessage={cleanMessage} />} />
           <Route path='/signin' element={<Login handleSubmit={onLogin} reqError={message.message} cleanMessage={cleanMessage} />} />
           <Route path='/signup' element={<Register handleSubmit={onRegister} reqError={message.message} cleanMessage={cleanMessage} />} />
           <Route path='/*' element={<PageNotFound />} />

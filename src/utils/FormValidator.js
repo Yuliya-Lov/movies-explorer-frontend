@@ -13,7 +13,7 @@ export default class FormValidator {
     input.classList.add(this._inputErrorClass);
     if (input.classList.contains('controlled-input__input_slim')) {
       const errorElement = this._form.querySelector(`.profile__form-error`);
-      errorElement.textContent = 'При обновлении профиля произошла ошибка.';
+      errorElement.textContent = input.validationMessage;
     } else {
       const errorElement = this._form.querySelector(`.${input.id}-error`);
       errorElement.textContent = input.validationMessage;

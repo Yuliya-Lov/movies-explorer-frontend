@@ -64,3 +64,20 @@ export const getUser = () => {
     }
   )
 }
+
+export const updateUser = ({email, name}) => {
+  return request(
+    `${BASE_URL}/users/me`,
+    {
+      method: 'PATCH',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        'email': email,
+        'name': name
+      })
+    }
+  )
+}
