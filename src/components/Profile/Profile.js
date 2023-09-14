@@ -6,7 +6,7 @@ import ControlledInput from '../ControlledInput/ControlledInput';
 import FormValidator from '../../utils/FormValidator';
 import { validationSettings } from '../../utils/validationSettings';
 
-function Profile({ currentUser, handleExit, onUpdate }) {
+function Profile({ currentUser, onExit, onUpdate, reqError}) {
   const navigate = useNavigate();
   const [isEditMode, setIsEditMode] = useState(false);
   const [userInfo, setUserInfo] = React.useState(
@@ -30,8 +30,8 @@ function Profile({ currentUser, handleExit, onUpdate }) {
   }
 
   const handleExitClick = () => {
-    handleExit(false);
-    navigate('/', { replace: true })
+    navigate('/signout', {replace: true})
+    onExit();
   }
 
   const profileForm = React.useRef();
@@ -80,7 +80,7 @@ function Profile({ currentUser, handleExit, onUpdate }) {
           </div>
           {isEditMode &&
             <div className='profile__actions'>
-              <span className='profile__form-error'></span>
+              <span className='profile__form-error'>{reqError}</span>
               <SubmitButton buttonText="Сохранить" buttonAction={handleSubmit} />
             </div>}
         </form>

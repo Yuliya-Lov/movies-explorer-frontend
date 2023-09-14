@@ -13,23 +13,31 @@ import Footer from '../Footer/Footer.js';
 import PopupWithNav from '../PopupWithNav/PopupWithNav.js';
 import InfoTooltip from '../InfoTooltip/InfoTooltip.js';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+import {
+  register,
+  login,
+  logout,
+  checkToken
+} from '../../utils/MainApi';
 
 function App() {
   const location = useLocation();
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = React.useState(true);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [isMobile, setIsMobile] = React.useState(false);
   const [isPopupWithNavOpen, setIsPopupWithNavOpen] = React.useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const isOpen = isPopupWithNavOpen || isInfoTooltipOpen;
   const [isSucces, setIsSucces] = React.useState(false);
-  const [message, setMessage] = React.useState({ message: 'The HTML element is used to create interactive controls for web-based forms in order' })
+  const [message, setMessage] = React.useState({ message: '' })
   const [currentUser, setCurrentUser] = React.useState(
     {
-      name: 'Виталий',
-      email: 'pochta@yandex.ru',
+      name: '',
+      email: '',
       password: ''
     })
+  const [reqError, setReqError] = React.useState('');
 
   function handleChangeIsLogged(value) {
     setIsLoggedIn(value);
@@ -59,18 +67,79 @@ function App() {
 
   const pathWithHeader = (location.pathname === '/movies') || (location.pathname === '/saved-movies') || (location.pathname === '/') || (location.pathname === '/profile');
 
-  function onRegister() {
-    navigate('/signin', { replace: true });
+  function checkUser() {
+    return checkToken()
+      .then(res => {
+        setIsSucces(true);
+        setMessage({
+          message: 'Авторизация прошла успешно!'
+        })
+        setCurrentUser({
+          ...currentUser,
+          email: res.email,
+          name: res.name,
+        });
+        setIsLoggedIn(true);
+        navigate('/', { replace: true });
+        setIsInfoTooltipOpen(true);
+
+      })
+      .catch((e) => {
+        setIsSucces(false);
+        setMessage({
+          message: 'Не удалось зарегистрироваться, попробуйте еще раз!'
+        })
+        setIsInfoTooltipOpen(true);
+        return Promise.reject();
+      })
+  }
+
+  function onRegister(data) {
+    return register(data.name, data.email, data.password)
+      .then(res => {
+        setIsSucces(true);
+        setMessage({
+          message: 'Регистрация прошла успешно!'
+        })
+        setCurrentUser({
+          ...currentUser,
+          email: res.email,
+          name: res.name,
+        });
+        setIsLoggedIn(true);
+        navigate('/', { replace: true });
+        setIsInfoTooltipOpen(true);
+
+      })
+      .catch((e) => {
+        navigate('/signin', { replace: true });
+      })
   }
 
   function onLogin(data) {
-    setCurrentUser({
-      ...currentUser,
-      email: data.email,
-      password: data.password,
-    });
-    setIsLoggedIn(true);
-    navigate('/', { replace: true });
+    return login(data.email, data.password)
+      .then(res => {
+        setIsSucces(true);
+        setMessage({
+          message: 'Авторизация прошла успешно!'
+        })
+        setCurrentUser({
+          ...currentUser,
+          email: res.email,
+          name: res.name,
+        });
+        setIsLoggedIn(true);
+        navigate('/', { replace: true });
+        setIsInfoTooltipOpen(true);
+
+      })
+      .catch((e) => {
+        setIsSucces(false);
+        setMessage({
+          message: 'Авторизация не пройдена!'
+        })
+        setIsInfoTooltipOpen(true);
+      })
   }
 
   function updateUserInfo(data) {
@@ -79,6 +148,27 @@ function App() {
       email: data.email,
       name: data.name,
     });
+  }
+
+  function onExit() {
+    return logout()
+      .then(() => {
+        setIsSucces(true);
+        setMessage({
+          message: 'Вы успешно вышли из аккаунта!'
+        })
+        handleChangeIsLogged(false);
+        navigate('/', { replace: true });
+        setIsInfoTooltipOpen(true);
+
+      })
+      .catch((e) => {
+        setIsSucces(false);
+        setMessage({
+          message: 'Не удалось выйти, попробуйте еще раз!'
+        })
+        setIsInfoTooltipOpen(true);
+      })
   }
 
   React.useEffect(() => {
@@ -106,6 +196,7 @@ function App() {
   React.useEffect(() => {
     window.addEventListener("resize", handleResize);
     handleResize();
+    checkUser();
   }, []);
 
   React.useEffect(() => {
@@ -122,11 +213,11 @@ function App() {
         <Routes>
           <Route path='/' element={<Main />} >
           </Route>
-          <Route path='/movies' element={<Movies />} />
-          <Route path='/saved-movies' element={<SavedMovies />} />
-          <Route path='/profile' element={<Profile currentUser={currentUser} handleExit={handleChangeIsLogged} onUpdate={updateUserInfo} />} />
-          <Route path='/signin' element={<Login handleSubmit={onLogin} />} />
-          <Route path='/signup' element={<Register handleSubmit={onRegister} />} />
+          <Route path='/movies' element={<ProtectedRoute element={Movies} />} />
+          <Route path='/saved-movies' element={<ProtectedRoute element={SavedMovies} />} />
+          <Route path='/profile' element={<ProtectedRoute element={Profile} currentUser={currentUser} onExit={onExit} onUpdate={updateUserInfo} reqError={reqError} />} />
+          <Route path='/signin' element={<Login handleSubmit={onLogin} reqError={reqError} />} />
+          <Route path='/signup' element={<Register handleSubmit={onRegister} reqError={reqError} />} />
           <Route path='/*' element={<PageNotFound />} />
         </Routes>
       </CurrentUserContext.Provider>

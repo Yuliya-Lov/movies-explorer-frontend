@@ -59,6 +59,15 @@
   flex-direction: column;
 }
 
+.entry-section__error {
+  margin: 0;
+  padding: 0 0 20px 0;
+  color: #FF004C;
+  font-size: 11px;
+  font-weight: 400;
+  text-align: center;
+}
+
 .entry-form__submit-button {
   margin: 69px 0 0 0;
   padding: 0;

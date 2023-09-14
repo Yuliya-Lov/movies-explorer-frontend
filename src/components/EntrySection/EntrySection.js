@@ -6,7 +6,7 @@ import SubmitButton from '../SubmitButton/SubmitButton';
 import FormValidator from '../../utils/FormValidator';
 import { validationSettings } from '../../utils/validationSettings';
 
-function EntrySection({ greeting, buttonText, buttonAction, redirectionText, linkName, linkPath }) {
+function EntrySection({ greeting, buttonText, buttonAction, redirectionText, linkName, linkPath, reqError }) {
   const location = useLocation();
 
   const [userInfo, setUserInfo] = React.useState(
@@ -51,6 +51,7 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
                 id='name'
                 type='text'
                 labelName='Имя'
+                pattern='^[A-Za-zА-Яа-я\sё\-]*$'
                 placeHolder='Введите имя'
                 value={userInfo.name}
                 isDisabled={false}
@@ -79,6 +80,7 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
               isRequired={true}
               onChange={handleInputChange} />
           </div>
+          <span className='entry-section__error'>{reqError}</span>
           <SubmitButton type='submit' buttonText={buttonText} buttonAction={handleSubmit} isDisabled={false} />
         </form>
         <p className='entry-section__redirection'>{redirectionText}<Link className='entry-section__link' to={linkPath}>{linkName}</Link></p>
