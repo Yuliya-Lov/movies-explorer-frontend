@@ -1,0 +1,125 @@
+.header {
+  max-width: 1140px;
+  min-width: 292px;
+  width: calc(100% - 140px);
+  padding: 18px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__logo {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  display: block;
+  background-image: url(../../images/logo.svg);
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 38px;
+  height: 38px;
+  border-radius: 49%;
+  cursor: pointer;
+}
+
+.header__menu-button {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  width: 44px;
+  height: 44px;
+  background-image: url(../../images/burger.svg);
+  background-repeat: no-repeat;
+  background-size: 44px 44px;
+  cursor: pointer;
+}
+
+.header__menu-button:focus-visible {
+  outline: none;
+}
+
+.header__menu-button:hover {
+  opacity: .8;
+}
+
+.header__logo:hover {
+  opacity: .7;
+}
+
+.header__access {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.header__signup-link {
+  padding: 0;
+  margin: 0;
+  color: #FFF;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+  cursor: pointer;
+}
+
+.header__signup-link:hover {
+  opacity: .7;
+}
+
+.header__signin-button {
+  padding: 0;
+  margin: 0;
+  border: none;
+  border-radius: 3px;
+  background: #3DDC84;
+  width: 76px;
+  height: 32px;
+  color: #000;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+  cursor: pointer;
+}
+
+.header__signin-button:hover {
+  opacity: .8;
+}
+
+@media screen and (max-width: 790px) {
+  .header {
+    width: calc(100% - 60px);
+    padding: 16px 0;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  .header {
+    width: calc(100% - 28px);
+    padding: 18px 0;
+  }
+
+  .header__menu-button {
+    width: 38px;
+    height: 38px;
+    background-size: 38px 38px;
+    background-position: top right 2px;
+  }
+
+  .header__signin-button {
+    width: 54px;
+    height: 26px;
+    font-size: 10px;
+    line-height: 1.6;
+  }
+
+  .header__signup-link {
+    font-size: 10px;
+    line-height: 1.6;
+  }
+
+  .header__access {
+    gap: 14px;
+  }
+}

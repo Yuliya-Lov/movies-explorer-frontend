@@ -1,0 +1,18 @@
+.root {
+  width: 100%;
+  min-width: 319px;
+  background-color: #202020;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #FFF;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  line-height: normal;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+}

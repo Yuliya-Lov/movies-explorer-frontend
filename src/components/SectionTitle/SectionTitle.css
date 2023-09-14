@@ -1,0 +1,24 @@
+.section-title {
+  width: 100%;
+  border-bottom: 1px solid #DADADA;
+  max-width: 1140px;
+  width: 100%;
+}
+
+.section-title__name {
+  margin: 0 0 23px 0;
+  padding: 0;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: -0.88px;
+}
+
+
+@media screen and (max-width: 380px) {
+  .section-title__name {
+    margin: 28px 0;
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+}

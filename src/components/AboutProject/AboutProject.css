@@ -1,0 +1,155 @@
+.about-project {
+  padding: 110px 0 95px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: calc(100% - 140px);
+  box-sizing: border-box;
+  max-width: 1140px;
+}
+
+.about-project__info {
+  padding: 0;
+  margin: 70px 0 0 0;
+  list-style: none;
+  display: flex;
+  width: 100%;
+  gap: 50px;
+
+}
+
+.about-project__stages {
+  margin: 0;
+  padding: 0;
+}
+
+.about-project__stages-title {
+  margin: 0;
+  padding: 0;
+  font-size: 20px;
+  font-weight: 400;
+  letter-spacing: -0.8px;
+}
+
+.about-project__stages-text {
+  margin: 26px 0 0 0;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.42;
+}
+
+.about-project__schema {
+  padding: 0;
+  margin: 110px 0 0 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  align-items: center;
+  width: 100%;
+}
+
+.about-project__schema-part {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-project__schema-cell {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  min-height: 36px;
+  background: #303030;
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.about-project__schema-cell_colorfull {
+  background: #3DDC84;
+  color: #000;
+  min-width: 140px;
+}
+
+.about-project__schema-cell_about {
+  background: #202020;
+  color: #8B8B8B;
+  font-weight: 500;
+  line-height: 1.21;
+  min-height: 48px;
+}
+
+@media screen and (max-width: 790px) {
+  .about-project {
+    padding: 92px 0 73px 0;
+    width: calc(100% - 100px);
+  }
+
+  .about-project__stages-text {
+    margin: 22px 0 0 0;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  .about-project__info {
+    gap: 36px;
+
+  }
+
+  .about-project__schema {
+    margin: 92px 0 0 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .about-project {
+    padding: 70px 0 60px 0;
+    width: calc(100% - 100px);
+  }
+
+  .about-project__info {
+    margin: 62px 0 0 0;
+    gap: 56px;
+    flex-direction: column;
+  }
+
+  .about-project__stages-title {
+    font-size: 18px;
+    letter-spacing: -0.72px;
+  }
+
+  .about-project__stages-text {
+    margin: 18px 0 0 0;
+    font-size: 11px;
+    line-height: 1.45;
+  }
+
+}
+
+@media screen and (max-width: 380px) {
+  .about-project {
+    width: calc(100% - 36px);
+    padding: 43px 0 31px 0;
+  }
+
+  .about-project__schema {
+    margin: 60px 0 0 0;
+  }
+
+  .about-project__schema-cell_colorfull {
+    min-width: 100px;
+  }
+
+  .about-project__schema-cell {
+    font-size: 11px;
+    min-height: 34px;
+  }
+}
