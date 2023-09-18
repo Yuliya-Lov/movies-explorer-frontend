@@ -1,3 +1,15 @@
-const  test = 1;
+import request from './request.js';
+export const BASE_URL = 'https://api.nomoreparties.co/beatfilm-movies';
 
-console.log(test);
+export const allMovies = () => {
+  return request(
+    `${BASE_URL}`,
+    {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json"
+      },
+    }
+  )
+    .catch(res => Promise.reject(res))
+}
