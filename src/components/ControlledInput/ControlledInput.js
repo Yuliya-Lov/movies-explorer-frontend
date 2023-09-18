@@ -21,8 +21,8 @@ function ControlledInput({ id, type, labelName, placeHolder, value, onChange, is
         required={isRequired || false}
         className={`
         controlled-input__input
-        ${slim && 'controlled-input__input_slim'}
-        ${!!errorValue && 'controlled-input__input_error-value'}`}
+        ${!!errorValue ? 'controlled-input__input_error-value' :''}
+        ${(!!errorValue && slim) ? 'controlled-input__input_slim-error' :''}`}
         autoComplete="off" />
       <span
         id={id}

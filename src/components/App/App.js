@@ -241,9 +241,9 @@ function App() {
           </Route>
           <Route path='/movies' element={<ProtectedRoute element={Movies} isLoggedIn={isLoggedIn} />} />
           <Route path='/saved-movies' element={<ProtectedRoute element={SavedMovies} isLoggedIn={isLoggedIn} />} />
-          <Route path='/profile' element={<ProtectedRoute isLoggedIn={isLoggedIn} element={Profile} currentUser={currentUser} onExit={onExit} onUpdate={updateUserInfo} reqError={message.message} />} />
-          <Route path='/signin' element={<Login handleSubmit={onLogin} reqError={message.message} />} />
-          <Route path='/signup' element={<Register handleSubmit={onRegister} reqError={message.message}  />} />
+          <Route path='/profile' element={<ProtectedRoute isLoggedIn={isLoggedIn} element={Profile} currentUser={currentUser} onExit={onExit} onUpdate={updateUserInfo} reqError={message.message}  cleanMessage={cleanMessage}/>} />
+          <Route path='/signin' element={<Login handleSubmit={onLogin} reqError={message.message} cleanMessage={cleanMessage} />} />
+          <Route path='/signup' element={<Register handleSubmit={onRegister} reqError={message.message} cleanMessage={cleanMessage} />} />
           <Route path='/*' element={<PageNotFound />} />
         </Routes>
       </CurrentUserContext.Provider>

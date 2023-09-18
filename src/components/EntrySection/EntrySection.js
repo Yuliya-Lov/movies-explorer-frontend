@@ -5,7 +5,7 @@ import ControlledInput from '../ControlledInput/ControlledInput';
 import SubmitButton from '../SubmitButton/SubmitButton';
 import { useFormWithValidation } from '../../utils/useFormWithValidation';
 
-function EntrySection({ greeting, buttonText, buttonAction, redirectionText, linkName, linkPath, reqError }) {
+function EntrySection({ greeting, buttonText, buttonAction, redirectionText, linkName, linkPath, reqError, cleanMessage }) {
   const location = useLocation();
   const useValidation = useFormWithValidation();
 
@@ -14,9 +14,15 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
     buttonAction(useValidation.values);
   }
 
-  React.useEffect(()=> {
+  function handleChange(e){
+    useValidation.handleChange(e);
+    cleanMessage();
+  }
+
+  React.useEffect(() => {
+    cleanMessage();
     useValidation.resetForm();
-  })
+  }, [])
 
   return (
     <main className='entry-section'>
@@ -32,38 +38,40 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
                 labelName='Имя'
                 pattern='^[A-Za-zА-Яа-я\sё\-]*$'
                 placeHolder='Введите имя'
-                value={useValidation.values['name'] }
+                value={useValidation.values['name'] || ''}
                 isDisabled={false}
                 isRequired={true}
                 minLengthValue='2'
                 maxLengthValue='30'
-                errorValue={useValidation.errors['name']}
-                onChange={useValidation.handleChange} />
+                errorValue={useValidation.errors['name'] || ''}
+                onChange={handleChange} />
             }
             <ControlledInput
               id='email'
               type='email'
               labelName='E-mail'
               placeHolder='Введите email'
-              value={useValidation.values['email'] }
+              value={useValidation.values['email'] || ''}
               isDisabled={false}
               isRequired={true}
-              errorValue={useValidation.errors['email']}
-              onChange={useValidation.handleChange} />
+              errorValue={useValidation.errors['email'] || ''}
+              onChange={handleChange} />
             <ControlledInput
               id='password'
               type='password'
               labelName='Пароль'
               placeHolder='Введите пароль'
-              value={useValidation.values['password']}
+              value={useValidation.values['password'] || ''}
               isDisabled={false}
               minLengthValue='8'
               isRequired={true}
-              errorValue={useValidation.errors['password']}
-              onChange={useValidation.handleChange} />
+              errorValue={useValidation.errors['password'] || ''}
+              onChange={handleChange} />
           </div>
-          <span className='entry-section__error'>{reqError}</span>
-          <SubmitButton type='submit' buttonText={buttonText} buttonAction={handleSubmit} isDisabled={!useValidation.isValid} />
+          <div className='entry-section__container'>
+            <span className='entry-section__error'>{reqError}</span>
+            <SubmitButton type='submit' buttonText={buttonText} buttonAction={handleSubmit} isDisabled={!useValidation.isValid} />
+          </div>
         </form>
         <p className='entry-section__redirection'>{redirectionText}<Link className='entry-section__link' to={linkPath}>{linkName}</Link></p>
       </section>

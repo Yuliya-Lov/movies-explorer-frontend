@@ -5,10 +5,16 @@ import SubmitButton from '../SubmitButton/SubmitButton';
 import ControlledInput from '../ControlledInput/ControlledInput';
 import { useFormWithValidation } from '../../utils/useFormWithValidation';
 
-function Profile({ currentUser, onExit, onUpdate, reqError }) {
+function Profile({ currentUser, onExit, onUpdate, reqError, cleanMessage }) {
   const navigate = useNavigate();
   const [isEditMode, setIsEditMode] = useState(false);
   const useValidation = useFormWithValidation();
+  const [notChanged, setNotChanged] = useState(false);
+
+  function handleChange(e) {
+    useValidation.handleChange(e);
+    cleanMessage();
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -33,8 +39,11 @@ function Profile({ currentUser, onExit, onUpdate, reqError }) {
       name: currentUser.name,
       email: currentUser.email,
     });
-
   }, [])
+
+  React.useEffect(() => {
+    setNotChanged(Object.keys(useValidation.values).every(key => useValidation.values[key] === currentUser[key] ));
+  }, [useValidation.values, currentUser])
 
   return (
     <main className='profile'>
@@ -50,13 +59,13 @@ function Profile({ currentUser, onExit, onUpdate, reqError }) {
                 labelName=''
                 pattern='^[A-Za-zА-Яа-я\sё\-]*$'
                 placeHolder='Введите имя'
-                value={useValidation.values['name']}
+                value={useValidation.values['name'] || ''}
                 isDisabled={!isEditMode}
                 isRequired={false}
                 minLengthValue='2'
                 maxLengthValue='30'
-                errorValue={useValidation.errors['name']}
-                onChange={useValidation.handleChange}
+                errorValue={useValidation.errors['name'] || ''}
+                onChange={handleChange}
                 slim={true} />
             </div>
             <div className={`profile__input-container ${isEditMode && 'profile__input-container_edit'}`}>
@@ -66,18 +75,18 @@ function Profile({ currentUser, onExit, onUpdate, reqError }) {
                 type='email'
                 labelName=''
                 placeHolder='Введите email'
-                value={useValidation.values['email']}
+                value={useValidation.values['email'] || ''}
                 isDisabled={!isEditMode}
                 isRequired={false}
-                errorValue={useValidation.errors['email']}
-                onChange={useValidation.handleChange}
+                errorValue={useValidation.errors['email'] || ''}
+                onChange={handleChange}
                 slim={true} />
             </div>
           </div>
           {isEditMode &&
             <div className='profile__actions'>
               <span className='profile__form-error'>{reqError}</span>
-              <SubmitButton buttonText="Сохранить" buttonAction={handleSubmit} isDisabled={!useValidation.isValid} />
+              <SubmitButton buttonText="Сохранить" buttonAction={handleSubmit} isDisabled={!useValidation.isValid || notChanged} />
             </div>}
           {!isEditMode &&
             <div className='profile__actions'>

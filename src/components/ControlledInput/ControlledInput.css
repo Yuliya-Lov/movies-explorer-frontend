@@ -55,6 +55,9 @@
 
 .controlled-input__input_error-value {
   color: #EE3465;
+}
+
+.controlled-input__input_slim-error {
   min-height: 30px;
 }
 
