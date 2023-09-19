@@ -23,7 +23,7 @@ function Profile({ currentUser, onExit, onUpdate, reqError, cleanMessage }) {
         setIsEditMode(false)
       })
       .catch((e) => {
-        console.log(e)
+        console.log("ошибка в profile")
       })
   }
 
@@ -43,7 +43,7 @@ function Profile({ currentUser, onExit, onUpdate, reqError, cleanMessage }) {
 
   React.useEffect(() => {
     setNotChanged(Object.keys(useValidation.values).every(key => useValidation.values[key] === currentUser[key] ));
-  }, [useValidation.values, currentUser])
+  }, [useValidation.values, currentUser]);
 
   return (
     <main className='profile'>
@@ -73,6 +73,7 @@ function Profile({ currentUser, onExit, onUpdate, reqError, cleanMessage }) {
               <ControlledInput
                 id='email'
                 type='email'
+                pattern='^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$'
                 labelName=''
                 placeHolder='Введите email'
                 value={useValidation.values['email'] || ''}
