@@ -40,6 +40,10 @@ function App() {
       email: '',
       password: ''
     })
+  const [allFindMovies, setAllFindMovies] = React.useState([]);
+  const [renderingMovies, setRenderingMovies] = React.useState([]);
+  const [stepForRendering, setStepForRendering] = React.useState(12);
+  const [countStepsForRendering, setCountStepsForRendering] = React.useState(1);
 
   function handleNavClick() {
     setIsPopupWithNavOpen(true);
@@ -51,11 +55,21 @@ function App() {
   }
 
   const handleResize = () => {
-    if (window.innerWidth < 790) {
+    if (window.innerWidth < 790 && window.innerWidth >= 600) {
+      setStepForRendering(8)
       setIsMobile(true);
-    } else {
+      return;
+    }
+    if (window.innerWidth < 600) {
+      setStepForRendering(5)
+      setIsMobile(true);
+      return;
+    }
+    else {
+      setStepForRendering(12)
       setIsMobile(false);
       setIsPopupWithNavOpen(false);
+      return;
     }
   };
 
@@ -145,18 +159,20 @@ function App() {
       })
   }
 
+  function addMoreMovies() {
+    setCountStepsForRendering(countStepsForRendering + 1)
+  }
+
   React.useEffect(() => {
     function closeByEscape(evt) {
       if (evt.key === 'Escape') {
         closeAllPopups();
       }
     }
-
     function handleOverlayClick(evt) {
       if (evt.target.classList.contains('popup') || evt.target.classList.contains('tooltip'))
         closeAllPopups();
     }
-
     if (isOpen) {
       document.addEventListener('keydown', closeByEscape);
       document.addEventListener('click', handleOverlayClick);
@@ -168,7 +184,7 @@ function App() {
   }, [isOpen])
 
   React.useEffect(() => {
-    window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", () => setTimeout(handleResize, 1000));
     handleResize();
     checkUser()
       .then(() => {
@@ -181,6 +197,7 @@ function App() {
     allMovies()
       .then(res => {
         console.log(res)
+        setAllFindMovies(res);
       })
       .catch(e => console.log(e))
   }, []);
@@ -202,6 +219,11 @@ function App() {
     setIsPopupWithNavOpen(false);
   }, [location]);
 
+  React.useEffect(() => {
+    console.log(stepForRendering, countStepsForRendering)
+    setRenderingMovies(allFindMovies.slice(0, stepForRendering * countStepsForRendering));
+  }, [allFindMovies, stepForRendering, countStepsForRendering]);
+
   return (
     <div className="root">
       {pathWithHeader &&
@@ -211,7 +233,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Main />} >
           </Route>
-          <Route path='/movies' element={<ProtectedRoute element={Movies} isLoggedIn={isLoggedIn} />} />
+          <Route path='/movies' element={<ProtectedRoute element={Movies} isLoggedIn={isLoggedIn} renderingMovies={renderingMovies} addMoreMovies={addMoreMovies} />} />
           <Route path='/saved-movies' element={<ProtectedRoute element={SavedMovies} isLoggedIn={isLoggedIn} />} />
           <Route path='/profile' element={<ProtectedRoute isLoggedIn={isLoggedIn} element={Profile} currentUser={currentUser} onExit={onExit} onUpdate={updateUserInfo} reqError={errorMessage.message.message} cleanMessage={cleanMessage} />} />
           <Route path='/signin' element={<Login handleSubmit={onLogin} reqError={errorMessage.message.message} cleanMessage={cleanMessage} />} />

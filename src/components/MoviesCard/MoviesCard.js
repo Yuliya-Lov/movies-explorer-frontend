@@ -3,6 +3,7 @@ import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
 
 function MoviesCard({ movie, saved }) {
+  console.log(movie)
   const location = useLocation();
   const [isSaved, setIsSaved] = React.useState(saved || false);
 
@@ -39,8 +40,8 @@ function MoviesCard({ movie, saved }) {
   }
 
   function getTime(duration) {
-    const minutes = Math.floor((duration / (1000 * 60)) % 60);
-    const hours = Math.floor((duration / (1000 * 60 * 60)) % 24);
+    const hours = Math.floor(duration / 60);
+    const minutes = Math.floor((duration - hours*60));
     return hours + "ч " + minutes + "м";
   }
 
@@ -56,7 +57,7 @@ function MoviesCard({ movie, saved }) {
 
   return (
       <article className='movie'>
-        <img className='movie__img' src={movie.image} alt={movie.nameRu} />
+        <img className='movie__img' src={`https://api.nomoreparties.co${movie.image.url}`} alt={movie.nameRu} />
         <div className='movie__info'>
           <h2 className='movie__name'>{movie.nameRU}</h2>
           <p className='movie__duration'>{getTime(movie.duration)}</p>

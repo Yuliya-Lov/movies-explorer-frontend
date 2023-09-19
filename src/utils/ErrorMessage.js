@@ -12,7 +12,11 @@ const ErrorMessage = () => {
     console.log(statusCode);
     setMessage({ message: 'На сервере произошла ошибка.' })
     if (statusCode === '500') {
-      return setMessage({ message: 'На сервере произошла ошибка.' })
+      if (location.pathname === '/movies' || location.pathname === '/saved-movies') {
+        return setMessage({ message: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.' })
+      } else {
+        return setMessage({ message: 'На сервере произошла ошибка.' })
+      }
     }
     if (statusCode === '400') {
       if (location.pathname === '/signup') {
@@ -23,6 +27,9 @@ const ErrorMessage = () => {
       }
       if (location.pathname === '/profile') {
         return setMessage({ message: 'При обновлении профиля произошла ошибка.' })
+      }
+      else {
+        return setMessage({ message: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.' })
       }
     }
 

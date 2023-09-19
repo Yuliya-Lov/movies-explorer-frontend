@@ -13,7 +13,7 @@ function SearchForm() {
       value: e.target.value
     })
     if (!e.target.validity.valid) {
-      setError(e.target.validationMessage);
+      setError('Нужно ввести ключевое слово.');
       setIsDisabled(true)
     } else {
       setError('');
@@ -34,7 +34,7 @@ function SearchForm() {
     if (meaning.validity.valid) {
       console.log(seachValue.value)
     } else {
-      setError(meaning.validationMessage);
+      setError('Нужно ввести ключевое слово.');
     }
   }
 
