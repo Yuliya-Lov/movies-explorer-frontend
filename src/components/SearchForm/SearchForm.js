@@ -2,16 +2,16 @@ import React from 'react';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm() {
-  const [seachValue, setSeachValue] = React.useState({ value: undefined });
-  const [isShort, setIsShort] = React.useState(true);
+/* keyword={filter.keyword} isShort={filter.isShort} handleChangeInput={filter.handleChangeInput} handleChangeCheckbox={filter.handleChangeCheckbox} handleSubmit={filter.handleSubmit(allFindMovies)} */
+
+function SearchForm({keyword, isShort, handleChangeInput, handleChangeCheckbox, handleSubmit}) {
+  /* const [seachValue, setSeachValue] = React.useState({ value: undefined });
+  const [isShort, setIsShort] = React.useState(true); */
   const [error, setError] = React.useState('');
   const [isDisabled, setIsDisabled] = React.useState(false);
 
-  function handleChangeInput(e) {
-    setSeachValue({
-      value: e.target.value
-    })
+  function handleChange(e) {
+    handleChangeInput(e)
     if (!e.target.validity.valid) {
       setError('Нужно ввести ключевое слово.');
       setIsDisabled(true)
@@ -22,17 +22,16 @@ function SearchForm() {
   }
 
 
-  const handleTumbClick = () => {
+ /*  const handleTumbClick = () => {
     isShort
       ? setIsShort(false)
       : setIsShort(true);
-  }
+  } */
 
-  function handleSubmit(e) {
+  function handleSubmitSearch(e) {
     e.preventDefault();
-    const meaning = e.target['search-value'];
-    if (meaning.validity.valid) {
-      console.log(seachValue.value)
+    if (e.target['search-value'].validity.valid) {
+      handleSubmit();
     } else {
       setError('Нужно ввести ключевое слово.');
     }
@@ -40,15 +39,15 @@ function SearchForm() {
 
   return (
     <section className='seach'>
-      <form className='seach__form' onSubmit={handleSubmit} noValidate>
+      <form className='seach__form' onSubmit={handleSubmitSearch} noValidate>
         <div className='seach__line'>
           <input
             name='search-value'
             className={`seach__input ${error.length > 0 ? 'seach__input__err' : ''}`}
             required
             placeholder={error.length > 0 ? error : 'Фильм'}
-            value={seachValue.value}
-            onChange={handleChangeInput} />
+            value={keyword}
+            onChange={handleChange} />
           <button
             type="submit"
             disabled={isDisabled}
@@ -56,7 +55,7 @@ function SearchForm() {
             aria-label='Найти фильмы'
           ></button>
         </div>
-        <FilterCheckbox isShort={isShort} handleTumbClick={handleTumbClick} />
+        <FilterCheckbox isShort={isShort} handleTumbClick={handleChangeCheckbox} />
       </form>
     </section>
   );

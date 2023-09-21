@@ -14,7 +14,7 @@ import PopupWithNav from '../PopupWithNav/PopupWithNav.js';
 import InfoTooltip from '../InfoTooltip/InfoTooltip.js';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-import ErrorMessage from '../../utils/ErrorMessage';
+import useErrorMessage from '../../utils/useErrorMessage';
 import {
   register,
   login,
@@ -33,7 +33,7 @@ function App() {
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const isOpen = isPopupWithNavOpen || isInfoTooltipOpen;
   const [isSucces, setIsSucces] = React.useState(false);
-  const errorMessage = ErrorMessage();
+  const errorMessage = useErrorMessage();
   const [currentUser, setCurrentUser] = React.useState(
     {
       name: '',
@@ -44,6 +44,7 @@ function App() {
   const [renderingMovies, setRenderingMovies] = React.useState([]);
   const [stepForRendering, setStepForRendering] = React.useState(12);
   const [countStepsForRendering, setCountStepsForRendering] = React.useState(1);
+  const [isEndedMovies, setIsEndedMovies] = React.useState(false);
 
   function handleNavClick() {
     setIsPopupWithNavOpen(true);
@@ -84,6 +85,7 @@ function App() {
   const pathWithHeader = (location.pathname === '/movies') || (location.pathname === '/saved-movies') || (location.pathname === '/') || (location.pathname === '/profile');
 
   function checkUser() {
+    const place = location.pathname;
     return getUser()
       .then(res => {
         setCurrentUser({
@@ -91,6 +93,7 @@ function App() {
           email: res.data.email,
           name: res.data.name,
         });
+        navigate(place, {redirect: true})
       })
       .catch((e) => {
         return Promise.reject(e);
@@ -140,7 +143,6 @@ function App() {
       })
       .catch((e) => {
         errorMessage.changeError(e);
-        console.log(errorMessage)
         return Promise.reject(e);
       })
   }
@@ -160,6 +162,11 @@ function App() {
   }
 
   function addMoreMovies() {
+    if (allFindMovies.length < stepForRendering*countStepsForRendering + 1 ){
+      setRenderingMovies(allFindMovies);
+      setIsEndedMovies(true);
+      /* allfind заменить на результат поиска после его изготовления */
+    }
     setCountStepsForRendering(countStepsForRendering + 1)
   }
 
@@ -196,7 +203,6 @@ function App() {
 
     allMovies()
       .then(res => {
-        console.log(res)
         setAllFindMovies(res);
       })
       .catch(e => console.log(e))
@@ -220,7 +226,6 @@ function App() {
   }, [location]);
 
   React.useEffect(() => {
-    console.log(stepForRendering, countStepsForRendering)
     setRenderingMovies(allFindMovies.slice(0, stepForRendering * countStepsForRendering));
   }, [allFindMovies, stepForRendering, countStepsForRendering]);
 
@@ -233,7 +238,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Main />} >
           </Route>
-          <Route path='/movies' element={<ProtectedRoute element={Movies} isLoggedIn={isLoggedIn} renderingMovies={renderingMovies} addMoreMovies={addMoreMovies} />} />
+          <Route path='/movies' element={<ProtectedRoute element={Movies} isLoggedIn={isLoggedIn} allFindMovies={allFindMovies} addMoreMovies={addMoreMovies} isEndedMovies={isEndedMovies} />} />
           <Route path='/saved-movies' element={<ProtectedRoute element={SavedMovies} isLoggedIn={isLoggedIn} />} />
           <Route path='/profile' element={<ProtectedRoute isLoggedIn={isLoggedIn} element={Profile} currentUser={currentUser} onExit={onExit} onUpdate={updateUserInfo} reqError={errorMessage.message.message} cleanMessage={cleanMessage} />} />
           <Route path='/signin' element={<Login handleSubmit={onLogin} reqError={errorMessage.message.message} cleanMessage={cleanMessage} />} />

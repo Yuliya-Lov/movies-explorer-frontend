@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 
 
-const ErrorMessage = () => {
+const useErrorMessage = () => {
   const location = useLocation();
   const [message, setMessage] = React.useState({ message: '' });
 
@@ -59,4 +59,4 @@ const ErrorMessage = () => {
   return { message, changeError, resetMessage };
 }
 
-export default ErrorMessage;
+export default useErrorMessage;
