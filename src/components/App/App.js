@@ -148,6 +148,7 @@ function App() {
     return logout()
       .then(() => {
         setIsLoggedIn(false);
+        localStorage.clear();
         navigate('/', { replace: true });
 
       })
@@ -156,7 +157,6 @@ function App() {
         errorMessage.changeError(e)
         setIsInfoTooltipOpen(true);
       })
-
   }
 
   function findAllMovies() {
@@ -215,10 +215,6 @@ function App() {
   React.useEffect(() => {
     setIsPopupWithNavOpen(false);
   }, [location]);
-
-  /* React.useEffect(() => {
-    setRenderingMovies(allFindMovies.slice(0, stepForRendering * countStepsForRendering));
-  }, [stepForRendering, countStepsForRendering]); */
 
   return (
     <div className="root">

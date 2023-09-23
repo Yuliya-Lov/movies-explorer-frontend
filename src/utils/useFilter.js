@@ -1,23 +1,23 @@
-import React, { useCallback } from "react";
+export function useFilter(keyword, isShort, handleChangeKeyword, handleChangeIsShort) {
 
-export function useFilter() {
-  const [keyword, setKeyword] = React.useState('');
-  const [isShort, setIsShort] = React.useState(false);
+  function handleChangeFilter(keyword, isShort) {
+    handleChangeKeyword(keyword);
+    handleChangeIsShort(isShort)
+  };
 
   const handleChangeInput = (event) => {
     const target = event.target;
-    setKeyword(target.value);
+    handleChangeKeyword(target.value);
   };
 
   const handleChangeCheckbox = (event) => {
     const target = event.target;
     target.checked
-      ? setIsShort(true)
-      : setIsShort(false);
+      ? handleChangeIsShort(true)
+      : handleChangeIsShort(false);
   };
 
   function handleSubmitFilter(moviesArr) {
-    console.log(keyword, moviesArr, isShort);
     return moviesArr.filter((movie) => {
       return isShort
         ? (movie.duration <= 40) && (movie.nameRU.toLowerCase().includes(keyword.toLowerCase()) || movie.nameEN.toLowerCase().includes(keyword.toLowerCase()))
@@ -32,14 +32,5 @@ export function useFilter() {
     localStorage.setItem("moviesArr", JSON.stringify(filterResult));
   }
 
-  const resetFilter = useCallback(
-    (newKeyword = '', newIsShort = false) => {
-      setKeyword(newKeyword);
-      setIsShort(newIsShort);
-    },
-    [setKeyword, setIsShort]
-  );
-
-
-  return { keyword, isShort, handleChangeInput, handleChangeCheckbox, handleSubmitFilter, saveSearch, resetFilter };
+  return { keyword, isShort, handleChangeFilter, handleChangeInput, handleChangeCheckbox, handleSubmitFilter, saveSearch };
 }

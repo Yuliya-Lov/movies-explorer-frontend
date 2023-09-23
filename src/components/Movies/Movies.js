@@ -8,13 +8,24 @@ import { useFilter } from '../../utils/useFilter';
 import { usePartialRender } from '../../utils/usePartialRender';
 
 function Movies({ findAllMovies, stepForRendering }) {
-  const filter = useFilter();
+  const [keyword, setKeyword] = React.useState('');
+  const [isShort, setIsShort] = React.useState(false);
   const [allMovies, setAllMovies] = React.useState([]);
   const [renderedMovies, setRenderedMovies] = React.useState([]);
   const [moviesPart, setMoviesPart] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
   const [message, setMessage] = React.useState(false);
   const renderControl = usePartialRender(renderedMovies, stepForRendering);
+
+  function handleChangeKeyword(value) {
+    setKeyword(value)
+  }
+
+  function handleChangeIsShort(value) {
+    setIsShort(value)
+  }
+
+  const filter = useFilter(keyword, isShort, handleChangeKeyword, handleChangeIsShort);
 
   function handleSubmit() {
     setIsLoading(true)
@@ -40,11 +51,21 @@ function Movies({ findAllMovies, stepForRendering }) {
   }
 
   React.useEffect(() => {
-    if (allMovies.length !== 0) handleSubmit();
+    if (localStorage.getItem('keyword')) {
+      filter.handleChangeFilter(JSON.parse(localStorage.getItem('keyword')), JSON.parse(localStorage.getItem('isShort')));
+      setRenderedMovies(JSON.parse(localStorage.getItem('moviesArr')))
+    } else {
+      setRenderedMovies([])
+    }
+  }, [])
+
+  React.useEffect(() => {
+    if (allMovies.length !== 0) {
+      handleSubmit();
+    }
   }, [filter.isShort])
 
   React.useEffect(() => {
-    console.log(renderedMovies)
     renderControl.setInitialMoviesState();
     setMoviesPart(renderControl.setMoviesCount)
   }, [renderedMovies])
