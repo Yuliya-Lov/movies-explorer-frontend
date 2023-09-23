@@ -7,7 +7,7 @@ import Preloader from '../Preloader/Preloader';
 import { useFilter } from '../../utils/useFilter';
 import { usePartialRender } from '../../utils/usePartialRender';
 
-function Movies({ findAllMovies, stepForRendering }) {
+function Movies({ findAllMovies, stepForRendering, savedMovies, deleteSavedMovie }) {
   const [keyword, setKeyword] = React.useState('');
   const [isShort, setIsShort] = React.useState(false);
   const [allMovies, setAllMovies] = React.useState([]);
@@ -80,7 +80,7 @@ function Movies({ findAllMovies, stepForRendering }) {
       {isLoading
         ? <Preloader />
         : renderedMovies.length > 0
-          ? <MoviesCardList movies={moviesPart} />
+          ? <MoviesCardList movies={moviesPart} savedMovies={savedMovies} deleteSavedMovie={deleteSavedMovie} />
           : <Result message={message || 'Ничего не найдено'} />}
       {!renderControl.isMoviesEnded &&
         <button type='button' className='movies__more-button' onClick={renderControl.addMoreMovies}>Ещё</button>

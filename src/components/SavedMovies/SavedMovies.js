@@ -2,27 +2,62 @@ import React from 'react';
 import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import Result from '../Result/Result';
+import Preloader from '../Preloader/Preloader';
+import { useFilter } from '../../utils/useFilter';
 
-function SavedMovies() {
-  const [moviesArr, setMoviesArr] = React.useState([])
+function SavedMovies({savedMovies, findSavedMovies, deleteSavedMovie}) {
+  const [keyword, setKeyword] = React.useState('');
+  const [isShort, setIsShort] = React.useState(false);
+  const [renderedMovies, setRenderedMovies] = React.useState([]);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [message, setMessage] = React.useState(false);
 
-  const arrayFavoriteMovies = () => {
-    let stringArray = localStorage.getItem("favoriteMovies");
-    let arrayFavoriteMovies = JSON.parse(stringArray);
-    return arrayFavoriteMovies;
+  function handleChangeKeyword(value) {
+    setKeyword(value)
   }
-  React.useEffect(() => {
-    if (localStorage.getItem("favoriteMovies") !== null) setMoviesArr(arrayFavoriteMovies());
-  }, []);
 
-  window.addEventListener('storage', () => {
-    setMoviesArr(arrayFavoriteMovies);
-  })
+  function handleChangeIsShort(value) {
+    setIsShort(value)
+  }
+
+  const filter = useFilter(keyword, isShort, handleChangeKeyword, handleChangeIsShort);
+
+  function handleSubmit() {
+    setRenderedMovies(filter.handleSubmitFilter(savedMovies))
+  }
+
+  React.useEffect(() => {
+    setIsLoading(true)
+    findSavedMovies()
+      .then(res => {
+        setRenderedMovies(res.data)
+      })
+      .catch(e => setMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
+      )
+      .finally(() => {
+        setIsLoading(false);
+      })
+  }, [])
+
+  React.useEffect(() => {
+    if (savedMovies.length !== 0) {
+      handleSubmit();
+    }
+  }, [filter.isShort])
+
+  React.useEffect(() => {
+    setRenderedMovies(savedMovies)
+  }, [savedMovies])
 
   return (
     <main className='movies'>
-      <SearchForm />
-      <MoviesCardList movies={moviesArr} saved={true} />
+      <SearchForm keyword={filter.keyword} isShort={filter.isShort} handleChangeInput={filter.handleChangeInput} handleChangeCheckbox={filter.handleChangeCheckbox} handleSubmit={handleSubmit} />
+      {isLoading
+        ? <Preloader />
+        : renderedMovies.length > 0
+          ? <MoviesCardList movies={renderedMovies} savedMovies={savedMovies} deleteSavedMovie={deleteSavedMovie}/>
+          : <Result message={message || 'Ничего не найдено'} />}
     </main>
   );
 }

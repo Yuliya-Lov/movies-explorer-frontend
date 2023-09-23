@@ -23,6 +23,7 @@ import {
   updateUser
 } from '../../utils/MainApi';
 import { allMovies } from '../../utils/MoviesApi';
+import { getMovies, deleteMovie } from '../../utils/MainApi';
 import { Promise } from 'mongoose';
 
 function App() {
@@ -42,6 +43,7 @@ function App() {
       password: ''
     })
   const [stepForRendering, setStepForRendering] = React.useState(12);
+  const [savedMovies, setSavedMovies] = React.useState([]);
 
   function handleNavClick() {
     setIsPopupWithNavOpen(true);
@@ -163,7 +165,22 @@ function App() {
     return allMovies()
   }
 
+  function findSavedMovies() {
+    return getMovies()
+      .then((res) => {
+        setSavedMovies(res.data)
+        return res;
+      })
+      .catch(e => e)
+  }
 
+  function deleteSavedMovie(_id) {
+    return deleteMovie(_id)
+      .then((res) => {
+        setSavedMovies(savedMovies.filter(c => c._id !== _id));
+      })
+      .catch(e => e)
+  }
 
   React.useEffect(() => {
     function closeByEscape(evt) {
@@ -231,9 +248,11 @@ function App() {
               element={Movies}
               isLoggedIn={isLoggedIn}
               findAllMovies={findAllMovies}
+              savedMovies={savedMovies}
               stepForRendering={stepForRendering}
+              deleteSavedMovie={deleteSavedMovie}
             />} />
-          <Route path='/saved-movies' element={<ProtectedRoute element={SavedMovies} isLoggedIn={isLoggedIn} />} />
+          <Route path='/saved-movies' element={<ProtectedRoute element={SavedMovies} savedMovies={savedMovies} findSavedMovies={findSavedMovies} isLoggedIn={isLoggedIn} deleteSavedMovie={deleteSavedMovie} />} />
           <Route path='/profile' element={<ProtectedRoute isLoggedIn={isLoggedIn} element={Profile} currentUser={currentUser} onExit={onExit} onUpdate={updateUserInfo} reqError={errorMessage.message.message} cleanMessage={cleanMessage} />} />
           <Route path='/signin' element={<Login handleSubmit={onLogin} reqError={errorMessage.message.message} cleanMessage={cleanMessage} />} />
           <Route path='/signup' element={<Register handleSubmit={onRegister} reqError={errorMessage.message.message} cleanMessage={cleanMessage} />} />

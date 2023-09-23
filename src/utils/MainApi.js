@@ -65,7 +65,7 @@ export const getUser = () => {
   )
 }
 
-export const updateUser = ({email, name}) => {
+export const updateUser = ({ email, name }) => {
   return request(
     `${BASE_URL}/users/me`,
     {
@@ -78,6 +78,59 @@ export const updateUser = ({email, name}) => {
         'email': email,
         'name': name
       })
+    }
+  )
+}
+
+export const getMovies = () => {
+  return request(
+    `${BASE_URL}/movies`,
+    {
+      method: 'GET',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: 'include',
+    }
+  )
+}
+
+export const saveMovie = (movie) => {
+  return request(
+    `${BASE_URL}/movies`,
+    {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        'country': movie.country,
+        'director': movie.director,
+        'duration': movie.duration,
+        'year': movie.year,
+        'description': movie.description,
+        'image': 'https://api.nomoreparties.co' + movie.image.url,
+        'trailerLink': movie.trailerLink,
+        'nameRU': movie.nameRU,
+        'nameEN': movie.nameEN,
+        'thumbnail': 'https://api.nomoreparties.co' + movie.image.formats.thumbnail.url,
+        'id': movie.id,
+      }
+      )
+    }
+  )
+}
+
+export const deleteMovie = (_id) => {
+  return request(
+    `${BASE_URL}/movies/${_id}`,
+    {
+      method: 'DELETE',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      credentials: 'include',
     }
   )
 }
