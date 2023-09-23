@@ -23,6 +23,7 @@ import {
   updateUser
 } from '../../utils/MainApi';
 import { allMovies } from '../../utils/MoviesApi';
+import { Promise } from 'mongoose';
 
 function App() {
   const location = useLocation();
@@ -40,11 +41,7 @@ function App() {
       email: '',
       password: ''
     })
-  const [allFindMovies, setAllFindMovies] = React.useState([]);
-  const [renderingMovies, setRenderingMovies] = React.useState([]);
   const [stepForRendering, setStepForRendering] = React.useState(12);
-  const [countStepsForRendering, setCountStepsForRendering] = React.useState(1);
-  const [isEndedMovies, setIsEndedMovies] = React.useState(false);
 
   function handleNavClick() {
     setIsPopupWithNavOpen(true);
@@ -57,19 +54,19 @@ function App() {
 
   const handleResize = () => {
     if (window.innerWidth < 790 && window.innerWidth >= 600) {
-      setStepForRendering(8)
       setIsMobile(true);
+      setStepForRendering(8)
       return;
     }
     if (window.innerWidth < 600) {
-      setStepForRendering(5)
       setIsMobile(true);
+      setStepForRendering(5)
       return;
     }
     else {
-      setStepForRendering(12)
       setIsMobile(false);
       setIsPopupWithNavOpen(false);
+      setStepForRendering(12)
       return;
     }
   };
@@ -93,7 +90,7 @@ function App() {
           email: res.data.email,
           name: res.data.name,
         });
-        navigate(place, {redirect: true})
+        navigate(place, { redirect: true })
       })
       .catch((e) => {
         return Promise.reject(e);
@@ -159,16 +156,14 @@ function App() {
         errorMessage.changeError(e)
         setIsInfoTooltipOpen(true);
       })
+
   }
 
-  function addMoreMovies() {
-    if (allFindMovies.length < stepForRendering*countStepsForRendering + 1 ){
-      setRenderingMovies(allFindMovies);
-      setIsEndedMovies(true);
-      /* allfind заменить на результат поиска после его изготовления */
-    }
-    setCountStepsForRendering(countStepsForRendering + 1)
+  function findAllMovies() {
+    return allMovies()
   }
+
+
 
   React.useEffect(() => {
     function closeByEscape(evt) {
@@ -191,7 +186,9 @@ function App() {
   }, [isOpen])
 
   React.useEffect(() => {
-    window.addEventListener("resize", () => setTimeout(handleResize, 1000));
+    window.addEventListener("resize", () => {
+      setTimeout(handleResize, 1000)
+    });
     handleResize();
     checkUser()
       .then(() => {
@@ -200,12 +197,6 @@ function App() {
       .catch((e) => {
         setIsLoggedIn(false);
       })
-
-    allMovies()
-      .then(res => {
-        setAllFindMovies(res);
-      })
-      .catch(e => console.log(e))
   }, []);
 
   React.useEffect(() => {
@@ -225,9 +216,9 @@ function App() {
     setIsPopupWithNavOpen(false);
   }, [location]);
 
-  React.useEffect(() => {
+  /* React.useEffect(() => {
     setRenderingMovies(allFindMovies.slice(0, stepForRendering * countStepsForRendering));
-  }, [allFindMovies, stepForRendering, countStepsForRendering]);
+  }, [stepForRendering, countStepsForRendering]); */
 
   return (
     <div className="root">
@@ -238,7 +229,14 @@ function App() {
         <Routes>
           <Route path='/' element={<Main />} >
           </Route>
-          <Route path='/movies' element={<ProtectedRoute element={Movies} isLoggedIn={isLoggedIn} allFindMovies={allFindMovies} addMoreMovies={addMoreMovies} isEndedMovies={isEndedMovies} />} />
+          <Route
+            path='/movies'
+            element={<ProtectedRoute
+              element={Movies}
+              isLoggedIn={isLoggedIn}
+              findAllMovies={findAllMovies}
+              stepForRendering={stepForRendering}
+            />} />
           <Route path='/saved-movies' element={<ProtectedRoute element={SavedMovies} isLoggedIn={isLoggedIn} />} />
           <Route path='/profile' element={<ProtectedRoute isLoggedIn={isLoggedIn} element={Profile} currentUser={currentUser} onExit={onExit} onUpdate={updateUserInfo} reqError={errorMessage.message.message} cleanMessage={cleanMessage} />} />
           <Route path='/signin' element={<Login handleSubmit={onLogin} reqError={errorMessage.message.message} cleanMessage={cleanMessage} />} />

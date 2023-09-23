@@ -1,0 +1,16 @@
+.result {
+  padding-top: 80px;
+  align-self: center;
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.result__title {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 500;
+}

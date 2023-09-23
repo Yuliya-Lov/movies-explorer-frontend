@@ -2,11 +2,7 @@ import React from 'react';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-/* keyword={filter.keyword} isShort={filter.isShort} handleChangeInput={filter.handleChangeInput} handleChangeCheckbox={filter.handleChangeCheckbox} handleSubmit={filter.handleSubmit(allFindMovies)} */
-
 function SearchForm({keyword, isShort, handleChangeInput, handleChangeCheckbox, handleSubmit}) {
-  /* const [seachValue, setSeachValue] = React.useState({ value: undefined });
-  const [isShort, setIsShort] = React.useState(true); */
   const [error, setError] = React.useState('');
   const [isDisabled, setIsDisabled] = React.useState(false);
 
@@ -20,13 +16,6 @@ function SearchForm({keyword, isShort, handleChangeInput, handleChangeCheckbox, 
       setIsDisabled(false)
     }
   }
-
-
- /*  const handleTumbClick = () => {
-    isShort
-      ? setIsShort(false)
-      : setIsShort(true);
-  } */
 
   function handleSubmitSearch(e) {
     e.preventDefault();
