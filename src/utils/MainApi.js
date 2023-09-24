@@ -1,6 +1,6 @@
 import request from './request.js';
-export const BASE_URL = 'http://localhost:4000';
-/* export const BASE_URL = 'https://api.mymovies.nomoredomainsicu.ru/'; */
+/* export const BASE_URL = 'http://localhost:4000'; */
+export const BASE_URL = 'https://api.mymovies.nomoredomainsicu.ru/';
 
 export const register = (name, email, password) => {
   return request(
