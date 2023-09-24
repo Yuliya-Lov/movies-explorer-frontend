@@ -24,7 +24,6 @@ import {
 } from '../../utils/MainApi';
 import { allMovies } from '../../utils/MoviesApi';
 import { getMovies, saveMovie, deleteMovie } from '../../utils/MainApi';
-import { Promise } from 'mongoose';
 
 function App() {
   const location = useLocation();
