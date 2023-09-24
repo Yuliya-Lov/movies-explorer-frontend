@@ -14,7 +14,7 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
     buttonAction(useValidation.values);
   }
 
-  function handleChange(e){
+  function handleChange(e) {
     useValidation.handleChange(e);
     cleanMessage();
   }

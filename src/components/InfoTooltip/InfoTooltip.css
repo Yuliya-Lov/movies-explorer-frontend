@@ -88,9 +88,24 @@
 }
 
 @media screen and (max-width:600px) {
+  .tooltip {
+    padding: 86px 30px;
+  }
+
+  .tooltip_opened {
+    padding: 86px 30px;
+  }
+
   .tooltip__container {
     padding: 25px 22px;
     max-width: 282px;
+  }
+
+  .tooltip__status-icon {
+    align-self: center;
+    margin: 0 0 10px 0;
+    width: 30px;
+    height: 30px;
   }
 
   .tooltip__button-close {

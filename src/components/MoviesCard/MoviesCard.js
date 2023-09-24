@@ -1,9 +1,8 @@
 import React from 'react';
 import './MoviesCard.css';
 import { useLocation } from 'react-router-dom';
-import { saveMovie } from '../../utils/MainApi'
 
-function MoviesCard({ movie, savedMovies, deleteSavedMovie }) {
+function MoviesCard({ movie, savedMovies, saveMovie, deleteSavedMovie }) {
   const location = useLocation();
   const [isSaved, setIsSaved] = React.useState(false);
   const image = movie.image.url
@@ -18,25 +17,27 @@ function MoviesCard({ movie, savedMovies, deleteSavedMovie }) {
 
   function handleSave() {
     saveMovie(movie)
-      .then((res) => {
-        console.log(res)
-      })
-      .catch((e) => console.log(e))
-    setIsSaved(true);
+      .then(() => setIsSaved(true))
+      .catch((e) => setIsSaved(false))
   }
 
   function deleteMovie() {
-    movie.movieId
-      ? deleteSavedMovie(movie._id)
-      : deleteSavedMovie(savedMovies.find((item) => item.movieId === movie.id)._id)
-    setIsSaved(false);
+    const deletedId = movie.movieId
+      ? movie._id
+      : savedMovies.find((item) => item.movieId === movie.id)._id
+    deleteSavedMovie(deletedId)
+      .then(() => {
+        setIsSaved(false);
+      })
+      .catch((e) => {
+        setIsSaved(true);
+      })
   }
 
   React.useEffect(() => {
     movie.movieId
       ? setIsSaved(true)
       : savedMovies.find((item) => {
-        console.log(item.movieId === movie.id)
         return item.movieId === movie.id
       })
         ? setIsSaved(true)

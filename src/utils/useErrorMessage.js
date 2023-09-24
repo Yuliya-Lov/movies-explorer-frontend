@@ -1,15 +1,12 @@
 import React, { useCallback } from 'react';
 import { useLocation } from 'react-router-dom';
 
-
 const useErrorMessage = () => {
   const location = useLocation();
   const [message, setMessage] = React.useState({ message: '' });
 
   function changeError(e) {
-    console.log(e);
     const statusCode = (e.statusCode || e.status || 0).toString();
-    console.log(statusCode);
     setMessage({ message: 'На сервере произошла ошибка.' })
     if (statusCode === '500') {
       if (location.pathname === '/movies' || location.pathname === '/saved-movies') {
@@ -44,7 +41,6 @@ const useErrorMessage = () => {
     if (statusCode === '404') {
       return setMessage({ message: 'Страница по указанному маршруту не найдена.' })
     } else {
-      console.log('statusCode === 0')
       return setMessage({ message: '' })
     }
   }

@@ -32,6 +32,11 @@
   color: #4285F4;
   font-size: 14px;
   font-weight: 400;
+  cursor: pointer;
+}
+
+.page-not-found__redirect-button:hover {
+  opacity: .8;
 }
 
 @media screen and (max-width: 790px) {

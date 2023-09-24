@@ -23,7 +23,7 @@ import {
   updateUser
 } from '../../utils/MainApi';
 import { allMovies } from '../../utils/MoviesApi';
-import { getMovies, deleteMovie } from '../../utils/MainApi';
+import { getMovies, saveMovie, deleteMovie } from '../../utils/MainApi';
 import { Promise } from 'mongoose';
 
 function App() {
@@ -119,12 +119,12 @@ function App() {
   function onLogin(data) {
     return login(data.email, data.password)
       .then(() => {
-        checkUser()
+        return checkUser()
           .then(() => {
             setIsLoggedIn(true);
             navigate('/', { replace: true });
           })
-          .catch(() => console.log('На сервере произошла ошибка.'))
+          .catch((e) => Promise.reject(e))
       })
       .catch((e) => {
         errorMessage.changeError(e)
@@ -163,6 +163,8 @@ function App() {
 
   function findAllMovies() {
     return allMovies()
+      .then(res => res)
+      .catch(e => Promise.reject(e))
   }
 
   function findSavedMovies() {
@@ -171,15 +173,36 @@ function App() {
         setSavedMovies(res.data)
         return res;
       })
-      .catch(e => e)
+      .catch(e => {
+        return Promise.reject(e);
+      })
   }
+
+  function handleSaveMovie(movie) {
+    return saveMovie(movie)
+      .then((res) => {
+        return res;
+      })
+      .catch((e) => {
+        setIsSucces(false);
+        errorMessage.changeError(e)
+        setIsInfoTooltipOpen(true);
+        return Promise.reject(e);
+      })
+  }
+
 
   function deleteSavedMovie(_id) {
     return deleteMovie(_id)
       .then((res) => {
         setSavedMovies(savedMovies.filter(c => c._id !== _id));
       })
-      .catch(e => e)
+      .catch(e => {
+        setIsSucces(false);
+        errorMessage.changeError(e)
+        setIsInfoTooltipOpen(true);
+        return Promise.reject(e);
+      })
   }
 
   React.useEffect(() => {
@@ -236,7 +259,10 @@ function App() {
   return (
     <div className="root">
       {pathWithHeader &&
-        <Header isLoggedIn={isLoggedIn} isMobile={isMobile} onNavClick={handleNavClick}></Header>
+        <Header
+          isLoggedIn={isLoggedIn}
+          isMobile={isMobile}
+          onNavClick={handleNavClick}></Header>
       }
       <CurrentUserContext.Provider value={currentUser}>
         <Routes>
@@ -250,17 +276,49 @@ function App() {
               findAllMovies={findAllMovies}
               savedMovies={savedMovies}
               stepForRendering={stepForRendering}
-              deleteSavedMovie={deleteSavedMovie}
-            />} />
-          <Route path='/saved-movies' element={<ProtectedRoute element={SavedMovies} savedMovies={savedMovies} findSavedMovies={findSavedMovies} isLoggedIn={isLoggedIn} deleteSavedMovie={deleteSavedMovie} />} />
-          <Route path='/profile' element={<ProtectedRoute isLoggedIn={isLoggedIn} element={Profile} currentUser={currentUser} onExit={onExit} onUpdate={updateUserInfo} reqError={errorMessage.message.message} cleanMessage={cleanMessage} />} />
-          <Route path='/signin' element={<Login handleSubmit={onLogin} reqError={errorMessage.message.message} cleanMessage={cleanMessage} />} />
-          <Route path='/signup' element={<Register handleSubmit={onRegister} reqError={errorMessage.message.message} cleanMessage={cleanMessage} />} />
+              saveMovie={handleSaveMovie}
+              deleteSavedMovie={deleteSavedMovie} />} />
+          <Route
+            path='/saved-movies'
+            element={<ProtectedRoute
+              element={SavedMovies}
+              savedMovies={savedMovies}
+              findSavedMovies={findSavedMovies}
+              isLoggedIn={isLoggedIn}
+              saveMovie={handleSaveMovie}
+              deleteSavedMovie={deleteSavedMovie} />} />
+          <Route
+            path='/profile'
+            element={<ProtectedRoute
+              isLoggedIn={isLoggedIn}
+              element={Profile}
+              currentUser={currentUser}
+              onExit={onExit}
+              onUpdate={updateUserInfo}
+              reqError={errorMessage.message.message}
+              cleanMessage={cleanMessage} />} />
+          <Route
+            path='/signin'
+            element={<Login
+              isLoggedIn={isLoggedIn}
+              handleSubmit={onLogin}
+              reqError={errorMessage.message.message}
+              cleanMessage={cleanMessage} />} />
+          <Route
+            path='/signup'
+            isLoggedIn={isLoggedIn}
+            element={<Register
+              handleSubmit={onRegister}
+              reqError={errorMessage.message.message}
+              cleanMessage={cleanMessage} />} />
           <Route path='/*' element={<PageNotFound />} />
         </Routes>
       </CurrentUserContext.Provider>
       {pathWithFooter && <Footer />}
-      <PopupWithNav isMobile={isMobile} isOpen={isPopupWithNavOpen} onClose={closeAllPopups} />
+      <PopupWithNav
+        isMobile={isMobile}
+        isOpen={isPopupWithNavOpen}
+        onClose={closeAllPopups} />
       <InfoTooltip
         isOpen={isInfoTooltipOpen}
         isOk={isSucces}

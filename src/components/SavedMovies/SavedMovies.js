@@ -6,7 +6,7 @@ import Result from '../Result/Result';
 import Preloader from '../Preloader/Preloader';
 import { useFilter } from '../../utils/useFilter';
 
-function SavedMovies({savedMovies, findSavedMovies, deleteSavedMovie}) {
+function SavedMovies({savedMovies, findSavedMovies, saveMovie, deleteSavedMovie}) {
   const [keyword, setKeyword] = React.useState('');
   const [isShort, setIsShort] = React.useState(false);
   const [renderedMovies, setRenderedMovies] = React.useState([]);
@@ -56,7 +56,7 @@ function SavedMovies({savedMovies, findSavedMovies, deleteSavedMovie}) {
       {isLoading
         ? <Preloader />
         : renderedMovies.length > 0
-          ? <MoviesCardList movies={renderedMovies} savedMovies={savedMovies} deleteSavedMovie={deleteSavedMovie}/>
+          ? <MoviesCardList movies={renderedMovies} savedMovies={savedMovies} saveMovie={saveMovie} deleteSavedMovie={deleteSavedMovie}/>
           : <Result message={message || 'Ничего не найдено'} />}
     </main>
   );

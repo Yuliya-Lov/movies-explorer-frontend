@@ -10,8 +10,10 @@ function Profile({ currentUser, onExit, onUpdate, reqError, cleanMessage }) {
   const [isEditMode, setIsEditMode] = useState(false);
   const useValidation = useFormWithValidation();
   const [notChanged, setNotChanged] = useState(false);
+  const [succesMessage, setSuccesMessage] = useState('');
 
   function handleChange(e) {
+    setSuccesMessage('')
     useValidation.handleChange(e);
     cleanMessage();
   }
@@ -21,9 +23,10 @@ function Profile({ currentUser, onExit, onUpdate, reqError, cleanMessage }) {
     onUpdate(useValidation.values)
       .then(() => {
         setIsEditMode(false)
+        setSuccesMessage('Изменение данных пользователя прошло успешно.')
       })
       .catch((e) => {
-        console.log("ошибка в profile")
+        setSuccesMessage('')
       })
   }
 
@@ -42,7 +45,7 @@ function Profile({ currentUser, onExit, onUpdate, reqError, cleanMessage }) {
   }, [])
 
   React.useEffect(() => {
-    setNotChanged(Object.keys(useValidation.values).every(key => useValidation.values[key] === currentUser[key] ));
+    setNotChanged(Object.keys(useValidation.values).every(key => useValidation.values[key] === currentUser[key]));
   }, [useValidation.values, currentUser]);
 
   return (
@@ -91,6 +94,7 @@ function Profile({ currentUser, onExit, onUpdate, reqError, cleanMessage }) {
             </div>}
           {!isEditMode &&
             <div className='profile__actions'>
+              <span className='profile__form-succes'>{succesMessage}</span>
               <button
                 type='button'
                 className='profile__button profile__button_type_edit'
