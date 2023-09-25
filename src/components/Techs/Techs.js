@@ -2,7 +2,7 @@ import React from 'react';
 import './Techs.css';
 import SectionTitle from '../SectionTitle/SectionTitle';
 
-function Techs(props) {
+function Techs() {
   return (
     <section className='techs' id='techs'>
       <div className='techs__container'>

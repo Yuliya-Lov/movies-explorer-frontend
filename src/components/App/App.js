@@ -212,7 +212,6 @@ function App() {
       })
   }
 
-
   function deleteSavedMovie(_id) {
     return deleteMovie(_id)
       .then(() => {
@@ -300,7 +299,7 @@ function App() {
               additionalCountForRendering={additionalCountForRendering}
               saveMovie={handleSaveMovie}
               deleteSavedMovie={deleteSavedMovie}
-              isLoading={isLoading}/>} />
+              isLoading={isLoading} />} />
           <Route
             path='/saved-movies'
             element={<ProtectedRoute
@@ -328,7 +327,7 @@ function App() {
               reqError={errorMessage.message.message}
               cleanMessage={cleanMessage}
               isLoading={isLoading}
-              />} />
+            />} />
           <Route
             path='/signup'
             isLoggedIn={isLoggedIn}
@@ -337,7 +336,7 @@ function App() {
               reqError={errorMessage.message.message}
               cleanMessage={cleanMessage}
               isLoading={isLoading} />} />
-          <Route path='/*' element={<PageNotFound />} />
+          <Route path='*' element={<PageNotFound />} />
         </Routes>
       </CurrentUserContext.Provider>
       {pathWithFooter && <Footer />}

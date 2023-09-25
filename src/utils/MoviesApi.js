@@ -1,9 +1,9 @@
 import request from './request.js';
-export const BASE_URL = 'https://api.nomoreparties.co/beatfilm-movies';
+import {BASE_MOVIES_URL} from '../utils/config.js';
 
 export const allMovies = () => {
   return request(
-    `${BASE_URL}`,
+    `${BASE_MOVIES_URL}/beatfilm-movies`,
     {
       method: 'GET',
       headers: {

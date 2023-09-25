@@ -13,9 +13,16 @@ function Movies({ findAllMovies, stepForRendering, additionalCountForRendering, 
   const [allMovies, setAllMovies] = React.useState([]);
   const [renderedMovies, setRenderedMovies] = React.useState([]);
   const [moviesPart, setMoviesPart] = React.useState([]);
- // const [isLoading, setIsLoading] = React.useState(false);
   const [message, setMessage] = React.useState(false);
   const renderControl = usePartialRender(renderedMovies, stepForRendering, additionalCountForRendering);
+
+  const filter = useFilter(keyword, isShort, handleChangeKeyword, handleChangeIsShort);
+
+  const localData = {
+    key: JSON.parse(localStorage.getItem('keyword')),
+    short: JSON.parse(localStorage.getItem('isShort')),
+    movies: JSON.parse(localStorage.getItem('moviesArr'))
+  }
 
   function handleChangeKeyword(value) {
     setKeyword(value)
@@ -24,8 +31,6 @@ function Movies({ findAllMovies, stepForRendering, additionalCountForRendering, 
   function handleChangeIsShort(value) {
     setIsShort(value)
   }
-
-  const filter = useFilter(keyword, isShort, handleChangeKeyword, handleChangeIsShort);
 
   function handleSubmit() {
     if (allMovies.length === 0) {
@@ -47,16 +52,16 @@ function Movies({ findAllMovies, stepForRendering, additionalCountForRendering, 
 
   React.useEffect(() => {
     if (localStorage.getItem('keyword')) {
-      filter.handleChangeFilter(JSON.parse(localStorage.getItem('keyword')), JSON.parse(localStorage.getItem('isShort')));
-      setRenderedMovies(JSON.parse(localStorage.getItem('moviesArr')))
+      filter.handleChangeFilter(localData.key, localData.short);
+      setRenderedMovies(localData.movies)
     } else {
       setRenderedMovies([])
     }
   }, [])
 
   React.useEffect(() => {
-    if (moviesPart.length !== 0) {
-      handleSubmit();
+    if (keyword.length > 0) {
+      handleSubmit()
     }
   }, [filter.isShort])
 

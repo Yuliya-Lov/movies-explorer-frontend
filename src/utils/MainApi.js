@@ -1,10 +1,9 @@
 import request from './request.js';
-export const BASE_URL = 'http://localhost:4000';
-/* export const BASE_URL = 'https://api.mymovies.nomoredomainsicu.ru'; */
+import { BASE_MAIN_URL, BASE_MOVIES_URL } from '../utils/config.js';
 
 export const register = (name, email, password) => {
   return request(
-    `${BASE_URL}/signup`,
+    `${BASE_MAIN_URL}/signup`,
     {
       method: 'POST',
       headers: {
@@ -23,7 +22,7 @@ export const register = (name, email, password) => {
 
 export const login = (email, password) => {
   return request(
-    `${BASE_URL}/signin`,
+    `${BASE_MAIN_URL}/signin`,
     {
       method: 'POST',
       headers: {
@@ -40,7 +39,7 @@ export const login = (email, password) => {
 }
 export const logout = () => {
   return request(
-    `${BASE_URL}/signout`,
+    `${BASE_MAIN_URL}/signout`,
     {
       method: 'POST',
       headers: {
@@ -54,7 +53,7 @@ export const logout = () => {
 
 export const getUser = () => {
   return request(
-    `${BASE_URL}/users/me`,
+    `${BASE_MAIN_URL}/users/me`,
     {
       method: 'GET',
       headers: {
@@ -67,7 +66,7 @@ export const getUser = () => {
 
 export const updateUser = ({ email, name }) => {
   return request(
-    `${BASE_URL}/users/me`,
+    `${BASE_MAIN_URL}/users/me`,
     {
       method: 'PATCH',
       headers: {
@@ -84,7 +83,7 @@ export const updateUser = ({ email, name }) => {
 
 export const getMovies = () => {
   return request(
-    `${BASE_URL}/movies`,
+    `${BASE_MAIN_URL}/movies`,
     {
       method: 'GET',
       headers: {
@@ -97,7 +96,7 @@ export const getMovies = () => {
 
 export const saveMovie = (movie) => {
   return request(
-    `${BASE_URL}/movies`,
+    `${BASE_MAIN_URL}/movies`,
     {
       method: 'POST',
       headers: {
@@ -110,11 +109,11 @@ export const saveMovie = (movie) => {
         'duration': movie.duration,
         'year': movie.year,
         'description': movie.description,
-        'image': 'https://api.nomoreparties.co' + movie.image.url,
+        'image': BASE_MOVIES_URL + movie.image.url,
         'trailerLink': movie.trailerLink,
         'nameRU': movie.nameRU,
         'nameEN': movie.nameEN,
-        'thumbnail': 'https://api.nomoreparties.co' + movie.image.formats.thumbnail.url,
+        'thumbnail': BASE_MOVIES_URL + movie.image.formats.thumbnail.url,
         'id': movie.id,
       }
       )
@@ -124,7 +123,7 @@ export const saveMovie = (movie) => {
 
 export const deleteMovie = (_id) => {
   return request(
-    `${BASE_URL}/movies/${_id}`,
+    `${BASE_MAIN_URL}/movies/${_id}`,
     {
       method: 'DELETE',
       headers: {
