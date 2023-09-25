@@ -9,10 +9,11 @@ function Profile({ currentUser, onExit, onUpdate, reqError, cleanMessage }) {
   const navigate = useNavigate();
   const [isEditMode, setIsEditMode] = useState(false);
   const useValidation = useFormWithValidation();
-  const [notChanged, setNotChanged] = useState(false);
+  const [turnOfSubmit, setTurnOfSubmit] = useState(false);
   const [succesMessage, setSuccesMessage] = useState('');
 
   function handleChange(e) {
+    setTurnOfSubmit(false)
     setSuccesMessage('')
     useValidation.handleChange(e);
     cleanMessage();
@@ -20,9 +21,11 @@ function Profile({ currentUser, onExit, onUpdate, reqError, cleanMessage }) {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setTurnOfSubmit(true)
     onUpdate(useValidation.values)
       .then(() => {
         setIsEditMode(false)
+        setTurnOfSubmit(false)
         setSuccesMessage('Изменение данных пользователя прошло успешно.')
       })
       .catch((e) => {
@@ -45,7 +48,7 @@ function Profile({ currentUser, onExit, onUpdate, reqError, cleanMessage }) {
   }, [])
 
   React.useEffect(() => {
-    setNotChanged(Object.keys(useValidation.values).every(key => useValidation.values[key] === currentUser[key]));
+    setTurnOfSubmit(Object.keys(useValidation.values).every(key => useValidation.values[key] === currentUser[key]));
   }, [useValidation.values, currentUser]);
 
   return (
@@ -90,7 +93,7 @@ function Profile({ currentUser, onExit, onUpdate, reqError, cleanMessage }) {
           {isEditMode &&
             <div className='profile__actions'>
               <span className='profile__form-error'>{reqError}</span>
-              <SubmitButton buttonText="Сохранить" buttonAction={handleSubmit} isDisabled={!useValidation.isValid || notChanged} />
+              <SubmitButton buttonText="Сохранить" buttonAction={handleSubmit} isDisabled={turnOfSubmit || !useValidation.isValid } />
             </div>}
           {!isEditMode &&
             <div className='profile__actions'>

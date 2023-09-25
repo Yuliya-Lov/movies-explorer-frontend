@@ -5,7 +5,7 @@ import ControlledInput from '../ControlledInput/ControlledInput';
 import SubmitButton from '../SubmitButton/SubmitButton';
 import { useFormWithValidation } from '../../utils/useFormWithValidation';
 
-function EntrySection({ greeting, buttonText, buttonAction, redirectionText, linkName, linkPath, reqError, cleanMessage }) {
+function EntrySection({ greeting, buttonText, buttonAction, redirectionText, linkName, linkPath, reqError, cleanMessage, isLoading }) {
   const location = useLocation();
   const useValidation = useFormWithValidation();
 
@@ -52,6 +52,7 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
               labelName='E-mail'
               placeHolder='Введите email'
               value={useValidation.values['email'] || ''}
+              pattern='[a-zA-Z0-9._\-]{2,}@[a-zA-Z0-9\-]{2,}[.]{1,}[a-zA-Z0-9\-]{2,}?'
               isDisabled={false}
               isRequired={true}
               errorValue={useValidation.errors['email'] || ''}
@@ -70,7 +71,7 @@ function EntrySection({ greeting, buttonText, buttonAction, redirectionText, lin
           </div>
           <div className='entry-section__container'>
             <span className='entry-section__error'>{reqError}</span>
-            <SubmitButton type='submit' buttonText={buttonText} buttonAction={handleSubmit} isDisabled={!useValidation.isValid} />
+            <SubmitButton type='submit' buttonText={buttonText} buttonAction={handleSubmit} isDisabled={isLoading || !useValidation.isValid} />
           </div>
         </form>
         <p className='entry-section__redirection'>{redirectionText}<Link className='entry-section__link' to={linkPath}>{linkName}</Link></p>

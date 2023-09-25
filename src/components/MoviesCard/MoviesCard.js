@@ -33,8 +33,7 @@ function MoviesCard({ movie, savedMovies, saveMovie, deleteSavedMovie }) {
         setIsSaved(true);
       })
   }
-
-  React.useEffect(() => {
+  function checkIsMovieSaved() {
     movie.movieId
       ? setIsSaved(true)
       : savedMovies.find((item) => {
@@ -42,6 +41,10 @@ function MoviesCard({ movie, savedMovies, saveMovie, deleteSavedMovie }) {
       })
         ? setIsSaved(true)
         : setIsSaved(false)
+  }
+
+  React.useEffect(() => {
+    checkIsMovieSaved()
   }, [savedMovies])
 
   return (

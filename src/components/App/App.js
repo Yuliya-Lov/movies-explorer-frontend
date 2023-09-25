@@ -33,6 +33,7 @@ function App() {
   const [isPopupWithNavOpen, setIsPopupWithNavOpen] = React.useState(false);
   const [isInfoTooltipOpen, setIsInfoTooltipOpen] = React.useState(false);
   const isOpen = isPopupWithNavOpen || isInfoTooltipOpen;
+  const [isLoading, setIsLoading] = React.useState(false);
   const [isSucces, setIsSucces] = React.useState(false);
   const errorMessage = useErrorMessage();
   const [currentUser, setCurrentUser] = React.useState(
@@ -42,6 +43,7 @@ function App() {
       password: ''
     })
   const [stepForRendering, setStepForRendering] = React.useState(12);
+  const [additionalCountForRendering, setAdditionalCountForRendering] = React.useState(3);
   const [savedMovies, setSavedMovies] = React.useState([]);
 
   function handleNavClick() {
@@ -54,26 +56,34 @@ function App() {
   }
 
   const handleResize = () => {
-    if (window.innerWidth < 790 && window.innerWidth >= 600) {
-      setIsMobile(true);
-      setStepForRendering(8)
-      return;
-    }
     if (window.innerWidth < 600) {
       setIsMobile(true);
-      setStepForRendering(5)
+      setStepForRendering(5);
+      setAdditionalCountForRendering(2);
+      return;
+    }
+    if (window.innerWidth < 790 && window.innerWidth >= 600) {
+      setIsMobile(true);
+      return;
+    }
+    if (window.innerWidth < 1050 && window.innerWidth >= 790) {
+      setIsMobile(true);
+      setStepForRendering(8);
+      setAdditionalCountForRendering(2);
       return;
     }
     else {
       setIsMobile(false);
       setIsPopupWithNavOpen(false);
-      setStepForRendering(12)
+      setAdditionalCountForRendering(3);
+      setStepForRendering(12);
       return;
     }
   };
 
   function cleanMessage() {
     errorMessage.resetMessage()
+    setIsLoading(false)
   }
 
 
@@ -99,7 +109,8 @@ function App() {
   }
 
   function onRegister(data) {
-    return register(data.name, data.email, data.password)
+    setIsLoading(true)
+    register(data.name, data.email, data.password)
       .then(res => {
         setIsSucces(true);
         setCurrentUser({
@@ -108,20 +119,24 @@ function App() {
           name: res.name,
         });
         setIsLoggedIn(true);
-        navigate('/', { replace: true });
+        navigate('/movies', { replace: true });
+        setIsLoading(false)
       })
       .catch((e) => {
         errorMessage.changeError(e)
       })
+      .finally(() => setIsLoading(false))
   }
 
   function onLogin(data) {
-    return login(data.email, data.password)
+    setIsLoading(true)
+    login(data.email, data.password)
       .then(() => {
         return checkUser()
           .then(() => {
             setIsLoggedIn(true);
-            navigate('/', { replace: true });
+            navigate('/movies', { replace: true });
+            setIsLoading(false)
           })
           .catch((e) => Promise.reject(e))
       })
@@ -161,25 +176,32 @@ function App() {
   }
 
   function findAllMovies() {
+    setIsLoading(true)
     return allMovies()
-      .then(res => res)
-      .catch(e => Promise.reject(e))
+      .then(res => {
+        setIsLoading(false);
+        return res;
+      })
+      .catch(e => {
+        setIsLoading(false);
+        return Promise.reject(e);
+      })
   }
 
   function findSavedMovies() {
     return getMovies()
       .then((res) => {
         setSavedMovies(res.data)
-        return res;
       })
       .catch(e => {
-        return Promise.reject(e);
+        errorMessage.changeError(e);
       })
   }
 
   function handleSaveMovie(movie) {
     return saveMovie(movie)
       .then((res) => {
+        setSavedMovies([...savedMovies, res.data]);
         return res;
       })
       .catch((e) => {
@@ -193,7 +215,7 @@ function App() {
 
   function deleteSavedMovie(_id) {
     return deleteMovie(_id)
-      .then((res) => {
+      .then(() => {
         setSavedMovies(savedMovies.filter(c => c._id !== _id));
       })
       .catch(e => {
@@ -229,13 +251,6 @@ function App() {
       setTimeout(handleResize, 1000)
     });
     handleResize();
-    checkUser()
-      .then(() => {
-        setIsLoggedIn(true);
-      })
-      .catch((e) => {
-        setIsLoggedIn(false);
-      })
   }, []);
 
   React.useEffect(() => {
@@ -243,6 +258,13 @@ function App() {
       checkUser()
         .then(() => {
           setIsLoggedIn(true);
+          findSavedMovies()
+            .then(res => {
+              setSavedMovies(res.data)
+            })
+            .catch(e => {
+              errorMessage.changeError(e)
+            })
         })
         .catch((e) => {
           setIsLoggedIn(false);
@@ -275,17 +297,19 @@ function App() {
               findAllMovies={findAllMovies}
               savedMovies={savedMovies}
               stepForRendering={stepForRendering}
+              additionalCountForRendering={additionalCountForRendering}
               saveMovie={handleSaveMovie}
-              deleteSavedMovie={deleteSavedMovie} />} />
+              deleteSavedMovie={deleteSavedMovie}
+              isLoading={isLoading}/>} />
           <Route
             path='/saved-movies'
             element={<ProtectedRoute
               element={SavedMovies}
               savedMovies={savedMovies}
-              findSavedMovies={findSavedMovies}
               isLoggedIn={isLoggedIn}
               saveMovie={handleSaveMovie}
-              deleteSavedMovie={deleteSavedMovie} />} />
+              deleteSavedMovie={deleteSavedMovie}
+              reqError={errorMessage.message.message} />} />
           <Route
             path='/profile'
             element={<ProtectedRoute
@@ -302,14 +326,17 @@ function App() {
               isLoggedIn={isLoggedIn}
               handleSubmit={onLogin}
               reqError={errorMessage.message.message}
-              cleanMessage={cleanMessage} />} />
+              cleanMessage={cleanMessage}
+              isLoading={isLoading}
+              />} />
           <Route
             path='/signup'
             isLoggedIn={isLoggedIn}
             element={<Register
               handleSubmit={onRegister}
               reqError={errorMessage.message.message}
-              cleanMessage={cleanMessage} />} />
+              cleanMessage={cleanMessage}
+              isLoading={isLoading} />} />
           <Route path='/*' element={<PageNotFound />} />
         </Routes>
       </CurrentUserContext.Provider>

@@ -1,11 +1,12 @@
 import React from "react";
 
-export function usePartialRender(renderedMovies, stepForRendering) {
-  const [countStepsForRendering, setCountStepsForRendering] = React.useState(1);
+export function usePartialRender(renderedMovies, stepForRendering, additionalCountForRendering) {
+  const [countAdditionalStepsForRendering, setCountAdditionalStepsForRendering] = React.useState(0);
   const [isMoviesEnded, setIsMoviesEnded] = React.useState(true);
 
+
   function setInitialMoviesState() {
-    setCountStepsForRendering(1);
+    setCountAdditionalStepsForRendering(0);
     if (renderedMovies.length > stepForRendering) {
       setIsMoviesEnded(false);
     } else {
@@ -14,17 +15,17 @@ export function usePartialRender(renderedMovies, stepForRendering) {
   }
 
   function setMoviesCount() {
-    if (renderedMovies.length < stepForRendering * countStepsForRendering) {
+    if (renderedMovies.length < stepForRendering + additionalCountForRendering * countAdditionalStepsForRendering) {
       setIsMoviesEnded(true);
       return renderedMovies;
     } else {
-      return renderedMovies.slice(0, stepForRendering * countStepsForRendering)
+      return renderedMovies.slice(0, stepForRendering + additionalCountForRendering * countAdditionalStepsForRendering)
     }
   }
 
   function addMoreMovies() {
-    setCountStepsForRendering(countStepsForRendering + 1);
+    setCountAdditionalStepsForRendering(countAdditionalStepsForRendering + 1);
   }
 
-  return { stepForRendering, countStepsForRendering, setInitialMoviesState, setMoviesCount, addMoreMovies, isMoviesEnded };
+  return { stepForRendering, countAdditionalStepsForRendering, setInitialMoviesState, setMoviesCount, addMoreMovies, isMoviesEnded };
 }

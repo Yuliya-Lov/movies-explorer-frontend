@@ -6,12 +6,11 @@ import Result from '../Result/Result';
 import Preloader from '../Preloader/Preloader';
 import { useFilter } from '../../utils/useFilter';
 
-function SavedMovies({savedMovies, findSavedMovies, saveMovie, deleteSavedMovie}) {
+function SavedMovies({ savedMovies, saveMovie, deleteSavedMovie, reqError }) {
   const [keyword, setKeyword] = React.useState('');
   const [isShort, setIsShort] = React.useState(false);
   const [renderedMovies, setRenderedMovies] = React.useState([]);
   const [isLoading, setIsLoading] = React.useState(false);
-  const [message, setMessage] = React.useState(false);
 
   function handleChangeKeyword(value) {
     setKeyword(value)
@@ -29,15 +28,8 @@ function SavedMovies({savedMovies, findSavedMovies, saveMovie, deleteSavedMovie}
 
   React.useEffect(() => {
     setIsLoading(true)
-    findSavedMovies()
-      .then(res => {
-        setRenderedMovies(res.data)
-      })
-      .catch(e => setMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз')
-      )
-      .finally(() => {
-        setIsLoading(false);
-      })
+    setRenderedMovies(savedMovies)
+    setIsLoading(false);
   }, [])
 
   React.useEffect(() => {
@@ -56,8 +48,8 @@ function SavedMovies({savedMovies, findSavedMovies, saveMovie, deleteSavedMovie}
       {isLoading
         ? <Preloader />
         : renderedMovies.length > 0
-          ? <MoviesCardList movies={renderedMovies} savedMovies={savedMovies} saveMovie={saveMovie} deleteSavedMovie={deleteSavedMovie}/>
-          : <Result message={message || 'Ничего не найдено'} />}
+          ? <MoviesCardList movies={renderedMovies} savedMovies={savedMovies} saveMovie={saveMovie} deleteSavedMovie={deleteSavedMovie} />
+          : <Result message={reqError || 'Ничего не найдено'} />}
     </main>
   );
 }

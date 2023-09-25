@@ -2,7 +2,7 @@ import React from 'react';
 import './SearchForm.css';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
-function SearchForm({keyword, isShort, handleChangeInput, handleChangeCheckbox, handleSubmit}) {
+function SearchForm({keyword, isShort, handleChangeInput, handleChangeCheckbox, handleSubmit, isLoading }) {
   const [error, setError] = React.useState('');
   const [isDisabled, setIsDisabled] = React.useState(false);
 
@@ -39,12 +39,12 @@ function SearchForm({keyword, isShort, handleChangeInput, handleChangeCheckbox, 
             onChange={handleChange} />
           <button
             type="submit"
-            disabled={isDisabled}
+            disabled={isLoading || isDisabled}
             className="seach__submit-button"
             aria-label='Найти фильмы'
           ></button>
         </div>
-        <FilterCheckbox isShort={isShort} handleTumbClick={handleChangeCheckbox} />
+        <FilterCheckbox isShort={isShort} disabled={isLoading} handleTumbClick={handleChangeCheckbox} />
       </form>
     </section>
   );

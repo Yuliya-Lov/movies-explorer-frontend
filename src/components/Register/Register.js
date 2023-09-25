@@ -3,7 +3,7 @@ import EntrySection from '../EntrySection/EntrySection';
 import { useNavigate } from 'react-router-dom';
 
 
-function Register({ isLoggedIn, handleSubmit, reqError, cleanMessage }) {
+function Register({ isLoggedIn, handleSubmit, reqError, cleanMessage, isLoading }) {
   const navigate = useNavigate();
   React.useEffect(() => {
     isLoggedIn && navigate('/', {replace: true})
@@ -15,6 +15,7 @@ function Register({ isLoggedIn, handleSubmit, reqError, cleanMessage }) {
       buttonAction={handleSubmit}
       reqError={reqError}
       cleanMessage={cleanMessage}
+      isLoading={isLoading}
       redirectionText='Уже зарегистрированы?'
       linkName='Войти' linkPath='/signin' />
   );
