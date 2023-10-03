@@ -104,6 +104,7 @@ function App() {
         navigate(place, { redirect: true })
       })
       .catch((e) => {
+        logout()
         return Promise.reject(e);
       })
   }

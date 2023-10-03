@@ -39,7 +39,7 @@ function SavedMovies({ savedMovies, saveMovie, deleteSavedMovie, reqError }) {
   }, [filter.isShort])
 
   React.useEffect(() => {
-    setRenderedMovies(savedMovies)
+    setRenderedMovies(filter.handleSubmitFilter(savedMovies))
   }, [savedMovies])
 
   return (
