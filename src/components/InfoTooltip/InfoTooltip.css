@@ -1,5 +1,6 @@
 .tooltip {
   position: fixed;
+  padding: 86px;
   top: 0;
   left: 0;
   right: 0;
@@ -8,8 +9,8 @@
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, .5);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: right;
+  align-items: flex-start;
   visibility: hidden;
   opacity: 0;
   transition: visibility .5s, opacity .5s;
@@ -17,6 +18,7 @@
 
 .tooltip_opened {
   position: fixed;
+  padding: 86px;
   top: 0;
   left: 0;
   right: 0;
@@ -25,8 +27,8 @@
   box-sizing: border-box;
   background-color: rgba(0, 0, 0, .5);
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: right;
+  align-items: flex-start;
   visibility: visible;
   opacity: 1;
   transition: visibility .5s, opacity .5s;
@@ -86,9 +88,24 @@
 }
 
 @media screen and (max-width:600px) {
+  .tooltip {
+    padding: 86px 30px;
+  }
+
+  .tooltip_opened {
+    padding: 86px 30px;
+  }
+
   .tooltip__container {
     padding: 25px 22px;
     max-width: 282px;
+  }
+
+  .tooltip__status-icon {
+    align-self: center;
+    margin: 0 0 10px 0;
+    width: 30px;
+    height: 30px;
   }
 
   .tooltip__button-close {

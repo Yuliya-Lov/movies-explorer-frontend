@@ -3,83 +3,76 @@ import { Link, useLocation } from 'react-router-dom';
 import './EntrySection.css';
 import ControlledInput from '../ControlledInput/ControlledInput';
 import SubmitButton from '../SubmitButton/SubmitButton';
-import FormValidator from '../../utils/FormValidator';
-import { validationSettings } from '../../utils/validationSettings';
+import { useFormWithValidation } from '../../utils/useFormWithValidation';
 
-function EntrySection({ greeting, buttonText, buttonAction, redirectionText, linkName, linkPath }) {
+function EntrySection({ greeting, buttonText, buttonAction, redirectionText, linkName, linkPath, reqError, cleanMessage, isLoading }) {
   const location = useLocation();
-
-  const [userInfo, setUserInfo] = React.useState(
-    {
-      name: '',
-      email: '',
-      password: ''
-    });
-
-  function handleInputChange(e) {
-    setUserInfo({
-      ...userInfo,
-      [e.target.id]: e.target.value
-    })
-  }
+  const useValidation = useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(userInfo);
-    buttonAction(userInfo);
+    buttonAction(useValidation.values);
   }
 
-  const enteryForm = React.useRef();
+  function handleChange(e) {
+    useValidation.handleChange(e);
+    cleanMessage();
+  }
 
   React.useEffect(() => {
-    console.log(enteryForm);
-    const validatedForm = new FormValidator(validationSettings, enteryForm.current);
-    validatedForm.enableValidation();
-    validatedForm.setInitialFormState();
-  }, [enteryForm])
-
+    cleanMessage();
+    useValidation.resetForm();
+  }, [])
 
   return (
     <main className='entry-section'>
       <Link className='entry-section__logo' aria-label='Перейти на главную' to="/" />
       <section className='entry-section__section'>
         <h1 className='entry-section__greeting'>{greeting}</h1>
-        <form className='entry-section__form' name='entry-form' ref={enteryForm}>
+        <form className='entry-section__form' name='entry-form'>
           <div className='entry-section__container'>
             {location.pathname === '/signup' &&
               <ControlledInput
                 id='name'
                 type='text'
                 labelName='Имя'
+                pattern='^[A-Za-zА-Яа-я\sё\-]*$'
                 placeHolder='Введите имя'
-                value={userInfo.name}
+                value={useValidation.values['name'] || ''}
                 isDisabled={false}
                 isRequired={true}
                 minLengthValue='2'
                 maxLengthValue='30'
-                onChange={handleInputChange} />
+                errorValue={useValidation.errors['name'] || ''}
+                onChange={handleChange} />
             }
             <ControlledInput
               id='email'
               type='email'
               labelName='E-mail'
               placeHolder='Введите email'
-              value={userInfo.email}
+              value={useValidation.values['email'] || ''}
+              pattern='[a-zA-Z0-9._\-]{2,}@[a-zA-Z0-9\-]{2,}[.]{1,}[a-zA-Z0-9\-]{2,}?'
               isDisabled={false}
               isRequired={true}
-              onChange={handleInputChange} />
+              errorValue={useValidation.errors['email'] || ''}
+              onChange={handleChange} />
             <ControlledInput
               id='password'
               type='password'
               labelName='Пароль'
               placeHolder='Введите пароль'
-              value={userInfo.password}
+              value={useValidation.values['password'] || ''}
               isDisabled={false}
               minLengthValue='8'
               isRequired={true}
-              onChange={handleInputChange} />
+              errorValue={useValidation.errors['password'] || ''}
+              onChange={handleChange} />
           </div>
-          <SubmitButton type='submit' buttonText={buttonText} buttonAction={handleSubmit} isDisabled={false} />
+          <div className='entry-section__container'>
+            <span className='entry-section__error'>{reqError}</span>
+            <SubmitButton type='submit' buttonText={buttonText} buttonAction={handleSubmit} isDisabled={isLoading || !useValidation.isValid} />
+          </div>
         </form>
         <p className='entry-section__redirection'>{redirectionText}<Link className='entry-section__link' to={linkPath}>{linkName}</Link></p>
       </section>

@@ -9,7 +9,7 @@ const InfoTooltip = ({ isOpen, isOk, message, onClose }) => {
     <div className={`tooltip ${isOpen && 'tooltip_opened'}`}>
       <div className="tooltip__container">
         <img className="tooltip__status-icon" src={isOk ? success_icon : failed_icon} alt="Иконка статуса запроса"></img>
-        <h2 className="tooltip__info-message">{message.message}</h2>
+        <h2 className="tooltip__info-message">{message}</h2>
         <button
           type="button"
           onClick={onClose}

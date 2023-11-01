@@ -3,7 +3,7 @@ import './SubmitButton.css';
 
 function SubmitButton({buttonText, buttonAction, isDisabled}) {
   return (
-    <button type='submit' onClick={buttonAction} className={`submit-button ${isDisabled && 'submit-button_disabled'}`}>{buttonText}</button>
+    <button type='submit' onClick={buttonAction} disabled={isDisabled} className={`submit-button ${isDisabled && 'submit-button_disabled'}`}>{buttonText}</button>
   );
 }
 

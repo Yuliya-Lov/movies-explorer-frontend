@@ -2,15 +2,14 @@ import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList({ movies, saved }) {
+function MoviesCardList({ movies, savedMovies, saveMovie, deleteSavedMovie }) {
   return (
     <section className='movies-list' aria-label='Фильмы'>
       <ul className='movies-list__shell'>
         {movies.map(item => {
-          console.log(item._id);
           return (
-            <li className='movies-list__item' key={item._id}>
-              <MoviesCard  movie={item} saved={saved} />
+            <li className='movies-list__item' key={item.id || item._id }>
+              <MoviesCard  movie={item} savedMovies={savedMovies}  saveMovie={saveMovie} deleteSavedMovie={deleteSavedMovie} />
             </li>
           )
         })}

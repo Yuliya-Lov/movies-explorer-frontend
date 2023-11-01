@@ -3,101 +3,114 @@ import { useNavigate } from 'react-router-dom';
 import './Profile.css';
 import SubmitButton from '../SubmitButton/SubmitButton';
 import ControlledInput from '../ControlledInput/ControlledInput';
-import FormValidator from '../../utils/FormValidator';
-import { validationSettings } from '../../utils/validationSettings';
+import { useFormWithValidation } from '../../utils/useFormWithValidation';
 
-function Profile({ currentUser, handleExit, onUpdate }) {
+function Profile({ currentUser, onExit, onUpdate, reqError, cleanMessage }) {
   const navigate = useNavigate();
   const [isEditMode, setIsEditMode] = useState(false);
-  const [userInfo, setUserInfo] = React.useState(
-    {
-      name: currentUser.name,
-      email: currentUser.email,
-    });
+  const useValidation = useFormWithValidation();
+  const [turnOfSubmit, setTurnOfSubmit] = useState(false);
+  const [succesMessage, setSuccesMessage] = useState('');
 
-  function handleInputChange(e) {
-    setUserInfo({
-      ...userInfo,
-      [e.target.id]: e.target.value
-    })
+  function handleChange(e) {
+    setTurnOfSubmit(false)
+    setSuccesMessage('')
+    useValidation.handleChange(e);
+    cleanMessage();
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(userInfo);
-    setIsEditMode(false);
-    onUpdate(userInfo);
+    setTurnOfSubmit(true)
+    onUpdate(useValidation.values)
+      .then(() => {
+        setIsEditMode(false)
+        setTurnOfSubmit(false)
+        setSuccesMessage('Изменение данных пользователя прошло успешно.')
+      })
+      .catch((e) => {
+        setSuccesMessage('')
+      })
   }
 
   const handleExitClick = () => {
-    handleExit(false);
-    navigate('/', { replace: true })
+    navigate('/signout', { replace: true })
+    onExit();
   }
 
-  const profileForm = React.useRef();
+  React.useEffect(() => {
+    useValidation.resetForm();
+    useValidation.setValues({
+      ...useValidation.values,
+      name: currentUser.name,
+      email: currentUser.email,
+    });
+  }, [])
 
   React.useEffect(() => {
-    if (isEditMode) {
-      const validatedForm = new FormValidator(validationSettings, profileForm.current);
-      validatedForm.enableValidation();
-      validatedForm.setInitialFormState();
-
-    }
-  }, [profileForm, isEditMode])
+    setTurnOfSubmit(Object.keys(useValidation.values).every(key => useValidation.values[key] === currentUser[key]));
+  }, [useValidation.values, currentUser]);
 
   return (
     <main className='profile'>
       <section className='profile__section'>
         <h1 className='profile__greeting'>Привет, {currentUser.name}!</h1>
-        <form className='profile__form' name='profile-form' ref={profileForm}>
-          <div className='profile__input-container'>
-            <label className='profile__form-field profile__form-field_type_key'>Имя</label>
-            <ControlledInput
-              id='name'
-              type='text'
-              labelName=''
-              placeHolder='Введите имя'
-              value={userInfo.name}
-              isDisabled={!isEditMode}
-              isRequired={true}
-              minLengthValue='2'
-              maxLengthValue='30'
-              onChange={handleInputChange}
-              slim={true} />
-          </div>
-          <div className='profile__input-container'>
-            <label className='profile__form-field profile__form-field_type_key'>E-mail</label>
-            <ControlledInput
-              id='email'
-              type='email'
-              labelName=''
-              placeHolder='Введите email'
-              value={userInfo.email}
-              isDisabled={!isEditMode}
-              isRequired={true}
-              onChange={handleInputChange}
-              slim={true} />
+        <form className='profile__form' name='profile-form'>
+          <div className='profile__form-container'>
+            <div className={`profile__input-container ${isEditMode && 'profile__input-container_edit'}`}>
+              <label className='profile__form-field profile__form-field_type_key'>Имя</label>
+              <ControlledInput
+                id='name'
+                type='text'
+                labelName=''
+                pattern='^[A-Za-zА-Яа-я\sё\-]*$'
+                placeHolder='Введите имя'
+                value={useValidation.values['name'] || ''}
+                isDisabled={!isEditMode}
+                isRequired={false}
+                minLengthValue='2'
+                maxLengthValue='30'
+                errorValue={useValidation.errors['name'] || ''}
+                onChange={handleChange}
+                slim={true} />
+            </div>
+            <div className={`profile__input-container ${isEditMode && 'profile__input-container_edit'}`}>
+              <label className='profile__form-field profile__form-field_type_key'>E-mail</label>
+              <ControlledInput
+                id='email'
+                type='email'
+                pattern='^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$'
+                labelName=''
+                placeHolder='Введите email'
+                value={useValidation.values['email'] || ''}
+                isDisabled={!isEditMode}
+                isRequired={false}
+                errorValue={useValidation.errors['email'] || ''}
+                onChange={handleChange}
+                slim={true} />
+            </div>
           </div>
           {isEditMode &&
             <div className='profile__actions'>
-              <span className='profile__form-error'></span>
-              <SubmitButton buttonText="Сохранить" buttonAction={handleSubmit} />
+              <span className='profile__form-error'>{reqError}</span>
+              <SubmitButton buttonText="Сохранить" buttonAction={handleSubmit} isDisabled={turnOfSubmit || !useValidation.isValid } />
             </div>}
+          {!isEditMode &&
+            <div className='profile__actions'>
+              <span className='profile__form-succes'>{succesMessage}</span>
+              <button
+                type='button'
+                className='profile__button profile__button_type_edit'
+                onClick={() => setIsEditMode(true)}
+              >Редактировать</button>
+              <button
+                type='button'
+                className='profile__button profile__button_type_exit'
+                onClick={handleExitClick}
+              >Выйти из аккаунта</button>
+            </div>
+          }
         </form>
-        {!isEditMode &&
-          <div className='profile__actions'>
-            <button
-              type='button'
-              className='profile__button profile__button_type_edit'
-              onClick={() => setIsEditMode(true)}
-            >Редактировать</button>
-            <button
-              type='button'
-              className='profile__button profile__button_type_exit'
-              onClick={handleExitClick}
-            >Выйти из аккаунта</button>
-          </div>
-        }
       </section>
     </main>
   );
